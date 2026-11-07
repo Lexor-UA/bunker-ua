@@ -85,24 +85,24 @@ export default function HomePage() {
             className="pointer-events-none absolute inset-x-0 top-0 h-[3px] diia-iridescent-bg"
           />
 
-          {/* Subtle Atmospheric 3D Night Stadium Backdrop on Right */}
+          {/* Subtle Atmospheric 3D Night Stadium Backdrop (Color-Matched to Midnight Royal Blue) */}
           <img
             src="/images/hero-arena.jpg"
             alt=""
             aria-hidden="true"
-            className="pointer-events-none absolute -right-4 top-0 w-[82%] h-[86%] object-cover opacity-55 mix-blend-screen saturate-125"
+            className="pointer-events-none absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-luminosity"
             style={{
               WebkitMaskImage:
-                'radial-gradient(ellipse 75% 75% at 72% 38%, #000 22%, rgba(0,0,0,0.5) 58%, transparent 96%)',
+                'linear-gradient(115deg, transparent 15%, rgba(0,0,0,0.65) 60%, rgba(0,0,0,0.85) 100%)',
               maskImage:
-                'radial-gradient(ellipse 75% 75% at 72% 38%, #000 22%, rgba(0,0,0,0.5) 58%, transparent 96%)',
+                'linear-gradient(115deg, transparent 15%, rgba(0,0,0,0.65) 60%, rgba(0,0,0,0.85) 100%)',
             }}
           />
 
-          {/* Stadium Floodlight Beam */}
+          {/* Harmonious Royal Blue Ambient Lighting (No Green/Turquoise Cast) */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -top-24 -left-16 w-96 h-60 rounded-full opacity-30 blur-3xl bg-gradient-to-r from-[#2563EB] via-[#38BDF8] to-[#F5C451]"
+            className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#04091A]/90 via-[#07122E]/75 to-[#040816]/95"
           />
 
           {/* Top Bar: Official Season Broadcast Badge + Cross-Play */}
@@ -184,10 +184,6 @@ export default function HomePage() {
 
             {/* Official 3D BUNKER FC 1v1 Shield Emblem */}
             <div className="hidden sm:flex xl:col-span-4 items-center justify-center relative py-2">
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute w-48 h-48 rounded-full bg-amber-400/10 blur-3xl"
-              />
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/bunker-fc-crest.png"
@@ -414,7 +410,8 @@ export default function HomePage() {
               >
                 <div className="flex items-center justify-between gap-2 mb-2">
                   <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-500/15 border border-amber-400/35 text-amber-200 text-[0.6rem] font-mono font-extrabold uppercase tracking-wider">
-                    <span>🥉 МАТЧ ЗА 3 МІСЦЕ • БРОНЗОВИЙ ФІНАЛ</span>
+                    <Trophy className="w-3 h-3 text-amber-300" />
+                    <span>МАТЧ ЗА 3 МІСЦЕ • БРОНЗОВИЙ ФІНАЛ</span>
                   </span>
                   <span className="text-[0.64rem] font-mono font-bold text-slate-300">
                     +135 pts рейтингу
