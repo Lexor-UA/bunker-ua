@@ -6,10 +6,10 @@
   color-scheme: dark;
   --in-oklab: ;
   --in-oklch: ;
-  --bg-titanium: #0d1017;
-  --surface-bento: #171b26;
-  --pitch-mint: #32e89f;
-  --gold-platinum: #f5c96b;
+  --bg-titanium: #030712;
+  --surface-bento: #081229;
+  --pitch-mint: #00f59b;
+  --gold-platinum: #f5c451;
 }
 
 @supports (background: linear-gradient(in oklab, white, black)) {
@@ -59,14 +59,26 @@ p {
   font-feature-settings: 'tnum' 1, 'cv01' 1;
 }
 
-/* Signature Diia Iridescent Holographic Text & Surfaces */
+/* UEFA Champions League Broadcast Starlight & Gold Gradients */
 .diia-gradient-text {
   background: linear-gradient(
     108deg var(--in-oklab),
-    #82ceff 0%,
-    #d4abff 35%,
-    #ffc999 68%,
-    #74f5c2 100%
+    #ffffff 0%,
+    #93c5fd 35%,
+    #f5c451 78%,
+    #fef08a 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(
+    115deg var(--in-oklab),
+    #fffbeb 0%,
+    #f5c451 50%,
+    #d97706 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
@@ -76,63 +88,61 @@ p {
 .diia-iridescent-bg {
   background: linear-gradient(
     118deg var(--in-oklab),
-    #8ad2ff 0%,
-    #dab4ff 35%,
-    #ffcea3 70%,
-    #8ef7ca 100%
+    #38bdf8 0%,
+    #60a5fa 45%,
+    #f5c451 100%
   );
 }
 
 .diia-iridescent-subtle {
   background: linear-gradient(
     125deg var(--in-oklab),
-    rgba(130, 206, 255, 0.22) 0%,
-    rgba(212, 171, 255, 0.2) 36%,
-    rgba(255, 201, 153, 0.18) 70%,
-    rgba(116, 245, 194, 0.22) 100%
+    rgba(37, 99, 235, 0.34) 0%,
+    rgba(14, 165, 233, 0.22) 55%,
+    rgba(245, 196, 81, 0.22) 100%
   );
 }
 
-/* Physical Monobank IRON Brushed-Titanium & Champagne Gold Card Surface */
+/* UEFA Champions Trophy Gold & Midnight Navy Broadcast Surface */
 .mono-iron-surface {
   background:
-    radial-gradient(ellipse 85% 90% at 88% 18%, rgba(245, 201, 107, 0.26), transparent 64%),
-    radial-gradient(ellipse 65% 70% at 12% 0%, rgba(255, 226, 162, 0.14), transparent 58%),
+    radial-gradient(ellipse 85% 90% at 88% 18%, rgba(245, 196, 81, 0.28), transparent 64%),
+    radial-gradient(ellipse 65% 70% at 12% 0%, rgba(37, 99, 235, 0.22), transparent 58%),
     linear-gradient(
-      138deg var(--in-oklab),
-      #272a36 0%,
-      #1a1d27 46%,
-      #25211e 80%,
-      #151720 100%
+      142deg var(--in-oklab),
+      #0f1c3f 0%,
+      #0a1229 48%,
+      #1a1714 85%,
+      #060b19 100%
     );
-  border: 1px solid rgba(245, 201, 107, 0.42);
+  border: 1px solid rgba(245, 196, 81, 0.48);
   box-shadow:
-    0 22px 50px -12px rgba(245, 201, 107, 0.16),
-    0 24px 52px -12px rgba(0, 0, 0, 0.65),
-    inset 0 1px 0 0 rgba(255, 240, 200, 0.28);
-  backdrop-filter: blur(32px) saturate(140%);
-}
-
-/* Physical Diia / Monobank Platinum Iridescent Card Surface */
-.diia-card-surface {
-  background:
-    radial-gradient(ellipse 85% 85% at 12% 0%, rgba(124, 203, 255, 0.28), transparent 62%),
-    radial-gradient(ellipse 80% 80% at 88% 22%, rgba(50, 232, 159, 0.24), transparent 62%),
-    radial-gradient(ellipse 80% 80% at 50% 100%, rgba(212, 171, 255, 0.22), transparent 65%),
-    linear-gradient(
-      148deg var(--in-oklab),
-      #23293a 0%,
-      #171b27 100%
-    );
-  border: 1px solid rgba(176, 224, 255, 0.34);
-  box-shadow:
-    0 22px 50px -12px rgba(130, 206, 255, 0.16),
-    0 24px 52px -12px rgba(0, 0, 0, 0.62),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.28);
+    0 22px 54px -12px rgba(245, 196, 81, 0.18),
+    0 26px 56px -12px rgba(0, 0, 0, 0.78),
+    inset 0 1px 0 0 rgba(255, 240, 200, 0.32);
   backdrop-filter: blur(32px) saturate(145%);
 }
 
-/* Seamless radial fade for trophy renders on physical bank cards (zero box edge) */
+/* UEFA Champions League Royal Stadium Blue Broadcast Surface */
+.diia-card-surface {
+  background:
+    radial-gradient(ellipse 85% 85% at 15% 0%, rgba(56, 189, 248, 0.28), transparent 62%),
+    radial-gradient(ellipse 80% 80% at 88% 22%, rgba(37, 99, 235, 0.32), transparent 64%),
+    radial-gradient(ellipse 75% 75% at 50% 100%, rgba(0, 245, 155, 0.14), transparent 65%),
+    linear-gradient(
+      148deg var(--in-oklab),
+      #0d1b3e 0%,
+      #071026 100%
+    );
+  border: 1px solid rgba(96, 165, 250, 0.38);
+  box-shadow:
+    0 22px 52px -12px rgba(37, 99, 235, 0.25),
+    0 26px 54px -12px rgba(0, 0, 0, 0.75),
+    inset 0 1px 0 0 rgba(191, 219, 254, 0.28);
+  backdrop-filter: blur(32px) saturate(150%);
+}
+
+/* Seamless radial fade for trophy renders (zero box edge) */
 .trophy-blend-mask {
   -webkit-mask-image: radial-gradient(
     ellipse 66% 74% at 56% 50%,
@@ -170,68 +180,68 @@ dialog:modal {
 }
 
 dialog::backdrop {
-  background: rgba(8, 10, 16, 0.78);
+  background: rgba(3, 7, 18, 0.82);
   backdrop-filter: blur(18px);
   overflow: hidden;
   overscroll-behavior: contain;
 }
 
-/* High-Contrast Monobank x Diia Bento Card Surface */
+/* UEFA Broadcast Midnight Navy Glass Surface */
 .glass-panel {
   background: linear-gradient(
     165deg var(--in-oklab),
-    rgba(31, 36, 50, 0.88) 0%,
-    rgba(20, 24, 34, 0.94) 100%
+    rgba(13, 25, 56, 0.88) 0%,
+    rgba(6, 12, 30, 0.95) 100%
   );
-  border: 1px solid rgba(255, 255, 255, 0.13);
+  border: 1px solid rgba(96, 165, 250, 0.2);
   box-shadow:
-    0 20px 46px -12px rgba(0, 0, 0, 0.58),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.16);
-  backdrop-filter: blur(32px) saturate(140%);
+    0 22px 50px -12px rgba(0, 0, 0, 0.72),
+    inset 0 1px 0 0 rgba(147, 197, 253, 0.18);
+  backdrop-filter: blur(32px) saturate(145%);
 }
 
-/* Mono Iron / Platinum Gold Frosted Bento Surface */
+/* UEFA Gold Broadcast Surface */
 .glass-panel-gold {
   background: linear-gradient(
     155deg var(--in-oklab),
-    rgba(44, 39, 36, 0.88) 0%,
-    rgba(21, 24, 34, 0.94) 100%
+    rgba(28, 30, 48, 0.9) 0%,
+    rgba(8, 14, 34, 0.96) 100%
   );
-  border: 1px solid rgba(245, 201, 107, 0.36);
+  border: 1px solid rgba(245, 196, 81, 0.42);
   box-shadow:
-    0 18px 46px -10px rgba(245, 201, 107, 0.15),
-    0 22px 48px -12px rgba(0, 0, 0, 0.62),
-    inset 0 1px 0 0 rgba(255, 236, 186, 0.24);
-  backdrop-filter: blur(30px) saturate(140%);
+    0 18px 46px -10px rgba(245, 196, 81, 0.16),
+    0 22px 48px -12px rgba(0, 0, 0, 0.72),
+    inset 0 1px 0 0 rgba(255, 236, 186, 0.26);
+  backdrop-filter: blur(30px) saturate(145%);
 }
 
-/* Mono Mint / Diia Emerald Frosted Bento Surface */
+/* UEFA Knockout Emerald & Navy Surface */
 .glass-panel-emerald {
   background: linear-gradient(
     155deg var(--in-oklab),
-    rgba(26, 42, 46, 0.88) 0%,
-    rgba(20, 24, 34, 0.94) 100%
+    rgba(11, 35, 52, 0.9) 0%,
+    rgba(7, 14, 34, 0.96) 100%
   );
-  border: 1px solid rgba(154, 248, 208, 0.28);
+  border: 1px solid rgba(52, 211, 153, 0.34);
   box-shadow:
-    0 18px 46px -10px rgba(50, 232, 159, 0.14),
-    0 22px 48px -12px rgba(0, 0, 0, 0.62),
-    inset 0 1px 0 0 rgba(193, 251, 224, 0.22);
-  backdrop-filter: blur(30px) saturate(140%);
+    0 18px 46px -10px rgba(16, 185, 129, 0.16),
+    0 22px 48px -12px rgba(0, 0, 0, 0.72),
+    inset 0 1px 0 0 rgba(167, 243, 208, 0.24);
+  backdrop-filter: blur(30px) saturate(145%);
 }
 
 .glass-panel-azure {
   background: linear-gradient(
     155deg var(--in-oklab),
-    rgba(28, 38, 56, 0.88) 0%,
-    rgba(20, 24, 34, 0.94) 100%
+    rgba(15, 32, 68, 0.9) 0%,
+    rgba(7, 14, 34, 0.96) 100%
   );
-  border: 1px solid rgba(168, 216, 255, 0.28);
+  border: 1px solid rgba(96, 165, 250, 0.34);
   box-shadow:
-    0 18px 46px -10px rgba(124, 198, 254, 0.14),
-    0 22px 48px -12px rgba(0, 0, 0, 0.62),
-    inset 0 1px 0 0 rgba(184, 225, 255, 0.22);
-  backdrop-filter: blur(30px) saturate(140%);
+    0 18px 46px -10px rgba(37, 99, 235, 0.2),
+    0 22px 48px -12px rgba(0, 0, 0, 0.72),
+    inset 0 1px 0 0 rgba(191, 219, 254, 0.24);
+  backdrop-filter: blur(30px) saturate(145%);
 }
 
 /* Soft Edge Content Fade (modern-web-guidance CSS masking) */

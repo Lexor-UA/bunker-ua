@@ -22,11 +22,11 @@ export function BrandLogo({ size = 'md', markOnly = false }: BrandLogoProps) {
 
   return (
     <div className="inline-flex items-center gap-3 shrink-0 select-none group">
-      {/* 3D App Icon Squircle */}
+      {/* 3D Golden Crowned Lion Crest in Champions Gold & Royal Navy Frame */}
       <div
-        className={`relative ${iconDims} rounded-[14px] p-[1.5px] diia-iridescent-bg shadow-[0_6px_18px_rgba(0,245,155,0.22),0_4px_12px_rgba(56,189,248,0.2)] transition-all duration-300 group-hover:scale-105 shrink-0`}
+        className={`relative ${iconDims} rounded-[14px] p-[1.5px] bg-gradient-to-br from-amber-300 via-gold to-blue-500 shadow-[0_6px_22px_rgba(245,196,81,0.28),0_4px_14px_rgba(37,99,235,0.25)] transition-all duration-300 group-hover:scale-105 shrink-0`}
       >
-        <div className="relative w-full h-full rounded-[12.5px] bg-[#0B0F1A] overflow-hidden flex items-center justify-center">
+        <div className="relative w-full h-full rounded-[12.5px] bg-[#050A18] overflow-hidden flex items-center justify-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/bunker-logo-v3.jpg"
@@ -36,16 +36,21 @@ export function BrandLogo({ size = 'md', markOnly = false }: BrandLogoProps) {
         </div>
       </div>
 
-      {/* Clean Wordmark + Iridescent UA Pill */}
+      {/* UEFA Champions Broadcast Wordmark + Gold UA Emblem */}
       {!markOnly && (
-        <div className="flex items-center gap-2 whitespace-nowrap leading-none">
-          <span
-            className={`font-display font-extrabold ${wordSize} tracking-[-0.03em] uppercase bg-gradient-to-b from-white via-white to-slate-200 bg-clip-text text-transparent`}
-          >
-            Бункер
-          </span>
-          <span className="px-2 py-0.5 rounded-full text-[0.62rem] font-extrabold tracking-wider uppercase diia-iridescent-bg text-[#09090B] shadow-sm">
-            ua
+        <div className="flex flex-col justify-center leading-none">
+          <div className="flex items-center gap-2 whitespace-nowrap">
+            <span
+              className={`font-display font-extrabold ${wordSize} tracking-[-0.03em] uppercase bg-gradient-to-b from-white via-white to-sky-100 bg-clip-text text-transparent`}
+            >
+              Бункер
+            </span>
+            <span className="px-2 py-0.5 rounded-md text-[0.6rem] font-extrabold tracking-widest uppercase bg-gradient-to-r from-amber-300 via-gold to-amber-500 text-[#050814] shadow-[0_2px_10px_rgba(245,196,81,0.3)]">
+              ★ UA
+            </span>
+          </div>
+          <span className="text-[0.54rem] font-mono font-bold tracking-[0.18em] uppercase text-sky-300/80 mt-0.5">
+            EA FC • ЛІГА ЧЕМПІОНІВ 1V1
           </span>
         </div>
       )}

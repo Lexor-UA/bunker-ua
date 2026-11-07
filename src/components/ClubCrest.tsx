@@ -20,7 +20,7 @@ export function getSmartInitials(nickname?: string | null): string {
 }
 
 interface ClubCrestProps {
-  club: Club | null | undefined;
+  club?: Club | null | undefined;
   size?: 'sm' | 'md' | 'lg' | 'xl';
   showName?: boolean;
   showStars?: boolean;
