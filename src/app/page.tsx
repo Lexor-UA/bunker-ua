@@ -103,12 +103,12 @@ export default function HomePage() {
             className="pointer-events-none absolute -top-24 -left-16 w-96 h-60 rounded-full opacity-30 blur-3xl bg-gradient-to-r from-[#2563EB] via-[#38BDF8] to-[#F5C451]"
           />
 
-          {/* Top Bar: Official BUNKER FC 1v1 Broadcast Badge + Cross-Play */}
+          {/* Top Bar: Official Season Broadcast Badge + Cross-Play */}
           <div className="relative z-10 flex flex-wrap items-center justify-between gap-3">
             <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#07112E]/90 border border-amber-400/35 text-xs font-extrabold text-white backdrop-blur-md shadow-[0_0_25px_rgba(245,196,81,0.22)]">
               <UaFlag className="w-4 h-3" />
               <span className="tracking-wide uppercase">
-                ★ BUNKER FC 1v1 • UKRAINE БЛАГОДІЙНА ПЛАТФОРМА
+                СЕЗОН 2026/27 • БЛАГОДІЙНА ЛІГА НА ПІДТРИМКУ ЗСУ
               </span>
               <ShieldCheck className="w-3.5 h-3.5 text-gold" />
             </div>
@@ -119,23 +119,24 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Center Stage: Bold Champions League Headline + Official 3D BUNKER FC 1v1 Crest */}
-          <div className="relative z-10 flex flex-col xl:flex-row xl:items-center justify-between gap-6 my-auto py-2">
-            <div className="space-y-6 max-w-xl">
-              <div className="space-y-3.5">
-                <div className="inline-flex items-center gap-2 text-xs font-mono font-extrabold uppercase tracking-[0.18em] text-gold">
-                  <Trophy className="w-3.5 h-3.5" />
-                  <span>ОФІЦІЙНА КІБЕРФУТБОЛЬНА АРЕНА НА ПІДТРИМКУ ЗСУ</span>
+          {/* Center Stage: Harmonious Headline + Studio Spotlight Pedestal for 3D BUNKER FC 1v1 Crest */}
+          <div className="relative z-10 grid grid-cols-1 xl:grid-cols-12 items-center gap-6 my-auto py-1">
+            <div className="xl:col-span-8 space-y-5">
+              <div className="space-y-3">
+                <div className="inline-flex items-center gap-2 text-xs font-mono font-extrabold uppercase tracking-[0.16em] text-gold">
+                  <Trophy className="w-3.5 h-3.5 shrink-0" />
+                  <span>ОФІЦІЙНА КІБЕРФУТБОЛЬНА АРЕНА УКРАЇНИ</span>
                 </div>
 
-                <h1 className="font-display text-4xl sm:text-5xl xl:text-[3.35rem] font-extrabold tracking-[-0.04em] text-white leading-[1.04] uppercase">
-                  Українська Ліга Чемпіонів{' '}
-                  <span className="block mt-1.5 diia-gradient-text">
+                <h1 className="font-display text-3xl sm:text-5xl xl:text-[3.05rem] font-extrabold tracking-[-0.035em] text-white leading-[1.06] uppercase">
+                  <span className="block">Українська</span>
+                  <span className="block">Ліга Чемпіонів</span>
+                  <span className="block mt-1.5 diia-gradient-text whitespace-nowrap">
                     1 на 1 в EA SPORTS FC
                   </span>
                 </h1>
 
-                <p className="text-sm sm:text-base text-slate-200 leading-relaxed">
+                <p className="text-sm sm:text-[0.95rem] text-slate-200/95 leading-relaxed max-w-xl pt-0.5">
                   Груповий етап у 2 кола, олімпійська сітка Плей-офф, офіційні
                   FUT-картки гравців та головний приз —{' '}
                   <strong className="text-gold">
@@ -146,10 +147,10 @@ export default function HomePage() {
                 </p>
               </div>
 
-              <div className="flex flex-wrap items-center gap-3.5">
+              <div className="flex flex-wrap items-center gap-3">
                 <Link
                   href={`/tournaments/${openNovemberCup?.slug ?? 'november-cup-2026'}`}
-                  className="group inline-flex items-center gap-3 pl-6 pr-4 py-3.5 rounded-full bg-gradient-to-r from-[#FDE68A] via-[#F5C451] to-[#D97706] text-[#040814] hover:brightness-110 font-extrabold text-sm shadow-[0_14px_36px_rgba(245,196,81,0.35)] hover:scale-[1.01] transition-all"
+                  className="group inline-flex items-center gap-3 pl-5 pr-4 py-3.5 rounded-full bg-gradient-to-r from-[#FDE68A] via-[#F5C451] to-[#D97706] text-[#040814] hover:brightness-110 font-extrabold text-xs sm:text-sm shadow-[0_14px_36px_rgba(245,196,81,0.35)] hover:scale-[1.01] transition-all"
                 >
                   <span>Подати заявку на Турнір #2</span>
                   <span className="px-2.5 py-0.5 rounded-full bg-[#040814] text-gold text-xs font-extrabold tabular-nums">
@@ -160,10 +161,10 @@ export default function HomePage() {
 
                 <Link
                   href={`/tournaments/${liveOctoberCup?.slug ?? 'october-cup-2026'}`}
-                  className="inline-flex items-center gap-2.5 px-5 py-3.5 rounded-full bg-[#0A193D]/90 hover:bg-[#122B66] border border-sky-400/40 text-sm font-extrabold text-white backdrop-blur-xl transition-all shadow-[0_10px_28px_rgba(37,99,235,0.25)]"
+                  className="inline-flex items-center gap-2 px-4 sm:px-5 py-3.5 rounded-full bg-[#0A193D]/90 hover:bg-[#122B66] border border-sky-400/40 text-xs sm:text-sm font-extrabold text-white backdrop-blur-xl transition-all shadow-[0_10px_28px_rgba(37,99,235,0.25)]"
                 >
-                  <Radio className="w-4 h-4 text-[#FF5C39] animate-pulse" />
-                  <span>Матч-центр Турніру #1 LIVE</span>
+                  <Radio className="w-3.5 h-3.5 text-[#FF5C39] animate-pulse shrink-0" />
+                  <span>Матч-центр LIVE</span>
                 </Link>
 
                 <a
@@ -178,17 +179,47 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Official Transparent Die-Cut 3D BUNKER FC 1v1 Shield Emblem (No Square Box!) */}
-            <div className="hidden sm:flex items-center justify-center shrink-0 self-center relative">
+            {/* Official 3D BUNKER FC 1v1 Shield Emblem on Champions Halo Pedestal */}
+            <div className="hidden sm:flex xl:col-span-4 items-center justify-center relative py-2">
+              {/* Soft Dark-Navy + Gold Radial Aura so stadium background never clashes with the crest */}
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-0 rounded-full bg-amber-400/20 blur-3xl scale-90"
+                className="pointer-events-none absolute w-56 h-56 rounded-full"
+                style={{
+                  background:
+                    'radial-gradient(circle, rgba(4,9,26,0.82) 0%, rgba(245,196,81,0.18) 52%, rgba(37,99,235,0.12) 72%, transparent 100%)',
+                }}
               />
+              {/* Subtle Concentric Champions Ring */}
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 240 240"
+                className="pointer-events-none absolute w-56 h-56 xl:w-60 xl:h-60 opacity-45"
+              >
+                <circle
+                  cx="120"
+                  cy="120"
+                  r="106"
+                  fill="none"
+                  stroke="#F5C451"
+                  strokeWidth="1"
+                  strokeDasharray="6 6"
+                />
+                <circle
+                  cx="120"
+                  cy="120"
+                  r="92"
+                  fill="none"
+                  stroke="#38BDF8"
+                  strokeWidth="0.75"
+                  strokeOpacity="0.6"
+                />
+              </svg>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/bunker-fc-crest.png"
                 alt="BUNKER FC 1v1 • UKRAINE БЛАГОДІЙНА ПЛАТФОРМА"
-                className="relative z-10 w-52 xl:w-64 h-auto object-contain drop-shadow-[0_24px_48px_rgba(0,0,0,0.9)] hover:scale-105 transition-transform duration-500"
+                className="relative z-10 w-48 xl:w-56 h-auto object-contain drop-shadow-[0_22px_40px_rgba(0,0,0,0.95)] hover:scale-105 transition-transform duration-500"
               />
             </div>
           </div>
@@ -197,7 +228,7 @@ export default function HomePage() {
           <div className="relative z-10 grid grid-cols-1 sm:grid-cols-3 gap-3.5">
             <div className="p-4 rounded-[24px] bg-[#040A1C]/90 border border-sky-400/20 flex items-center justify-between gap-3">
               <div>
-                <div className="text-[0.68rem] font-mono uppercase tracking-wider text-sky-300 font-bold">
+                <div className="text-[0.65rem] font-mono uppercase tracking-wider text-sky-300 font-bold">
                   БЛАГОДІЙНИЙ ФОНД ЗСУ
                 </div>
                 <div className="font-display text-xl sm:text-2xl font-extrabold text-white tabular-nums mt-0.5">
@@ -211,11 +242,11 @@ export default function HomePage() {
             </div>
 
             <div className="p-4 rounded-[24px] bg-[#040A1C]/90 border border-sky-400/20 flex flex-col justify-between">
-              <div className="flex items-center justify-between gap-2">
-                <span className="text-[0.68rem] font-mono uppercase tracking-wider text-sky-300 font-bold">
+              <div className="flex items-center justify-between gap-1.5">
+                <span className="text-[0.65rem] font-mono uppercase tracking-wider text-sky-300 font-bold truncate">
                   ФОРМАТ ЛІГИ ЧЕМПІОНІВ
                 </span>
-                <span className="text-[0.65rem] font-extrabold text-pitch">
+                <span className="text-[0.62rem] font-extrabold text-pitch whitespace-nowrap shrink-0">
                   2 КОЛА + ПО
                 </span>
               </div>
@@ -243,7 +274,7 @@ export default function HomePage() {
 
             <div className="p-4 rounded-[24px] bg-[#040A1C]/90 border border-amber-400/30 flex items-center justify-between gap-3">
               <div>
-                <div className="text-[0.68rem] font-mono uppercase tracking-wider text-gold font-bold">
+                <div className="text-[0.65rem] font-mono uppercase tracking-wider text-gold font-bold">
                   ГОЛОВНА НАГОРОДА
                 </div>
                 <div className="font-display text-lg sm:text-xl font-extrabold text-gold mt-0.5">
@@ -260,9 +291,9 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Right 5 Columns: UEFA CHAMPIONS LEAGUE LIVE MATCHDAY SCOREBOARD */}
-        <div className="lg:col-span-5 flex flex-col justify-between gap-5">
-          <div className="h-full rounded-[36px] glass-panel p-6 sm:p-7 flex flex-col justify-between gap-5 relative overflow-hidden border border-sky-400/30 shadow-[0_28px_80px_rgba(2,6,23,0.9)]">
+        {/* Right 5 Columns: UEFA CHAMPIONS LEAGUE LIVE MATCHDAY SCOREBOARD (3 DECISIVE MATCHES + PROGRESS) */}
+        <div className="lg:col-span-5 flex flex-col justify-between">
+          <div className="h-full rounded-[36px] glass-panel p-6 sm:p-7 flex flex-col justify-between gap-4 relative overflow-hidden border border-sky-400/30 shadow-[0_28px_80px_rgba(2,6,23,0.9)]">
             {/* Top Gold/Blue Broadcast Strip */}
             <div
               aria-hidden="true"
@@ -270,7 +301,7 @@ export default function HomePage() {
             />
 
             {/* Header: Matchday Broadcast Studio */}
-            <div className="relative z-10 flex items-center justify-between gap-2 pb-3 border-b border-sky-400/20">
+            <div className="relative z-10 flex items-center justify-between gap-2 pb-2.5 border-b border-sky-400/20">
               <div className="flex items-center gap-2.5">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FF5C39] text-white text-[0.68rem] font-extrabold uppercase tracking-wider shadow-[0_0_20px_rgba(255,92,57,0.45)]">
                   <Radio className="w-3 h-3 animate-pulse" />
@@ -281,7 +312,7 @@ export default function HomePage() {
                     Благодійний Турнір #1 • Плей-офф
                   </div>
                   <div className="text-[0.68rem] text-sky-300 font-semibold">
-                    Стадія вирішальних матчів • 38 / 41 ігор зіграно
+                    Стадія вирішальних матчів • 18 учасників (Групи A–E)
                   </div>
                 </div>
               </div>
@@ -295,133 +326,187 @@ export default function HomePage() {
               </Link>
             </div>
 
-            {/* MATCH 1: GRAND FINAL SHOWCASE */}
-            <Link
-              href={`/tournaments/${liveOctoberCup?.slug ?? 'october-cup-2026'}`}
-              className="relative z-10 rounded-[26px] mono-iron-surface p-4 sm:p-5 border border-amber-400/40 hover:border-amber-300/75 transition-all group"
-            >
-              <div className="flex items-center justify-between gap-2 mb-3">
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-gold text-[#040814] text-[0.65rem] font-extrabold uppercase tracking-wider">
-                  <Crown className="w-3 h-3" />
-                  <span>ГРАНД-ФІНАЛ КУБКА</span>
-                </span>
-                <span className="text-[0.68rem] font-mono font-bold text-amber-200">
-                  🏆 За пам’ятну нагороду від ЗСУ
-                </span>
-              </div>
-
-              <div className="grid grid-cols-11 items-center gap-2">
-                {/* Finalist 1 */}
-                <div className="col-span-5 flex items-center gap-2.5 min-w-0">
-                  <ClubCrest
-                    nickname="BRS_Nederfox"
-                    seedBadge="A1"
-                    size="md"
-                  />
-                  <div className="min-w-0">
-                    <div className="font-display text-sm sm:text-base font-extrabold text-white truncate">
-                      BRS_Nederfox
-                    </div>
-                    <div className="text-[0.65rem] text-gold font-bold">
-                      8:5 у 1/2 • Фіналіст
-                    </div>
-                  </div>
-                </div>
-
-                {/* VS Center */}
-                <div className="col-span-1 flex flex-col items-center justify-center">
-                  <span className="px-2 py-1 rounded-lg bg-[#040814]/90 border border-amber-400/40 font-mono text-[0.65rem] font-extrabold text-gold">
-                    VS
+            {/* 3 Harmonious Broadcast Match Cards */}
+            <div className="relative z-10 space-y-3 my-auto">
+              {/* MATCH 1: GRAND FINAL SHOWCASE */}
+              <Link
+                href={`/tournaments/${liveOctoberCup?.slug ?? 'october-cup-2026'}`}
+                className="block rounded-[24px] mono-iron-surface p-4 border border-amber-400/40 hover:border-amber-300/75 transition-all group"
+              >
+                <div className="flex items-center justify-between gap-2 mb-2.5">
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-gold text-[#040814] text-[0.62rem] font-extrabold uppercase tracking-wider">
+                    <Crown className="w-3 h-3" />
+                    <span>ГРАНД-ФІНАЛ КУБКА</span>
+                  </span>
+                  <span className="text-[0.65rem] font-mono font-bold text-amber-200">
+                    🏆 За пам’ятну нагороду від ЗСУ
                   </span>
                 </div>
 
-                {/* Finalist 2 (Winner SF2) */}
-                <div className="col-span-5 flex items-center justify-end gap-2.5 min-w-0 text-right">
-                  <div className="min-w-0">
-                    <div className="font-display text-xs sm:text-sm font-extrabold text-slate-200 truncate">
-                      Переможець 1/2
-                    </div>
-                    <div className="text-[0.65rem] text-sky-300 font-semibold truncate">
-                      YoungChamp18 / Elaizer
+                <div className="grid grid-cols-11 items-center gap-2">
+                  <div className="col-span-5 flex items-center gap-2.5 min-w-0">
+                    <ClubCrest
+                      nickname="BRS_Nederfox"
+                      seedBadge="A1"
+                      size="md"
+                    />
+                    <div className="min-w-0">
+                      <div className="font-display text-xs sm:text-sm font-extrabold text-white truncate">
+                        BRS_Nederfox
+                      </div>
+                      <div className="text-[0.64rem] text-gold font-bold">
+                        8:5 у 1/2 • Фіналіст
+                      </div>
                     </div>
                   </div>
-                  <div className="w-10 h-10 rounded-2xl bg-[#040814]/90 border border-amber-400/35 flex items-center justify-center shrink-0">
-                    <VectorGoldTrophy className="w-8 h-8" />
+
+                  <div className="col-span-1 flex flex-col items-center justify-center">
+                    <span className="px-2 py-0.5 rounded-lg bg-[#040814]/90 border border-amber-400/40 font-mono text-[0.62rem] font-extrabold text-gold">
+                      VS
+                    </span>
                   </div>
-                </div>
-              </div>
-            </Link>
 
-            {/* MATCH 2: SEMI-FINAL #2 LIVE */}
-            <Link
-              href={`/tournaments/${liveOctoberCup?.slug ?? 'october-cup-2026'}`}
-              className="relative z-10 rounded-[26px] bg-[#050E26]/95 p-4 sm:p-5 border border-sky-400/35 hover:border-sky-300/70 transition-all group"
-            >
-              <div className="flex items-center justify-between gap-2 mb-3">
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-sky-500/20 border border-sky-400/40 text-sky-200 text-[0.65rem] font-extrabold uppercase tracking-wider">
-                  <Swords className="w-3 h-3 text-pitch" />
-                  <span>ПІВФІНАЛ #2 • LIVE МАТЧ ТИЖНЯ</span>
-                </span>
-                <span className="text-[0.68rem] font-mono font-bold text-pitch">
-                  До 2 перемог (BO3)
-                </span>
-              </div>
-
-              <div className="grid grid-cols-11 items-center gap-2">
-                {/* Player 1 */}
-                <div className="col-span-5 flex items-center gap-2.5 min-w-0">
-                  <ClubCrest
-                    nickname="BRS_YoungChamp18"
-                    seedBadge="E1"
-                    size="md"
-                  />
-                  <div className="min-w-0">
-                    <div className="font-display text-xs sm:text-sm font-extrabold text-white truncate">
-                      BRS_YoungChamp18
+                  <div className="col-span-5 flex items-center justify-end gap-2.5 min-w-0 text-right">
+                    <div className="min-w-0">
+                      <div className="font-display text-xs sm:text-sm font-extrabold text-slate-100 truncate">
+                        Переможець 1/2
+                      </div>
+                      <div className="text-[0.64rem] text-sky-300 font-semibold truncate">
+                        YoungChamp18 / Elaizer
+                      </div>
                     </div>
-                    <div className="text-[0.65rem] text-slate-300">
-                      Київ • 42 голи
+                    <div className="w-9 h-9 rounded-2xl bg-[#040814]/90 border border-amber-400/35 flex items-center justify-center shrink-0">
+                      <VectorGoldTrophy className="w-7 h-7" />
                     </div>
                   </div>
                 </div>
+              </Link>
 
-                {/* Score Box */}
-                <div className="col-span-1 flex items-center justify-center">
-                  <span className="px-2 py-1 rounded-lg bg-[#040814] border border-sky-400/30 font-mono text-xs font-extrabold text-white">
-                    —:—
+              {/* MATCH 2: SEMI-FINAL #2 LIVE */}
+              <Link
+                href={`/tournaments/${liveOctoberCup?.slug ?? 'october-cup-2026'}`}
+                className="block rounded-[24px] bg-[#050E26]/95 p-4 border border-sky-400/35 hover:border-sky-300/70 transition-all group"
+              >
+                <div className="flex items-center justify-between gap-2 mb-2.5">
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-sky-500/20 border border-sky-400/40 text-sky-200 text-[0.62rem] font-extrabold uppercase tracking-wider">
+                    <Swords className="w-3 h-3 text-pitch" />
+                    <span>ПІВФІНАЛ #2 • LIVE МАТЧ ТИЖНЯ</span>
+                  </span>
+                  <span className="text-[0.65rem] font-mono font-bold text-pitch">
+                    До 2 перемог (BO3)
                   </span>
                 </div>
 
-                {/* Player 2 */}
-                <div className="col-span-5 flex items-center justify-end gap-2.5 min-w-0 text-right">
-                  <div className="min-w-0">
-                    <div className="font-display text-xs sm:text-sm font-extrabold text-white truncate">
-                      Elaizer
-                    </div>
-                    <div className="text-[0.65rem] text-slate-300">
-                      Львів • 5:3 у 1/4
+                <div className="grid grid-cols-11 items-center gap-2">
+                  <div className="col-span-5 flex items-center gap-2.5 min-w-0">
+                    <ClubCrest
+                      nickname="BRS_YoungChamp18"
+                      seedBadge="E1"
+                      size="md"
+                    />
+                    <div className="min-w-0">
+                      <div className="font-display text-xs sm:text-sm font-extrabold text-white truncate">
+                        BRS_YoungChamp18
+                      </div>
+                      <div className="text-[0.64rem] text-slate-300">
+                        Київ • 42 голи
+                      </div>
                     </div>
                   </div>
-                  <ClubCrest nickname="Elaizer" seedBadge="C2" size="md" />
-                </div>
-              </div>
-            </Link>
 
-            {/* Footer: 3rd Place Match + Open Full Bracket Button */}
-            <div className="relative z-10 pt-2 border-t border-sky-400/20 flex flex-wrap items-center justify-between gap-3">
-              <div className="flex items-center gap-2 text-xs text-slate-200">
-                <span className="px-2 py-0.5 rounded bg-amber-500/15 border border-amber-400/30 text-[0.62rem] font-mono font-extrabold text-gold">
-                  🥉 МАТЧ ЗА 3 МІСЦЕ
-                </span>
-                <span className="font-bold text-white">BRS_Hasfer23 [C1]</span>
-                <span className="text-slate-400">очікує суперника</span>
+                  <div className="col-span-1 flex items-center justify-center">
+                    <span className="px-2 py-0.5 rounded-lg bg-[#040814] border border-sky-400/30 font-mono text-[0.65rem] font-extrabold text-white">
+                      —:—
+                    </span>
+                  </div>
+
+                  <div className="col-span-5 flex items-center justify-end gap-2.5 min-w-0 text-right">
+                    <div className="min-w-0">
+                      <div className="font-display text-xs sm:text-sm font-extrabold text-white truncate">
+                        Elaizer
+                      </div>
+                      <div className="text-[0.64rem] text-slate-300">
+                        Львів • 5:3 у 1/4
+                      </div>
+                    </div>
+                    <ClubCrest nickname="Elaizer" seedBadge="C2" size="md" />
+                  </div>
+                </div>
+              </Link>
+
+              {/* MATCH 3: BRONZE FINAL (3RD PLACE MATCH) */}
+              <Link
+                href={`/tournaments/${liveOctoberCup?.slug ?? 'october-cup-2026'}`}
+                className="block rounded-[24px] bg-[#040A1E]/90 p-3.5 border border-white/12 hover:border-amber-400/40 transition-all group"
+              >
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-500/15 border border-amber-400/35 text-amber-200 text-[0.6rem] font-mono font-extrabold uppercase tracking-wider">
+                    <span>🥉 МАТЧ ЗА 3 МІСЦЕ • БРОНЗОВИЙ ФІНАЛ</span>
+                  </span>
+                  <span className="text-[0.64rem] font-mono font-bold text-slate-300">
+                    +135 pts рейтингу
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-11 items-center gap-2">
+                  <div className="col-span-5 flex items-center gap-2.5 min-w-0">
+                    <ClubCrest
+                      nickname="BRS_Hasfer23"
+                      seedBadge="C1"
+                      size="sm"
+                    />
+                    <div className="min-w-0">
+                      <div className="font-display text-xs font-extrabold text-white truncate">
+                        BRS_Hasfer23
+                      </div>
+                      <div className="text-[0.62rem] text-slate-400">
+                        Київ • 5:4 у 1/4
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="col-span-1 flex items-center justify-center">
+                    <span className="px-1.5 py-0.5 rounded bg-[#040814] border border-white/15 font-mono text-[0.6rem] font-bold text-slate-300">
+                      VS
+                    </span>
+                  </div>
+
+                  <div className="col-span-5 flex items-center justify-end gap-2 min-w-0 text-right">
+                    <div className="min-w-0">
+                      <div className="font-display text-xs font-bold text-slate-300 truncate">
+                        Суперник із 1/2
+                      </div>
+                      <div className="text-[0.62rem] text-slate-400 truncate">
+                        Очікується після 1/2
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            </div>
+
+            {/* Footer: Progress Bar + Open Full Bracket Button */}
+            <div className="relative z-10 pt-2.5 border-t border-sky-400/20 flex items-center justify-between gap-4">
+              <div className="flex-1 space-y-1">
+                <div className="flex items-center justify-between text-[0.68rem] font-semibold">
+                  <span className="text-slate-300">Прогрес Турніру #1</span>
+                  <span className="text-pitch font-mono font-extrabold">
+                    38 / 41 матчів (93%)
+                  </span>
+                </div>
+                <div className="h-1.5 rounded-full bg-[#040814] overflow-hidden border border-white/10">
+                  <div
+                    className="h-full rounded-full diia-iridescent-bg"
+                    style={{ width: '93%' }}
+                  />
+                </div>
               </div>
 
               <Link
                 href={`/tournaments/${liveOctoberCup?.slug ?? 'october-cup-2026'}`}
-                className="text-xs font-extrabold text-gold hover:text-amber-200 inline-flex items-center gap-1 transition-colors"
+                className="px-4 py-2 rounded-full bg-white/10 hover:bg-gold hover:text-[#040814] border border-white/15 text-xs font-extrabold text-white inline-flex items-center gap-1.5 transition-all shrink-0"
               >
-                <span>Уся сітка Плей-офф</span>
+                <span>Сітка Плей-офф</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
