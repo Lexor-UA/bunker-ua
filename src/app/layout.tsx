@@ -30,9 +30,9 @@ export const metadata: Metadata = {
   description:
     'Офіційна благодійна платформа BUNKER FC 1v1 Ukraine: турніри 1 на 1 в EA SPORTS FC за системою Ліги Чемпіонів (групи + плей-офф) на підтримку ЗСУ.',
   icons: {
-    icon: '/images/bunker-fc-emblem.jpg',
-    shortcut: '/images/bunker-fc-emblem.jpg',
-    apple: '/images/bunker-fc-emblem.jpg',
+    icon: '/images/bunker-fc-crest.png',
+    shortcut: '/images/bunker-fc-crest.png',
+    apple: '/images/bunker-fc-crest.png',
   },
   openGraph: {
     title: 'BUNKER FC 1v1 • UKRAINE — Благодійна платформа',

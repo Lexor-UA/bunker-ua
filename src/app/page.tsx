@@ -178,18 +178,18 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Official 3D BUNKER FC 1v1 Shield Emblem Showcase */}
-            <div className="hidden sm:flex items-center justify-center shrink-0 self-center">
-              <div className="relative w-44 h-44 xl:w-52 xl:h-52 rounded-[30px] p-[2px] bg-gradient-to-br from-amber-300 via-gold to-sky-500 shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_40px_rgba(245,196,81,0.28)]">
-                <div className="w-full h-full rounded-[28px] bg-[#070B14] overflow-hidden flex items-center justify-center">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src="/images/bunker-fc-emblem.jpg"
-                    alt="BUNKER FC 1v1 • UKRAINE БЛАГОДІЙНА ПЛАТФОРМА"
-                    className="w-full h-full object-cover scale-[1.03]"
-                  />
-                </div>
-              </div>
+            {/* Official Transparent Die-Cut 3D BUNKER FC 1v1 Shield Emblem (No Square Box!) */}
+            <div className="hidden sm:flex items-center justify-center shrink-0 self-center relative">
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 rounded-full bg-amber-400/20 blur-3xl scale-90"
+              />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/bunker-fc-crest.png"
+                alt="BUNKER FC 1v1 • UKRAINE БЛАГОДІЙНА ПЛАТФОРМА"
+                className="relative z-10 w-52 xl:w-64 h-auto object-contain drop-shadow-[0_24px_48px_rgba(0,0,0,0.9)] hover:scale-105 transition-transform duration-500"
+              />
             </div>
           </div>
 
