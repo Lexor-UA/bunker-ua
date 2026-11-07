@@ -86,16 +86,46 @@ export async function POST(req: Request) {
         .trim()
         .toLowerCase();
       const password = String(body.password || '');
-      const city = String(body.city || 'Київ').trim();
+      const city = String(body.city || '').trim();
       const platform = ['PS5', 'PC', 'XBOX'].includes(body.platform)
-        ? body.platform
-        : 'PS5';
+        ? (body.platform as PlatformType)
+        : null;
       const eaId = String(body.eaId || '').trim();
       const telegram = String(body.telegram || '').trim();
 
       if (!nickname || nickname.length < 3) {
         return NextResponse.json(
-          { error: 'Нікнейм повинен містити щонайменше 3 символи.' },
+          { error: 'Ігровий нікнейм повинен містити щонайменше 3 символи.' },
+          { status: 400 }
+        );
+      }
+      if (!fullName || fullName.length < 2) {
+        return NextResponse.json(
+          { error: 'Будь ласка, вкажіть ваше Ім’я та Прізвище.' },
+          { status: 400 }
+        );
+      }
+      if (!eaId || eaId.length < 2) {
+        return NextResponse.json(
+          { error: 'Вкажіть ваш EA ID / PSN ID для запрошень у матч 1v1.' },
+          { status: 400 }
+        );
+      }
+      if (!platform) {
+        return NextResponse.json(
+          { error: 'Оберіть вашу ігрову платформу (PS5, PC або Xbox).' },
+          { status: 400 }
+        );
+      }
+      if (!city || city.length < 2) {
+        return NextResponse.json(
+          { error: 'Оберіть або вкажіть ваше місто (Україна або Європа).' },
+          { status: 400 }
+        );
+      }
+      if (!telegram || telegram.length < 2) {
+        return NextResponse.json(
+          { error: 'Вкажіть ваш Telegram для домовленості про матчі 1v1.' },
           { status: 400 }
         );
       }
@@ -108,12 +138,6 @@ export async function POST(req: Request) {
       if (!password || password.length < 5) {
         return NextResponse.json(
           { error: 'Пароль має містити щонайменше 5 символів.' },
-          { status: 400 }
-        );
-      }
-      if (!eaId) {
-        return NextResponse.json(
-          { error: 'Вкажіть ваш EA ID / PSN ID для запрошень у матч 1v1.' },
           { status: 400 }
         );
       }
@@ -133,11 +157,7 @@ export async function POST(req: Request) {
       const id = uid('usr');
       const colors = ['#00F59B', '#38BDF8', '#F5C451', '#A78BFA', '#FB7185'];
       const color = colors[Math.floor(Math.random() * colors.length)];
-      const tgFormatted = telegram
-        ? telegram.startsWith('@')
-          ? telegram
-          : `@${telegram}`
-        : `@${nickname.toLowerCase()}`;
+      const tgFormatted = telegram.startsWith('@') ? telegram : `@${telegram}`;
 
       db.prepare(
         `
@@ -150,7 +170,7 @@ export async function POST(req: Request) {
       ).run(
         id,
         nickname,
-        fullName || nickname,
+        fullName,
         email,
         hashPassword(password),
         city,

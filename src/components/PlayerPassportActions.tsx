@@ -12,11 +12,13 @@ import {
   Settings,
 } from 'lucide-react';
 import {
+  EUROPEAN_CITIES,
   UKRAINIAN_CITIES,
   ZSU_CHARITY_FUND_NAME,
   ZSU_MONOBANK_JAR_URL,
 } from '@/lib/constants';
 import type { PlatformType, User } from '@/lib/types';
+import { getSmartInitials } from './ClubCrest';
 import { ModalDialog } from './ModalDialog';
 
 interface PlayerPassportActionsProps {
@@ -321,7 +323,7 @@ export function PlayerPassportActions({
                     className="w-12 h-12 rounded-2xl flex items-center justify-center font-display font-extrabold text-base text-[#09090B]"
                     style={{ backgroundColor: avatarColor }}
                   >
-                    {player.nickname.slice(0, 2).toUpperCase()}
+                    {getSmartInitials(player.nickname)}
                   </div>
                 )}
                 <div>
@@ -362,10 +364,11 @@ export function PlayerPassportActions({
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
               <div>
                 <label className="block text-xs font-semibold text-slate-200 mb-1">
-                  Ім&apos;я та Прізвище
+                  Ім&apos;я та Прізвище *
                 </label>
                 <input
                   type="text"
+                  required
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   className="w-full px-3.5 py-2.5 rounded-2xl bg-[#10121A] border border-white/15 text-sm text-white focus:outline-none focus:border-white/45"
@@ -374,18 +377,31 @@ export function PlayerPassportActions({
 
               <div>
                 <label className="block text-xs font-semibold text-slate-200 mb-1">
-                  Місто України
+                  Місто (Україна / Європа) *
                 </label>
                 <select
+                  required
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
                   className="w-full px-3.5 py-2.5 rounded-2xl bg-[#10121A] border border-white/15 text-sm text-white focus:outline-none focus:border-white/45"
                 >
-                  {UKRAINIAN_CITIES.map((c) => (
-                    <option key={c} value={c}>
-                      {c}
-                    </option>
-                  ))}
+                  {!UKRAINIAN_CITIES.includes(city) &&
+                    !EUROPEAN_CITIES.includes(city) &&
+                    city && <option value={city}>{city}</option>}
+                  <optgroup label="Україна">
+                    {UKRAINIAN_CITIES.map((c) => (
+                      <option key={c} value={c}>
+                        {c}
+                      </option>
+                    ))}
+                  </optgroup>
+                  <optgroup label="Європа та Світ">
+                    {EUROPEAN_CITIES.map((c) => (
+                      <option key={c} value={c}>
+                        {c}
+                      </option>
+                    ))}
+                  </optgroup>
                 </select>
               </div>
             </div>

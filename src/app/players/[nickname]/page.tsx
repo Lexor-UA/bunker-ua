@@ -19,7 +19,7 @@ import {
   getPlayerProfileByNicknameOrId,
   listTournaments,
 } from '@/lib/tournament-engine';
-import { ClubCrest } from '@/components/ClubCrest';
+import { ClubCrest, getSmartInitials } from '@/components/ClubCrest';
 import { NfcIcon, TacticalPitchArt } from '@/components/FintechArt';
 import { HoloCard } from '@/components/HoloCard';
 import { PlayerPassportActions } from '@/components/PlayerPassportActions';
@@ -197,7 +197,7 @@ export default async function PlayerProfilePage({
                     className="w-14 h-14 rounded-2xl flex items-center justify-center font-display font-extrabold text-2xl text-[#09090B] shadow-lg"
                     style={{ backgroundColor: player.avatarColor }}
                   >
-                    {player.nickname.slice(0, 2).toUpperCase()}
+                    {getSmartInitials(player.nickname)}
                   </div>
                   <span className="mt-2.5 px-2.5 py-0.5 rounded-full bg-black/70 border border-white/15 text-slate-200 text-[0.62rem] font-extrabold tabular-nums">
                     {actualPlayed > 0 ? `${proOvr} OVR` : player.platform}

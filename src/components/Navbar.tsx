@@ -12,7 +12,11 @@ import {
   X,
 } from 'lucide-react';
 import type { Match, PlatformType, User } from '@/lib/types';
-import { UKRAINIAN_CITIES, ZSU_MONOBANK_JAR_URL } from '@/lib/constants';
+import {
+  EUROPEAN_CITIES,
+  UKRAINIAN_CITIES,
+  ZSU_MONOBANK_JAR_URL,
+} from '@/lib/constants';
 import { BrandLogo } from './BrandLogo';
 import { ModalDialog } from './ModalDialog';
 
@@ -43,10 +47,22 @@ export function Navbar({
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [regPassword, setRegPassword] = useState('');
-  const [city, setCity] = useState('Київ');
-  const [platform, setPlatform] = useState<PlatformType>('PS5');
+  const [city, setCity] = useState('');
+  const [customCity, setCustomCity] = useState('');
+  const [platform, setPlatform] = useState<PlatformType | ''>('');
   const [eaId, setEaId] = useState('');
   const [telegram, setTelegram] = useState('');
+
+  const resolvedCity = city === 'CUSTOM' ? customCity.trim() : city.trim();
+  const isRegisterFormComplete =
+    nickname.trim().length >= 3 &&
+    fullName.trim().length >= 2 &&
+    eaId.trim().length >= 2 &&
+    (platform === 'PS5' || platform === 'PC' || platform === 'XBOX') &&
+    resolvedCity.length >= 2 &&
+    telegram.trim().length >= 2 &&
+    email.trim().includes('@') &&
+    regPassword.length >= 5;
 
   async function handleLogout() {
     setBusy(true);
@@ -87,6 +103,14 @@ export function Navbar({
   async function handleRegister(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
+
+    if (!isRegisterFormComplete) {
+      setError(
+        'Будь ласка, заповніть усі обов’язкові поля (*) перед створенням картки гравця.'
+      );
+      return;
+    }
+
     setBusy(true);
     try {
       const res = await fetch('/api/auth', {
@@ -94,14 +118,14 @@ export function Navbar({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           action: 'register',
-          nickname,
-          fullName,
-          email,
+          nickname: nickname.trim(),
+          fullName: fullName.trim(),
+          email: email.trim(),
           password: regPassword,
-          city,
+          city: resolvedCity,
           platform,
-          eaId,
-          telegram,
+          eaId: eaId.trim(),
+          telegram: telegram.trim(),
         }),
       });
       const data = await res.json();
@@ -347,7 +371,7 @@ export function Navbar({
         open={authOpen}
         onClose={() => setAuthOpen(false)}
         title={authTab === 'login' ? 'Вхід у профіль' : 'Картка нового гравця'}
-        subtitle="Єдиний БУНКЕР ID для участі у Благодійних Турнірах 1v1 на підтримку ЗСУ 🇺🇦"
+        subtitle="Єдиний БУНКЕР ID для участі у Благодійних Турнірах 1v1 на підтримку ЗСУ"
         maxWidthClass="max-w-lg"
       >
         <div className="space-y-5">
@@ -392,20 +416,20 @@ export function Navbar({
             <form onSubmit={handleLogin} className="space-y-4">
               <div>
                 <label className="block text-xs font-semibold text-slate-200 mb-1.5">
-                  Email або Нікнейм
+                  Email або Нікнейм *
                 </label>
                 <input
                   type="text"
                   required
                   value={identifier}
                   onChange={(e) => setIdentifier(e.target.value)}
-                  placeholder="kozak@cyberliga.ua або Kozak_FC27"
+                  placeholder="BRS_Nederfox або player@ukr.net"
                   className="w-full px-4 py-2.5 rounded-2xl bg-[#10121A]/80 border border-white/15 text-sm text-white focus:outline-none focus:border-white/45"
                 />
               </div>
               <div>
                 <label className="block text-xs font-semibold text-slate-200 mb-1.5">
-                  Пароль
+                  Пароль *
                 </label>
                 <input
                   type="password"
@@ -418,8 +442,8 @@ export function Navbar({
               </div>
               <button
                 type="submit"
-                disabled={busy}
-                className="w-full py-3 rounded-full font-extrabold text-sm bg-white text-[#09090B] hover:bg-neutral-100 transition-all"
+                disabled={busy || !identifier.trim() || !password}
+                className="w-full py-3 rounded-full font-extrabold text-sm bg-white text-[#09090B] hover:bg-neutral-100 disabled:opacity-45 disabled:cursor-not-allowed transition-all"
               >
                 {busy ? 'Вхід...' : 'Увійти'}
               </button>
@@ -434,6 +458,7 @@ export function Navbar({
                   <input
                     type="text"
                     required
+                    minLength={3}
                     value={nickname}
                     onChange={(e) => setNickname(e.target.value)}
                     placeholder="Kyiv_Legend"
@@ -442,10 +467,12 @@ export function Navbar({
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-slate-200 mb-1">
-                    Ім&apos;я та Прізвище
+                    Ім&apos;я та Прізвище *
                   </label>
                   <input
                     type="text"
+                    required
+                    minLength={2}
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     placeholder="Іван Петренко"
@@ -462,6 +489,7 @@ export function Navbar({
                   <input
                     type="text"
                     required
+                    minLength={2}
                     value={eaId}
                     onChange={(e) => setEaId(e.target.value)}
                     placeholder="Kyiv_Legend_UA"
@@ -470,15 +498,19 @@ export function Navbar({
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-slate-200 mb-1">
-                    Платформа
+                    Платформа *
                   </label>
                   <select
+                    required
                     value={platform}
                     onChange={(e) =>
                       setPlatform(e.target.value as PlatformType)
                     }
                     className="w-full px-3.5 py-2 rounded-2xl bg-[#10121A] border border-white/15 text-sm text-white focus:outline-none focus:border-white/45"
                   >
+                    <option value="" disabled>
+                      Оберіть платформу...
+                    </option>
                     <option value="PS5">PlayStation 5</option>
                     <option value="PC">PC (EA App / Steam)</option>
                     <option value="XBOX">Xbox Series X|S</option>
@@ -487,28 +519,61 @@ export function Navbar({
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-xs font-semibold text-slate-200 mb-1">
-                    Місто
-                  </label>
-                  <select
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                    className="w-full px-3.5 py-2 rounded-2xl bg-[#10121A] border border-white/15 text-sm text-white focus:outline-none focus:border-white/45"
-                  >
-                    {UKRAINIAN_CITIES.map((c) => (
-                      <option key={c} value={c}>
-                        {c}
+                <div className="space-y-2">
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-200 mb-1">
+                      Місто (Україна / Європа) *
+                    </label>
+                    <select
+                      required
+                      value={city}
+                      onChange={(e) => setCity(e.target.value)}
+                      className="w-full px-3.5 py-2 rounded-2xl bg-[#10121A] border border-white/15 text-sm text-white focus:outline-none focus:border-white/45"
+                    >
+                      <option value="" disabled>
+                        Оберіть місто...
                       </option>
-                    ))}
-                  </select>
+                      <optgroup label="Україна">
+                        {UKRAINIAN_CITIES.map((c) => (
+                          <option key={c} value={c}>
+                            {c}
+                          </option>
+                        ))}
+                      </optgroup>
+                      <optgroup label="Європа та Світ">
+                        {EUROPEAN_CITIES.map((c) => (
+                          <option key={c} value={c}>
+                            {c}
+                          </option>
+                        ))}
+                      </optgroup>
+                      <option value="CUSTOM">
+                        Інше місто (ввести вручну)...
+                      </option>
+                    </select>
+                  </div>
+
+                  {city === 'CUSTOM' && (
+                    <input
+                      type="text"
+                      required
+                      minLength={2}
+                      value={customCity}
+                      onChange={(e) => setCustomCity(e.target.value)}
+                      placeholder="Введіть ваше місто та країну..."
+                      className="w-full px-3.5 py-2 rounded-2xl bg-[#10121A]/80 border border-sky-400/45 text-sm text-white focus:outline-none focus:border-sky-300"
+                    />
+                  )}
                 </div>
+
                 <div>
                   <label className="block text-xs font-semibold text-slate-200 mb-1">
-                    Telegram
+                    Telegram (для зв&apos;язку 1v1) *
                   </label>
                   <input
                     type="text"
+                    required
+                    minLength={2}
                     value={telegram}
                     onChange={(e) => setTelegram(e.target.value)}
                     placeholder="@kyiv_legend"
@@ -547,10 +612,17 @@ export function Navbar({
                 </div>
               </div>
 
+              {!isRegisterFormComplete && (
+                <div className="px-3.5 py-2 rounded-xl bg-amber-400/10 border border-amber-400/25 text-[0.72rem] text-amber-200/95 text-center font-medium">
+                  Заповніть усі обов&apos;язкові поля (*) вище, щоб створити
+                  картку гравця
+                </div>
+              )}
+
               <button
                 type="submit"
-                disabled={busy}
-                className="w-full py-3 rounded-full font-extrabold text-sm bg-white text-[#09090B] hover:bg-neutral-100 transition-all flex items-center justify-center gap-2"
+                disabled={busy || !isRegisterFormComplete}
+                className="w-full py-3 rounded-full font-extrabold text-sm bg-white text-[#09090B] hover:bg-neutral-100 disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
               >
                 <UserPlus className="w-4 h-4" />
                 <span>
