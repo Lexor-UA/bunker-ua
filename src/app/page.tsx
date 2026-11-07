@@ -514,84 +514,37 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 2. TOURNAMENTS OF THE SEASON — CLEAN, HARMONIOUS DIGITAL PASSES */}
+      {/* 2. TOURNAMENTS OF THE SEASON — UEFA CHAMPIONS LEAGUE BROADCAST PANELS */}
       <section className="space-y-6">
         <div className="flex flex-wrap items-end justify-between gap-4">
-          <div className="space-y-1">
-            <div className="text-xs font-bold text-pitch">
-              Календар сезону 2026/27
+          <div className="space-y-1.5">
+            <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.16em] text-gold font-extrabold">
+              <Trophy className="w-3.5 h-3.5" />
+              <span>КАЛЕНДАР СЕЗОНУ 2026/27 • BUNKER FC 1v1 UKRAINE</span>
             </div>
-            <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-white tracking-[-0.03em]">
+            <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-white tracking-[-0.03em] uppercase">
               Турніри сезону
             </h2>
           </div>
 
-          <Link
-            href="/tournaments"
-            className="px-5 py-2.5 rounded-full glass-panel hover:bg-white hover:text-[#09090B] text-xs font-bold text-white inline-flex items-center gap-2 transition-all"
-          >
-            <span>Усі турніри</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
+          <div className="flex flex-wrap items-center gap-2.5">
+            <span className="hidden sm:inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-[#060E24]/90 border border-sky-400/25 text-xs font-bold text-sky-200">
+              <span className="w-2 h-2 rounded-full bg-pitch animate-pulse" />
+              <span>Система Ліги Чемпіонів (Групи + ПО)</span>
+            </span>
+
+            <Link
+              href="/tournaments"
+              className="px-5 py-2.5 rounded-full glass-panel hover:bg-gold hover:text-[#040814] text-xs font-extrabold text-white inline-flex items-center gap-2 transition-all"
+            >
+              <span>Усі турніри</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
         </div>
 
-        {/* Clean Single-Row Live Match Bar */}
-        {featuredMatch && (
-          <Link
-            href={`/tournaments/${featuredMatch.tournamentSlug}`}
-            className="glass-panel rounded-[26px] px-5 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-4 border border-white/15 hover:border-white/30 transition-all group"
-          >
-            <div className="flex items-center gap-3">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FF5C39] text-white text-xs font-bold">
-                <Radio className="w-3 h-3 animate-pulse" />
-                LIVE 1/2
-              </span>
-              <span className="text-sm font-bold text-white">
-                {featuredMatch.tournamentTitle}
-              </span>
-            </div>
-
-            <div className="flex items-center gap-3 sm:gap-4">
-              <div className="flex items-center gap-2">
-                <span className="text-sm font-bold text-white">
-                  {featuredMatch.player1?.nickname}
-                </span>
-                <ClubCrest
-                  club={featuredMatch.player1?.club}
-                  nickname={featuredMatch.player1?.nickname}
-                  seedBadge="E1"
-                  size="sm"
-                />
-              </div>
-
-              <span className="px-3.5 py-1 rounded-xl bg-[#0B0E17]/90 border border-white/15 text-sm font-extrabold text-white tabular-nums">
-                {featuredMatch.score1 ?? '—'}{' '}
-                <span className="text-slate-400">:</span>{' '}
-                {featuredMatch.score2 ?? '—'}
-              </span>
-
-              <div className="flex items-center gap-2">
-                <ClubCrest
-                  club={featuredMatch.player2?.club}
-                  nickname={featuredMatch.player2?.nickname}
-                  seedBadge="C2"
-                  size="sm"
-                />
-                <span className="text-sm font-bold text-white">
-                  {featuredMatch.player2?.nickname}
-                </span>
-              </div>
-            </div>
-
-            <span className="px-4 py-2 rounded-full bg-white text-[#09090B] group-hover:bg-neutral-200 text-xs font-bold inline-flex items-center gap-1.5 transition-all">
-              <span>Матч-центр</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </span>
-          </Link>
-        )}
-
         {/* Harmonious Tournament Cards (2 Monthly Cups + Full-Width Grand Final Banner) */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
           {tournaments.map((t) => {
             const isAnnual = t.cupType === 'ANNUAL';
             const isPlayoff =
@@ -601,6 +554,8 @@ export default function HomePage() {
               100,
               Math.round((count / t.maxPlayers) * 100)
             );
+            const displayTitle = t.title.replace('БУНКЕР UA', 'BUNKER FC 1v1');
+
             const top3Prizes =
               t.prizeBreakdown.length >= 3
                 ? t.prizeBreakdown.slice(0, 3)
@@ -609,19 +564,19 @@ export default function HomePage() {
                       place: '1 місце',
                       amountUah: 0,
                       points: isAnnual ? 1000 : 250,
-                      badge: '🎖️ Нагорода від ЗСУ',
+                      badge: 'Трофей від воїнів ЗСУ',
                     },
                     {
                       place: '2 місце',
                       amountUah: 0,
                       points: isAnnual ? 700 : 180,
-                      badge: '🥈 Срібний фіналіст',
+                      badge: 'Срібний фіналіст',
                     },
                     {
                       place: '3 місце',
                       amountUah: 0,
                       points: isAnnual ? 500 : 135,
-                      badge: '🥉 Бронзовий призер',
+                      badge: 'Бронзовий призер',
                     },
                   ];
 
@@ -631,7 +586,7 @@ export default function HomePage() {
                 ? '/images/hero-arena.jpg'
                 : '/images/banner-kickoff-draft.jpg';
 
-            const medalIcons = ['🥇', '🥈', '🥉', '🏅'];
+            const rankBadges = ['I МІСЦЕ', 'II МІСЦЕ', 'III МІСЦЕ', 'IV МІСЦЕ'];
 
             if (isAnnual) {
               const annualPrizes =
@@ -643,7 +598,7 @@ export default function HomePage() {
                         place: '4 місце',
                         amountUah: 0,
                         points: 350,
-                        badge: '🏅 Півфіналіст року',
+                        badge: 'Півфіналіст року',
                       },
                     ];
 
@@ -651,11 +606,17 @@ export default function HomePage() {
                 <Link
                   key={t.id}
                   href={`/tournaments/${t.slug}`}
-                  className="lg:col-span-2 group relative rounded-[34px] mono-iron-surface border border-amber-300/35 hover:border-amber-300/70 overflow-hidden transition-all duration-300 hover:-translate-y-1 shadow-[0_24px_60px_rgba(0,0,0,0.55)]"
+                  className="lg:col-span-2 group relative rounded-[34px] mono-iron-surface border border-amber-400/40 hover:border-amber-300/80 overflow-hidden transition-all duration-300 hover:-translate-y-1 shadow-[0_28px_70px_rgba(2,6,23,0.85)]"
                 >
+                  {/* Top Champions Gold Strip */}
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-[#D97706] via-[#FDE68A] to-[#2563EB] z-20"
+                  />
+
                   <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
                     {/* Left 5 Cols: Panoramic Golden Trophy Stage */}
-                    <div className="lg:col-span-5 relative min-h-[220px] p-6 sm:p-7 flex flex-col justify-between overflow-hidden border-b lg:border-b-0 lg:border-r border-white/12">
+                    <div className="lg:col-span-5 relative min-h-[240px] p-6 sm:p-8 flex flex-col justify-between overflow-hidden border-b lg:border-b-0 lg:border-r border-amber-400/20">
                       <img
                         src={headerBackdrop}
                         alt=""
@@ -664,105 +625,120 @@ export default function HomePage() {
                       />
                       <div
                         aria-hidden="true"
-                        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#161412] via-[#161412]/60 to-[#0B0E17]/35"
+                        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#090D1A] via-[#090D1A]/70 to-[#050814]/40"
                       />
 
                       <div className="relative z-10 flex items-center justify-between gap-2">
-                        <span className="px-3.5 py-1 rounded-full bg-gold text-[#09090B] text-xs font-extrabold shadow-sm">
-                          ★ Підсумковий Фінал Сезону
+                        <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-gradient-to-r from-[#FDE68A] via-[#F5C451] to-[#D97706] text-[#040814] text-xs font-extrabold uppercase tracking-wide shadow-sm">
+                          <Crown className="w-3.5 h-3.5" />
+                          <span>Фінал Сезону • Major</span>
                         </span>
-                        <span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#0B0E17]/80 text-amber-200 border border-amber-300/30 backdrop-blur-md">
-                          {t.monthLabel}
+                        <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-[#050A18]/90 text-amber-200 border border-amber-400/35 backdrop-blur-md">
+                          ТОП-16 УКРАЇНИ
                         </span>
                       </div>
 
                       <div className="relative z-10 my-2 flex items-center justify-between gap-4">
-                        <div className="space-y-1">
-                          <div className="text-xs text-amber-200/90 font-semibold">
-                            Головний трофей року • БУНКЕР UA
+                        <div className="space-y-1.5">
+                          <div className="text-[0.68rem] font-mono uppercase tracking-[0.15em] text-amber-200/90 font-extrabold">
+                            ГОЛОВНИЙ ТРОФЕЙ РОКУ • BUNKER FC 1v1
                           </div>
-                          <div className="font-display text-2xl sm:text-3xl font-extrabold text-gradient-gold leading-tight">
-                            🏆 Кубок Чемпіонів ЗСУ
+                          <div className="font-display text-2xl sm:text-3xl font-extrabold text-gradient-gold leading-tight uppercase">
+                            Кубок Чемпіонів ЗСУ
                           </div>
                           <div className="pt-1 flex flex-wrap items-center gap-1.5">
-                            <span className="px-2.5 py-0.5 rounded-full bg-[#0B0E17]/85 border border-white/15 text-xs font-semibold text-slate-100">
-                              ТОП-16 рейтингу сезону
+                            <span className="px-2.5 py-0.5 rounded-full bg-[#050A18]/90 border border-sky-400/30 text-xs font-bold text-slate-100">
+                              Кваліфікація за рейтингом
                             </span>
-                            <span className="px-2.5 py-0.5 rounded-full bg-amber-400/20 border border-amber-400/35 text-xs font-bold text-gold">
-                              ×2 Очки
+                            <span className="px-2.5 py-0.5 rounded-full bg-amber-400/20 border border-amber-400/40 text-xs font-extrabold text-gold">
+                              ×2 Подвійні очки
                             </span>
                           </div>
                         </div>
 
-                        <div className="w-28 h-28 sm:w-32 sm:h-32 shrink-0 group-hover:scale-105 transition-transform duration-500">
-                          <VectorGoldTrophy className="w-full h-full" />
+                        <div className="relative w-28 h-28 sm:w-32 sm:h-32 shrink-0 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
+                          <div
+                            aria-hidden="true"
+                            className="pointer-events-none absolute inset-0 rounded-full bg-amber-400/20 blur-2xl"
+                          />
+                          <VectorGoldTrophy className="relative z-10 w-full h-full" />
                         </div>
                       </div>
                     </div>
 
-                    {/* Right 7 Cols: Executive Championship Details */}
+                    {/* Right 7 Cols: Executive Championship Details (Clean, Zero Repetition) */}
                     <div className="lg:col-span-7 p-6 sm:p-8 flex flex-col justify-between gap-5">
                       <div className="space-y-4">
                         <div className="flex flex-wrap items-start justify-between gap-3">
-                          <div className="space-y-1">
-                            <h3 className="font-display text-xl sm:text-2xl font-extrabold text-white">
-                              {t.title}
+                          <div className="space-y-1.5 max-w-2xl">
+                            <h3 className="font-display text-xl sm:text-2xl font-extrabold text-white uppercase tracking-[-0.02em]">
+                              {displayTitle}
                             </h3>
                             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                              {t.subtitle} — переможці благодійних турнірів та
-                              лідери загального рейтингу БУНКЕР UA розіграють
-                              головну відзнаку сезону від воїнів ЗСУ.
+                              Підсумковий турнір сезону серед чемпіонів
+                              благодійних кубків та 16 лідерів національного
+                              рейтингу України за головну відзнаку року від
+                              воїнів ЗСУ.
                             </p>
                           </div>
 
-                          <span className="px-3 py-1 rounded-full bg-amber-400/15 border border-amber-400/35 text-xs font-mono font-extrabold text-gold uppercase shrink-0">
+                          <span className="px-3 py-1 rounded-full bg-amber-400/15 border border-amber-400/40 text-[0.68rem] font-mono font-extrabold text-gold uppercase shrink-0">
                             ★ GRAND FINAL
                           </span>
                         </div>
 
+                        {/* 4-Column Sculpted Podium Pods */}
                         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                           {annualPrizes.map((tier, idx) => (
                             <div
                               key={idx}
-                              className="p-3 rounded-2xl bg-[#0B0E17]/75 border border-white/10 text-center"
+                              className={`p-3 rounded-2xl border text-center transition-colors ${
+                                idx === 0
+                                  ? 'bg-gradient-to-b from-amber-500/20 to-[#060D20]/95 border-amber-400/45'
+                                  : 'bg-[#050B1C]/85 border-sky-400/20'
+                              }`}
                             >
-                              <div className="text-xs text-slate-300 font-medium">
-                                {medalIcons[idx]} {idx + 1} місце
+                              <div
+                                className={`text-[0.62rem] font-mono font-extrabold uppercase tracking-wider ${
+                                  idx === 0 ? 'text-gold' : 'text-sky-300'
+                                }`}
+                              >
+                                {rankBadges[idx]}
                               </div>
                               <div
-                                className={`font-display text-xs sm:text-sm font-extrabold tabular-nums mt-0.5 ${
-                                  idx === 0 ? 'text-gold' : 'text-white'
+                                className={`font-display text-xs sm:text-sm font-extrabold tabular-nums mt-1 ${
+                                  idx === 0 ? 'text-white' : 'text-white'
                                 }`}
                               >
                                 {idx === 0
-                                  ? '🎖️ Сувенір ЗСУ'
-                                  : `+${tier.points} pts`}
+                                  ? 'Трофей ЗСУ + 1000 pts'
+                                  : `+${tier.points} pts рейтингу`}
                               </div>
                             </div>
                           ))}
                         </div>
                       </div>
 
-                      <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                      <div className="pt-4 border-t border-amber-400/20 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                         <div className="flex-1 max-w-md space-y-1.5">
                           <div className="flex items-center justify-between text-xs">
-                            <span className="text-slate-300 font-medium">
-                              Кваліфікація за рейтингом сезону (ТОП-16)
+                            <span className="text-slate-300 font-semibold">
+                              Зона відбору за рейтингом сезону (ТОП-16)
                             </span>
-                            <span className="text-gold font-bold tabular-nums">
+                            <span className="text-gold font-mono font-extrabold tabular-nums">
                               8 / {t.maxPlayers} у зоні відбору
                             </span>
                           </div>
-                          <div className="h-2 rounded-full bg-[#090B12] overflow-hidden p-[1px] border border-white/10">
+                          <div className="h-2 rounded-full bg-[#040814] overflow-hidden p-[1px] border border-amber-400/25">
                             <div
-                              className="h-full rounded-full bg-gold transition-all"
+                              className="h-full rounded-full bg-gradient-to-r from-[#2563EB] via-[#38BDF8] to-[#F5C451] transition-all"
                               style={{ width: '50%' }}
                             />
                           </div>
                         </div>
 
-                        <span className="px-6 py-2.5 rounded-full bg-white text-[#09090B] group-hover:bg-neutral-200 text-xs font-extrabold inline-flex items-center justify-center gap-1.5 transition-all shrink-0 shadow">
-                          <span>Детальніше про Фінал</span>
+                        <span className="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#FDE68A] via-[#F5C451] to-[#D97706] text-[#040814] group-hover:brightness-110 text-xs font-extrabold inline-flex items-center justify-center gap-1.5 transition-all shrink-0 shadow-[0_10px_24px_rgba(245,196,81,0.3)]">
+                          <span>Регламент Фіналу</span>
                           <ArrowRight className="w-3.5 h-3.5" />
                         </span>
                       </div>
@@ -776,15 +752,25 @@ export default function HomePage() {
               <Link
                 key={t.id}
                 href={`/tournaments/${t.slug}`}
-                className={`group relative rounded-[32px] p-6 flex flex-col justify-between gap-5 overflow-hidden transition-all duration-300 hover:-translate-y-1 ${
-                  t.status === 'REGISTRATION'
-                    ? 'diia-card-surface border border-sky-300/30 hover:border-sky-300/65'
-                    : 'glass-panel border border-white/15 hover:border-white/35'
+                className={`group relative rounded-[34px] p-6 sm:p-7 flex flex-col justify-between gap-5 overflow-hidden transition-all duration-300 hover:-translate-y-1 shadow-[0_24px_60px_rgba(2,6,23,0.8)] ${
+                  isPlayoff
+                    ? 'glass-panel border border-sky-400/35 hover:border-sky-300/75'
+                    : 'diia-card-surface border border-amber-400/35 hover:border-amber-300/75'
                 }`}
               >
+                {/* Top Broadcast Accent Line */}
+                <div
+                  aria-hidden="true"
+                  className={`pointer-events-none absolute inset-x-0 top-0 h-[3px] z-20 ${
+                    isPlayoff
+                      ? 'bg-gradient-to-r from-[#FF5C39] via-[#38BDF8] to-[#2563EB]'
+                      : 'bg-gradient-to-r from-[#00F59B] via-[#F5C451] to-[#38BDF8]'
+                  }`}
+                />
+
                 <div className="space-y-5">
                   {/* Panoramic 3D Header Stage */}
-                  <div className="relative -mx-6 -mt-6 px-6 pt-5 pb-4 overflow-hidden border-b border-white/10 min-h-[195px] flex flex-col justify-between">
+                  <div className="relative -mx-6 sm:-mx-7 -mt-6 sm:-mt-7 px-6 sm:px-7 pt-5 pb-5 overflow-hidden border-b border-sky-400/20 min-h-[205px] flex flex-col justify-between">
                     <img
                       src={headerBackdrop}
                       alt=""
@@ -793,153 +779,214 @@ export default function HomePage() {
                     />
                     <div
                       aria-hidden="true"
-                      className={`pointer-events-none absolute inset-0 ${
-                        t.status === 'REGISTRATION'
-                          ? 'bg-gradient-to-t from-[#111926] via-[#111926]/70 to-[#0B0E17]/35'
-                          : 'bg-gradient-to-t from-[#121622] via-[#121622]/70 to-[#0B0E17]/35'
-                      }`}
+                      className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#060E24] via-[#060E24]/75 to-[#040814]/40"
                     />
 
                     {/* Top Pass Header */}
                     <div className="relative z-10 flex items-center justify-between gap-2">
-                      <span
-                        className={`px-3 py-1 rounded-full text-xs font-bold shadow-sm ${
-                          isPlayoff
-                            ? 'bg-[#FF5C39] text-white'
-                            : 'bg-white text-[#09090B]'
-                        }`}
-                      >
-                        {t.status === 'PLAYOFF'
-                          ? '● Плей-офф LIVE (1/2 та Фінал)'
-                          : t.status === 'GROUP_STAGE'
-                            ? '● Групи LIVE'
-                            : '● Відкрита реєстрація'}
-                      </span>
+                      {isPlayoff ? (
+                        <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#FF5C39] text-white text-xs font-extrabold uppercase tracking-wide shadow-[0_0_20px_rgba(255,92,57,0.4)]">
+                          <Radio className="w-3 h-3 animate-pulse" />
+                          <span>Плей-офф LIVE • 1/2 та Фінал</span>
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-gradient-to-r from-[#FDE68A] via-[#F5C451] to-[#D97706] text-[#040814] text-xs font-extrabold uppercase tracking-wide shadow-sm">
+                          <ShieldCheck className="w-3.5 h-3.5" />
+                          <span>Відкрита реєстрація в групи</span>
+                        </span>
+                      )}
 
-                      <span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#0B0E17]/80 text-slate-100 border border-white/15 backdrop-blur-md">
-                        {t.monthLabel}
+                      <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-[#040814]/85 text-sky-200 border border-sky-400/30 backdrop-blur-md">
+                        {isPlayoff ? 'ТУРНІР #1 • LIVE' : 'ТУРНІР #2 • 16 МІСЦЬ'}
                       </span>
                     </div>
 
-                    {/* Trophy & Charity Reward */}
-                    <div className="relative z-10 flex items-end justify-between gap-3 pt-3">
-                      <div className="space-y-1">
-                        <div className="text-xs text-slate-300 font-medium">
+                    {/* Center Stage Metric & 3D Trophy */}
+                    <div className="relative z-10 flex items-end justify-between gap-4 pt-3">
+                      <div className="space-y-1.5">
+                        <div className="text-[0.68rem] font-mono uppercase tracking-[0.14em] text-sky-300 font-bold">
                           {isPlayoff
-                            ? 'Зібрано в банку ЗСУ • Project Ukraine'
-                            : 'Головна нагорода турніру'}
+                            ? 'БЛАГОДІЙНИЙ ЗБІР ФОНДУ PROJECT UKRAINE'
+                            : 'ГОЛОВНА НАГОРОДА ПЕРЕМОЖЦЮ ТУРНІРУ'}
                         </div>
+
                         <div className="font-display text-2xl sm:text-3xl font-extrabold tracking-[-0.03em] leading-tight text-white">
                           {isPlayoff ? (
-                            <>
-                              🫙 2 145 <span className="text-gold">₴</span>{' '}
-                              <span className="text-base sm:text-lg font-bold text-pitch">
-                                • Трофей ЗСУ
+                            <span className="inline-flex flex-wrap items-baseline gap-2">
+                              <span className="text-gradient-gold">2 145 ₴</span>
+                              <span className="text-base sm:text-lg font-extrabold text-white">
+                                + Трофей від воїнів ЗСУ
                               </span>
-                            </>
-                          ) : t.prizePoolUah > 0 ? (
-                            `${t.prizePoolUah.toLocaleString('uk-UA')} ₴`
+                            </span>
                           ) : (
-                            '🎖️ Нагорода від воїнів ЗСУ'
-                          )}
-                        </div>
-                        <div className="pt-1 flex flex-wrap items-center gap-1.5">
-                          <span className="px-2.5 py-0.5 rounded-full bg-[#0B0E17]/80 border border-white/15 text-xs font-semibold text-slate-100">
-                            {isPlayoff
-                              ? '18 учасників • 5 груп A–E'
-                              : t.gameMode === 'KICKOFF_CLUB_DRAFT'
-                                ? 'Ліга Чемпіонів • Групи + Плей-офф'
-                                : 'Ultimate Team 1v1'}
-                          </span>
-                          {t.equal95Ovr && (
-                            <span className="px-2.5 py-0.5 rounded-full bg-emerald-400/20 border border-emerald-400/35 text-xs font-bold text-pitch">
-                              95 OVR
+                            <span className="text-gradient-gold">
+                              Пам’ятний Трофей від ЗСУ
                             </span>
                           )}
                         </div>
+
+                        <div className="pt-1 flex flex-wrap items-center gap-1.5">
+                          <span className="px-2.5 py-0.5 rounded-full bg-[#040814]/85 border border-sky-400/25 text-xs font-semibold text-slate-100">
+                            {isPlayoff
+                              ? '18 учасників • 5 груп (A–E)'
+                              : 'Ultimate Team 1v1 • Групи + ПО'}
+                          </span>
+                          <span className="px-2.5 py-0.5 rounded-full bg-emerald-400/15 border border-emerald-400/35 text-xs font-bold text-pitch">
+                            {isPlayoff ? '38 / 41 матчів' : 'Донат від 10 ₴'}
+                          </span>
+                        </div>
                       </div>
 
-                      <div className="w-24 h-24 shrink-0 -mb-1 group-hover:scale-105 transition-transform duration-500">
-                        <VectorEmeraldTrophy className="w-full h-full" />
+                      <div className="relative w-24 h-24 sm:w-28 sm:h-28 shrink-0 -mb-1 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
+                        <div
+                          aria-hidden="true"
+                          className={`pointer-events-none absolute inset-1 rounded-full blur-xl ${
+                            isPlayoff ? 'bg-sky-400/20' : 'bg-amber-400/20'
+                          }`}
+                        />
+                        {isPlayoff ? (
+                          <VectorEmeraldTrophy className="relative z-10 w-full h-full" />
+                        ) : (
+                          <VectorGoldTrophy className="relative z-10 w-full h-full" />
+                        )}
                       </div>
                     </div>
                   </div>
 
-                  {/* Title & Subtitle */}
+                  {/* Clean Title & Non-Repetitive Description */}
                   <div className="space-y-1">
-                    <h3 className="font-display text-xl font-extrabold text-white truncate">
-                      {t.title}
+                    <h3 className="font-display text-xl sm:text-2xl font-extrabold text-white truncate tracking-[-0.02em]">
+                      {displayTitle}
                     </h3>
-                    <p className="text-xs sm:text-sm text-slate-300 line-clamp-2">
-                      {t.subtitle}
+                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                      {isPlayoff
+                        ? 'Груповий етап у 5 групах (A–E) та чвертьфінали завершено. Визначаються призери та володар кубка.'
+                        : 'Новий набір на 16 учасників за форматом Ліги Чемпіонів (4 групи A–D по 2 кола + сітка Плей-офф).'}
                     </p>
                   </div>
 
-                  {/* Clean 3-Column Medal Prize Row */}
-                  <div className="grid grid-cols-3 gap-2">
-                    {top3Prizes.map((tier, idx) => (
-                      <div
-                        key={idx}
-                        className="p-2.5 rounded-2xl bg-[#0B0E17]/75 border border-white/10 text-center"
-                      >
-                        <div className="text-xs text-slate-300 font-medium">
-                          {medalIcons[idx]} {idx + 1} місце
+                  {/* Distinct Body Grid: Live Playoff Stage for #1 vs Podium Rewards for #2 */}
+                  {isPlayoff ? (
+                    <div className="grid grid-cols-3 gap-2.5">
+                      <div className="p-3 rounded-2xl bg-gradient-to-b from-amber-500/18 to-[#050B1C]/90 border border-amber-400/40">
+                        <div className="text-[0.6rem] font-mono font-extrabold text-gold uppercase tracking-wider">
+                          ГРАНД-ФІНАЛ
                         </div>
-                        <div
-                          className={`font-display text-xs sm:text-sm font-extrabold tabular-nums mt-0.5 ${
-                            idx === 0 ? 'text-pitch' : 'text-white'
-                          }`}
-                        >
-                          {tier.amountUah > 0
-                            ? `${tier.amountUah.toLocaleString('uk-UA')} ₴`
-                            : idx === 0
-                              ? 'Трофей ЗСУ'
-                              : `+${tier.points} pts`}
+                        <div className="font-display text-xs sm:text-sm font-extrabold text-white truncate mt-1">
+                          BRS_Nederfox
+                        </div>
+                        <div className="text-[0.62rem] text-amber-200/90 font-semibold truncate">
+                          Очікує 1/2
                         </div>
                       </div>
-                    ))}
-                  </div>
+
+                      <div className="p-3 rounded-2xl bg-[#050D24]/90 border border-sky-400/35">
+                        <div className="text-[0.6rem] font-mono font-extrabold text-pitch uppercase tracking-wider">
+                          1/2 ФІНАЛУ • LIVE
+                        </div>
+                        <div className="font-display text-xs sm:text-sm font-extrabold text-white truncate mt-1">
+                          YoungChamp18
+                        </div>
+                        <div className="text-[0.62rem] text-sky-300 font-semibold truncate">
+                          vs Elaizer [C2]
+                        </div>
+                      </div>
+
+                      <div className="p-3 rounded-2xl bg-[#050B1C]/85 border border-white/12">
+                        <div className="text-[0.6rem] font-mono font-extrabold text-slate-300 uppercase tracking-wider">
+                          ЗА 3 МІСЦЕ
+                        </div>
+                        <div className="font-display text-xs sm:text-sm font-extrabold text-white truncate mt-1">
+                          BRS_Hasfer23
+                        </div>
+                        <div className="text-[0.62rem] text-slate-400 font-semibold truncate">
+                          Бронзовий фінал
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-3 gap-2.5">
+                      {top3Prizes.map((tier, idx) => (
+                        <div
+                          key={idx}
+                          className={`p-3 rounded-2xl border text-center ${
+                            idx === 0
+                              ? 'bg-gradient-to-b from-amber-500/18 to-[#050B1C]/90 border-amber-400/40'
+                              : 'bg-[#050B1C]/85 border-sky-400/20'
+                          }`}
+                        >
+                          <div
+                            className={`text-[0.6rem] font-mono font-extrabold uppercase tracking-wider ${
+                              idx === 0 ? 'text-gold' : 'text-sky-300'
+                            }`}
+                          >
+                            {rankBadges[idx]}
+                          </div>
+                          <div className="font-display text-xs sm:text-sm font-extrabold text-white tabular-nums mt-1">
+                            {idx === 0
+                              ? 'Трофей ЗСУ'
+                              : `+${tier.points} pts`}
+                          </div>
+                          <div className="text-[0.62rem] text-slate-300 font-medium mt-0.5">
+                            {idx === 0 ? '+250 pts' : idx === 1 ? 'Срібло' : 'Бронза'}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 {/* Clean Progress Bar + Action Row */}
-                <div className="space-y-4 pt-3 border-t border-white/10">
+                <div className="space-y-4 pt-3.5 border-t border-sky-400/20">
                   <div className="space-y-1.5">
                     <div className="flex items-center justify-between text-xs">
-                      <span className="text-slate-300 font-medium">
+                      <span className="text-slate-300 font-semibold">
                         {isPlayoff
-                          ? 'Зіграно матчів (Групи + Плей-офф)'
-                          : 'Зареєстровано гравців у групи'}
+                          ? 'Зіграно матчів (Групи A–E + Плей-офф)'
+                          : 'Вільні слоти у групах A–D (відкритий набір)'}
                       </span>
-                      <span className="text-white font-bold tabular-nums">
+                      <span
+                        className={`font-mono font-extrabold tabular-nums ${
+                          isPlayoff ? 'text-pitch' : 'text-gold'
+                        }`}
+                      >
                         {isPlayoff
                           ? '38 / 41 (93%)'
-                          : `${count} / ${t.maxPlayers}`}
+                          : `${t.maxPlayers - count} із ${t.maxPlayers} місць вільно`}
                       </span>
                     </div>
-                    <div className="h-2 rounded-full bg-[#090B12] overflow-hidden p-[1px] border border-white/10">
+                    <div className="h-2 rounded-full bg-[#040814] overflow-hidden p-[1px] border border-white/10">
                       <div
-                        className="h-full rounded-full transition-all diia-iridescent-bg"
+                        className={`h-full rounded-full transition-all ${
+                          isPlayoff
+                            ? 'diia-iridescent-bg'
+                            : 'bg-gradient-to-r from-[#00F59B] via-[#38BDF8] to-[#F5C451]'
+                        }`}
                         style={{
                           width: isPlayoff
                             ? '93%'
-                            : `${Math.max(8, fillPct)}%`,
+                            : `${Math.max(18, fillPct)}%`,
                         }}
                       />
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center justify-between gap-3">
                     <span className="text-xs font-semibold text-slate-200">
                       {isPlayoff
-                        ? 'Фінал: BRS_Nederfox vs Переможець 1/2'
-                        : t.entryFeeUah === 0
-                          ? 'Вільний донат на Банку ЗСУ'
-                          : `Донат від ${t.entryFeeUah} ₴ на Банку ЗСУ`}
+                        ? 'Гранд-Фінал та півфінал #2 у прямому ефірі'
+                        : 'Вільний графік (1 тиждень на групу) • Telegram-чат'}
                     </span>
 
-                    <span className="px-4 py-2 rounded-full bg-white text-[#09090B] group-hover:bg-neutral-200 text-xs font-extrabold inline-flex items-center gap-1.5 transition-all shrink-0">
+                    <span
+                      className={`px-4 sm:px-5 py-2.5 rounded-full text-xs font-extrabold inline-flex items-center gap-1.5 transition-all shrink-0 ${
+                        isPlayoff
+                          ? 'bg-white text-[#040814] group-hover:bg-sky-200'
+                          : 'bg-gradient-to-r from-[#FDE68A] via-[#F5C451] to-[#D97706] text-[#040814] group-hover:brightness-110 shadow-[0_8px_20px_rgba(245,196,81,0.3)]'
+                      }`}
+                    >
                       <span>
-                        {t.status === 'PLAYOFF' ? 'Сітка LIVE' : 'Узяти участь'}
+                        {isPlayoff ? 'Матч-центр LIVE' : 'Подати заявку'}
                       </span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </span>
