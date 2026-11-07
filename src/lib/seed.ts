@@ -456,7 +456,7 @@ export function seedDatabase(db: SqliteDatabase) {
     'ULTIMATE_TEAM',
     'NONE',
     0,
-    2145,
+    0,
     10,
     32,
     4,

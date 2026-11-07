@@ -170,7 +170,12 @@ function ensureRealTournamentV1(db: SqliteDatabase) {
   const realCheck = db
     .prepare("SELECT id FROM users WHERE id = 'usr_p1' AND nickname = 'BRS_Nederfox'")
     .get();
-  if (realCheck) return;
+  if (realCheck) {
+    db.prepare(
+      "UPDATE tournaments SET prize_pool_uah = 0 WHERE id = 'trn_oct_2026' AND prize_pool_uah != 0"
+    ).run();
+    return;
+  }
 
   const customUsers = db
     .prepare(
