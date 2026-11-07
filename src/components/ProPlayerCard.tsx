@@ -1,6 +1,15 @@
 import React from 'react';
 import Link from 'next/link';
-import { ArrowUpRight, CheckCircle2, Crown, Shield, Star, Trophy } from 'lucide-react';
+import {
+  ArrowUpRight,
+  Award,
+  CheckCircle2,
+  Crown,
+  Flame,
+  QrCode,
+  Shield,
+  Trophy,
+} from 'lucide-react';
 import type { User } from '@/lib/types';
 import { getSmartInitials, isClubMemberByNickname } from './ClubCrest';
 import { UaFlag } from './UaFlag';
@@ -11,7 +20,8 @@ interface ProPlayerCardProps {
 }
 
 /**
- * Authentic EA SPORTS FC Ultimate Team (FUT) × UEFA Champions League Shield Card
+ * Official BUNKER FC 1v1 • UKRAINE Top-3 Podium Player Card
+ * Combines UEFA Champions League Broadcast Podium aesthetics with EA SPORTS FC Ultimate Team telemetry.
  */
 export function ProPlayerCard({ player, rank }: ProPlayerCardProps) {
   const actualPlayed = player.wins + player.draws + player.losses;
@@ -21,6 +31,7 @@ export function ProPlayerCard({ player, rank }: ProPlayerCardProps) {
   const gpg =
     actualPlayed > 0 ? (player.goalsFor / totalMatches).toFixed(1) : '0.0';
   const gd = player.goalsFor - player.goalsAgainst;
+  const gdFormatted = gd > 0 ? `+${gd}` : `${gd}`;
 
   // FUT Overall Rating (86..96)
   const proOvr = Math.min(
@@ -54,56 +65,83 @@ export function ProPlayerCard({ player, rank }: ProPlayerCardProps) {
       ? player.avatarUrl
       : null;
 
-  // Card Edition Theme (Rank 1 = TOTY Gold/Navy, Rank 2 = UCL Royal Blue, Rank 3 = UCL Knockout Emerald)
+  // Tournament Stage / Achievement Subtitle
+  const stageStatus =
+    rank === 1
+      ? 'Фіналіст Турніру #1 • Посів A1'
+      : rank === 2
+        ? 'Півфіналіст Турніру #1 • Посів C2'
+        : 'Півфіналіст Турніру #1 • Посів E1';
+
+  // Podium Tier Theme: #1 Champions Gold, #2 Platinum Ice Blue, #3 Warm Bronze-Amber
   const theme =
     rank === 1
       ? {
-          edition: 'CHAMPIONS TOTY',
-          pos: 'ST',
-          outerGlow:
-            'hover:shadow-[0_28px_70px_rgba(245,196,81,0.28)] border-amber-300/60',
+          rankLabel: '#1 В УКРАЇНІ',
+          editionLabel: 'ЛІДЕР СЕЗОНУ',
+          topBeam: 'from-transparent via-amber-300/90 to-transparent',
+          cardBorder:
+            'border-amber-400/50 hover:border-amber-300/80 shadow-[0_24px_60px_rgba(0,0,0,0.75)] hover:shadow-[0_28px_70px_rgba(245,196,81,0.22)]',
           bgGradient:
-            'linear-gradient(155deg, #1b2448 0%, #0a122c 42%, #241c12 82%, #070b19 100%)',
-          accentColor: '#F5C451',
+            'linear-gradient(155deg, rgba(28, 36, 68, 0.96) 0%, rgba(9, 17, 40, 0.98) 48%, rgba(36, 26, 12, 0.95) 100%)',
+          rankBadge:
+            'bg-gradient-to-r from-[#FDE68A] via-[#F5C451] to-[#D97706] text-[#040814] shadow-[0_6px_18px_rgba(245,196,81,0.35)]',
+          ovrBadge:
+            'bg-amber-400/15 border-amber-300/45 text-amber-200',
           accentText: 'text-gold',
-          badgeBg:
-            'bg-gradient-to-r from-amber-300 via-gold to-amber-500 text-[#050814]',
-          dividerBorder: 'border-amber-300/35',
-          statAccent: 'text-amber-300',
-          crestRing: 'ring-amber-300/60 shadow-[0_0_32px_rgba(245,196,81,0.35)]',
+          pointsGlow:
+            'bg-gradient-to-r from-amber-200 via-gold to-amber-400 bg-clip-text text-transparent',
+          avatarRing:
+            'ring-amber-300/60 shadow-[0_12px_30px_rgba(245,196,81,0.28)]',
+          statusPill:
+            'bg-amber-400/12 border-amber-400/35 text-amber-200',
+          footerHover:
+            'group-hover:border-amber-400/45 group-hover:bg-amber-400/10',
         }
       : rank === 2
         ? {
-            edition: 'UCL ROAD TO FINAL',
-            pos: 'CAM',
-            outerGlow:
-              'hover:shadow-[0_28px_70px_rgba(56,189,248,0.28)] border-sky-400/55',
+            rankLabel: '#2 В УКРАЇНІ',
+            editionLabel: 'ВІЦЕ-ЛІДЕР',
+            topBeam: 'from-transparent via-sky-300/90 to-transparent',
+            cardBorder:
+              'border-sky-400/45 hover:border-sky-300/75 shadow-[0_24px_60px_rgba(0,0,0,0.75)] hover:shadow-[0_28px_70px_rgba(56,189,248,0.22)]',
             bgGradient:
-              'linear-gradient(155deg, #102a63 0%, #09173a 48%, #0c224e 82%, #050b1c 100%)',
-            accentColor: '#38BDF8',
+              'linear-gradient(155deg, rgba(16, 38, 84, 0.96) 0%, rgba(8, 19, 45, 0.98) 52%, rgba(11, 29, 64, 0.96) 100%)',
+            rankBadge:
+              'bg-gradient-to-r from-sky-200 via-sky-300 to-blue-400 text-[#040814] shadow-[0_6px_18px_rgba(56,189,248,0.3)]',
+            ovrBadge:
+              'bg-sky-400/15 border-sky-300/45 text-sky-200',
             accentText: 'text-sky-300',
-            badgeBg:
-              'bg-gradient-to-r from-sky-300 via-blue-400 to-cyan-300 text-[#050814]',
-            dividerBorder: 'border-sky-400/35',
-            statAccent: 'text-sky-300',
-            crestRing:
-              'ring-sky-300/60 shadow-[0_0_32px_rgba(56,189,248,0.35)]',
+            pointsGlow:
+              'bg-gradient-to-r from-white via-sky-200 to-sky-400 bg-clip-text text-transparent',
+            avatarRing:
+              'ring-sky-300/60 shadow-[0_12px_30px_rgba(56,189,248,0.25)]',
+            statusPill:
+              'bg-sky-400/12 border-sky-400/35 text-sky-200',
+            footerHover:
+              'group-hover:border-sky-400/45 group-hover:bg-sky-400/10',
           }
         : {
-            edition: 'UCL KNOCKOUT HERO',
-            pos: 'CF',
-            outerGlow:
-              'hover:shadow-[0_28px_70px_rgba(0,245,155,0.24)] border-emerald-400/50',
+            rankLabel: '#3 В УКРАЇНІ',
+            editionLabel: 'ТОП-3 СЕЗОНУ',
+            topBeam: 'from-transparent via-amber-500/85 to-transparent',
+            cardBorder:
+              'border-amber-500/40 hover:border-amber-400/70 shadow-[0_24px_60px_rgba(0,0,0,0.75)] hover:shadow-[0_28px_70px_rgba(217,119,6,0.2)]',
             bgGradient:
-              'linear-gradient(155deg, #0d333e 0%, #081832 50%, #09292b 84%, #050b1a 100%)',
-            accentColor: '#00F59B',
-            accentText: 'text-pitch',
-            badgeBg:
-              'bg-gradient-to-r from-emerald-300 via-pitch to-teal-300 text-[#050814]',
-            dividerBorder: 'border-emerald-400/35',
-            statAccent: 'text-pitch',
-            crestRing:
-              'ring-emerald-300/60 shadow-[0_0_32px_rgba(0,245,155,0.3)]',
+              'linear-gradient(155deg, rgba(24, 32, 62, 0.96) 0%, rgba(9, 17, 38, 0.98) 52%, rgba(32, 20, 14, 0.96) 100%)',
+            rankBadge:
+              'bg-gradient-to-r from-amber-200 via-amber-400 to-orange-500 text-[#040814] shadow-[0_6px_18px_rgba(245,158,11,0.3)]',
+            ovrBadge:
+              'bg-amber-500/15 border-amber-400/40 text-amber-200',
+            accentText: 'text-amber-300',
+            pointsGlow:
+              'bg-gradient-to-r from-amber-100 via-amber-300 to-orange-300 bg-clip-text text-transparent',
+            avatarRing:
+              'ring-amber-400/55 shadow-[0_12px_30px_rgba(217,119,6,0.24)]',
+            statusPill:
+              'bg-amber-500/12 border-amber-500/35 text-amber-200',
+            footerHover:
+              'group-hover:border-amber-400/45 group-hover:bg-amber-400/10',
           };
 
   return (
@@ -112,222 +150,216 @@ export function ProPlayerCard({ player, rank }: ProPlayerCardProps) {
       className="block group"
     >
       <div
-        className={`relative rounded-[28px] border-2 p-6 flex flex-col justify-between gap-4 overflow-hidden transition-all duration-300 group-hover:-translate-y-2 shadow-[0_24px_60px_rgba(0,0,0,0.75)] ${theme.outerGlow}`}
+        className={`relative rounded-[30px] border p-6 flex flex-col justify-between gap-5 overflow-hidden transition-all duration-300 group-hover:-translate-y-1.5 ${theme.cardBorder}`}
         style={{
           background: theme.bgGradient,
         }}
       >
-        {/* Inner Metallic FUT Shield Frame & Starball Watermark */}
-        <svg
-          viewBox="0 0 400 520"
-          className="pointer-events-none absolute inset-0 w-full h-full opacity-25"
-          fill="none"
+        {/* Top Broadcast Glow Line */}
+        <div
+          className={`pointer-events-none absolute inset-x-10 top-0 h-[2px] bg-gradient-to-r ${theme.topBeam}`}
+        />
+
+        {/* Subtle Corner Rank Watermark */}
+        <div
           aria-hidden="true"
+          className="pointer-events-none select-none absolute -right-2 -top-4 font-display text-[6.5rem] font-black leading-none text-white/[0.03]"
         >
-          {/* Diagonal Stadium Light Beams */}
-          <path
-            d="M-40 120 L260 -40 L340 -40 L-40 200 Z"
-            fill={theme.accentColor}
-            fillOpacity="0.18"
-          />
-          <path
-            d="M80 540 L440 180 L440 270 L160 540 Z"
-            fill={theme.accentColor}
-            fillOpacity="0.12"
-          />
-          {/* Inner Sculpted FUT Shield Outline */}
-          <path
-            d="M200 14 L366 46 L366 375 C366 435 295 480 200 506 C105 480 34 435 34 375 L34 46 Z"
-            stroke={theme.accentColor}
-            strokeWidth="1.5"
-            strokeOpacity="0.65"
-          />
-          {/* UEFA Starball Ring Watermark */}
-          <circle
-            cx="255"
-            cy="145"
-            r="88"
-            stroke={theme.accentColor}
-            strokeWidth="1.2"
-            strokeDasharray="6 6"
-            strokeOpacity="0.5"
-          />
-        </svg>
-
-        {/* 1. TOP FUT EDITION HEADER RIBBON */}
-        <div className="relative z-10 flex items-center justify-between gap-2 pb-2 border-b border-white/10">
-          <span
-            className={`px-3 py-1 rounded-md text-[0.65rem] font-extrabold uppercase tracking-wider shadow-md inline-flex items-center gap-1 ${theme.badgeBg}`}
-          >
-            {rank === 1 ? (
-              <Crown className="w-3.5 h-3.5" />
-            ) : (
-              <Star className="w-3 h-3 fill-current" />
-            )}
-            <span>#{rank} УКРАЇНА • {theme.edition}</span>
-          </span>
-
-          <span className="px-2.5 py-1 rounded-md bg-[#040814]/85 border border-white/15 font-mono text-xs font-extrabold text-white tabular-nums">
-            {player.seasonPoints} <span className={theme.accentText}>PTS</span>
-          </span>
+          #{rank}
         </div>
 
-        {/* 2. AUTHENTIC FUT UPPER STAGE: LEFT OVR/POS/FLAG COLUMN + RIGHT ATHLETE CREST */}
-        <div className="relative z-10 grid grid-cols-12 items-center gap-3 pt-1">
-          {/* Left 4 Cols: Classic FUT Rating Stack */}
-          <div className="col-span-4 flex flex-col items-center justify-center py-2 px-2 rounded-2xl bg-[#040814]/70 border border-white/12 shadow-inner">
-            <div
-              className={`font-display text-4xl sm:text-[2.75rem] font-black leading-none tracking-tighter tabular-nums ${theme.accentText}`}
-            >
-              {proOvr}
-            </div>
-            <div className="text-xs font-mono font-extrabold uppercase tracking-widest text-white mt-1">
-              {theme.pos}
-            </div>
-
-            <div className={`w-10 border-t my-2 ${theme.dividerBorder}`} />
-
-            <UaFlag className="w-6 h-4 shadow-sm" />
-
-            <div className={`w-10 border-t my-2 ${theme.dividerBorder}`} />
-
+        {/* 1. TOP BROADCAST HEADER: RANK BADGE + FUT OVR PILL */}
+        <div className="relative z-10 flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
             <span
-              className={`px-2 py-0.5 rounded text-[0.58rem] font-extrabold uppercase tracking-wider border ${
-                isClub
-                  ? 'bg-amber-400/20 text-amber-300 border-amber-400/40'
-                  : 'bg-sky-400/20 text-sky-300 border-sky-400/40'
-              }`}
+              className={`px-3 py-1 rounded-full text-[0.68rem] font-extrabold uppercase tracking-wider inline-flex items-center gap-1.5 ${theme.rankBadge}`}
             >
-              {isClub ? 'КЛУБ' : 'ФАНАТ'}
+              {rank === 1 ? (
+                <Crown className="w-3.5 h-3.5" />
+              ) : (
+                <Award className="w-3.5 h-3.5" />
+              )}
+              <span>{theme.rankLabel}</span>
+            </span>
+            <span className="text-[0.68rem] font-mono font-bold text-slate-300 hidden sm:inline">
+              {theme.editionLabel}
             </span>
           </div>
 
-          {/* Right 8 Cols: Player Portrait or 3D Champions Shield Emblem */}
-          <div className="col-span-8 flex flex-col items-center justify-center relative py-2">
+          <span
+            className={`px-3 py-1 rounded-full border text-[0.68rem] font-mono font-extrabold inline-flex items-center gap-1.5 ${theme.statusPill}`}
+          >
+            <CheckCircle2 className="w-3 h-3" />
+            <span>У Фіналі року</span>
+          </span>
+        </div>
+
+        {/* 2. MAIN ATHLETE IDENTITY & SEASON POINTS STAGE */}
+        <div className="relative z-10 flex items-center gap-4">
+          {/* Left: Sculpted 3D Monogram / Portrait Shield with OVR Pill */}
+          <div className="relative shrink-0 flex flex-col items-center">
             {customAvatarUrl ? (
               <div
-                className={`relative w-28 h-32 sm:w-32 sm:h-36 rounded-2xl overflow-hidden bg-[#050914] ring-2 ${theme.crestRing}`}
+                className={`w-20 h-24 rounded-2xl overflow-hidden bg-[#040814] ring-2 ${theme.avatarRing}`}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={customAvatarUrl}
                   alt={player.nickname}
                   loading="lazy"
-                  width={400}
-                  height={500}
+                  width={200}
+                  height={240}
                   className="w-full h-full object-cover object-[50%_15%]"
                 />
               </div>
             ) : (
-              <div className="relative flex flex-col items-center">
-                {/* 3D FUT Shield Emblem with Smart Initials */}
+              <div
+                className={`w-20 h-24 rounded-2xl bg-[#040918]/90 border border-white/15 ring-2 flex flex-col items-center justify-center gap-1.5 p-2 ${theme.avatarRing}`}
+              >
                 <div
-                  className={`relative w-24 h-24 sm:w-28 sm:h-28 rounded-[26px] flex flex-col items-center justify-center ring-2 transition-transform duration-500 group-hover:scale-105 ${theme.crestRing}`}
-                  style={{
-                    background: `radial-gradient(circle at 30% 20%, ${player.avatarColor}66, #060D24 78%)`,
-                  }}
+                  className="w-12 h-12 rounded-xl flex items-center justify-center font-display font-black text-xl text-[#040814] shadow-lg"
+                  style={{ backgroundColor: player.avatarColor }}
                 >
-                  <div
-                    className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center font-display font-black text-2xl sm:text-3xl text-[#050814] shadow-xl"
-                    style={{ backgroundColor: player.avatarColor }}
-                  >
-                    {smartInitials}
-                  </div>
+                  {smartInitials}
                 </div>
-                <span className=" -mt-2.5 relative z-10 px-3 py-0.5 rounded-full bg-[#040814] border border-white/20 text-[0.65rem] font-mono font-extrabold text-white shadow">
-                  {player.platform} • {player.city}
+                <span className="px-2 py-0.5 rounded bg-[#02050D] border border-white/15 font-mono text-[0.58rem] font-extrabold text-white tracking-wider">
+                  {proOvr} OVR
                 </span>
               </div>
             )}
           </div>
+
+          {/* Right: Nickname, Club Status, City/Platform & Season Points */}
+          <div className="min-w-0 flex-1 space-y-1.5">
+            <div className="flex items-center gap-2 min-w-0">
+              <h3 className="font-display text-xl sm:text-2xl font-black text-white truncate tracking-tight group-hover:text-gold transition-colors">
+                {player.nickname}
+              </h3>
+              <span
+                className={`px-1.5 py-0.5 rounded text-[0.55rem] font-extrabold uppercase tracking-wider shrink-0 border ${
+                  isClub
+                    ? 'bg-amber-400/20 text-amber-300 border-amber-400/40'
+                    : 'bg-sky-400/20 text-sky-300 border-sky-400/40'
+                }`}
+              >
+                {isClub ? 'КЛУБ' : 'ФАНАТ'}
+              </span>
+            </div>
+
+            <div className="text-[0.72rem] text-slate-300 font-medium truncate">
+              {stageStatus}
+            </div>
+
+            <div className="flex items-center gap-2 pt-0.5">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#040814]/85 border border-white/12 text-[0.68rem] font-bold text-slate-200">
+                <UaFlag className="w-3.5 h-2.5" />
+                <span>
+                  {player.city} • {player.platform}
+                </span>
+              </span>
+            </div>
+
+            <div className="pt-1 flex items-baseline gap-2">
+              <span
+                className={`font-display text-2xl sm:text-3xl font-black leading-none tabular-nums ${theme.pointsGlow}`}
+              >
+                {player.seasonPoints}
+              </span>
+              <span className="text-xs font-bold text-slate-300">
+                очок сезону
+              </span>
+            </div>
+          </div>
         </div>
 
-        {/* 3. FUT NAMEPLATE BANNER */}
+        {/* 3. REAL 4-POD TOURNAMENT TELEMETRY */}
+        <div className="relative z-10 grid grid-cols-4 gap-2 text-center">
+          <div className="p-2.5 rounded-2xl bg-[#040814]/80 border border-white/10">
+            <div className="font-mono text-sm sm:text-base font-extrabold text-white tabular-nums">
+              {winRate}%
+            </div>
+            <div className="text-[0.62rem] text-slate-400 font-semibold mt-0.5">
+              Вінрейт
+            </div>
+          </div>
+
+          <div className="p-2.5 rounded-2xl bg-[#040814]/80 border border-white/10">
+            <div className="font-mono text-sm sm:text-base font-extrabold text-emerald-400 tabular-nums">
+              {player.wins}В
+            </div>
+            <div className="text-[0.62rem] text-slate-400 font-semibold mt-0.5">
+              {actualPlayed} ігор
+            </div>
+          </div>
+
+          <div className="p-2.5 rounded-2xl bg-[#040814]/80 border border-white/10">
+            <div className="font-mono text-sm sm:text-base font-extrabold text-white tabular-nums">
+              {gpg}
+            </div>
+            <div className="text-[0.62rem] text-slate-400 font-semibold mt-0.5">
+              Гол/М ({gdFormatted})
+            </div>
+          </div>
+
+          <div className="p-2.5 rounded-2xl bg-[#040814]/80 border border-white/10">
+            <div
+              className={`font-mono text-sm sm:text-base font-extrabold tabular-nums inline-flex items-center justify-center gap-1 ${theme.accentText}`}
+            >
+              <Trophy className="w-3.5 h-3.5" />
+              <span>{rank === 1 ? 'Фінал' : '1/2'}</span>
+            </div>
+            <div className="text-[0.62rem] text-slate-400 font-semibold mt-0.5">
+              Турнір #1
+            </div>
+          </div>
+        </div>
+
+        {/* 4. COMPACT FUT 6-ATTRIBUTE TELEMETRY STRIP */}
+        <div className="relative z-10 px-3 py-2 rounded-xl bg-[#030712]/75 border border-white/[0.08] flex items-center justify-between gap-1 text-[0.64rem] font-mono">
+          <span>
+            <span className="text-slate-400">ШВД </span>
+            <strong className="text-white">{pacStat}</strong>
+          </span>
+          <span className="text-white/15">•</span>
+          <span>
+            <span className="text-slate-400">УДР </span>
+            <strong className={theme.accentText}>{shoStat}</strong>
+          </span>
+          <span className="text-white/15">•</span>
+          <span>
+            <span className="text-slate-400">ПАС </span>
+            <strong className="text-white">{pasStat}</strong>
+          </span>
+          <span className="text-white/15">•</span>
+          <span>
+            <span className="text-slate-400">ДРИ </span>
+            <strong className="text-white">{driStat}</strong>
+          </span>
+          <span className="text-white/15">•</span>
+          <span>
+            <span className="text-slate-400">ЗАХ </span>
+            <strong className="text-white">{defStat}</strong>
+          </span>
+          <span className="text-white/15">•</span>
+          <span>
+            <span className="text-slate-400">ФІЗ </span>
+            <strong className="text-white">{phyStat}</strong>
+          </span>
+        </div>
+
+        {/* 5. OFFICIAL BUNKER ID PASSPORT BAR */}
         <div
-          className={`relative z-10 py-2.5 px-3 rounded-xl bg-[#040814]/85 border-y-2 text-center ${theme.dividerBorder}`}
+          className={`relative z-10 px-3.5 py-2.5 rounded-xl bg-[#040814]/85 border border-white/12 flex items-center justify-between gap-2 text-[0.68rem] font-mono transition-colors ${theme.footerHover}`}
         >
-          <h3 className="font-display text-xl sm:text-2xl font-black text-white uppercase tracking-tight truncate">
-            {player.nickname}
-          </h3>
-          <div className="flex items-center justify-center gap-3 text-[0.68rem] font-mono text-slate-300 mt-0.5">
-            <span>
-              <strong className="text-pitch">{player.wins}В</strong> •{' '}
-              {player.draws}Н • {player.losses}П
-            </span>
-            <span className="text-slate-600">|</span>
-            <span>
-              Голи:{' '}
-              <strong className="text-white">
-                {player.goalsFor}:{player.goalsAgainst}
-              </strong>
-            </span>
-          </div>
-        </div>
-
-        {/* 4. CLASSIC FUT 6-ATTRIBUTE 2x3 GRID */}
-        <div className="relative z-10 grid grid-cols-2 gap-x-5 gap-y-1.5 px-3 py-2.5 rounded-2xl bg-[#040814]/65 border border-white/10 font-mono">
-          {/* Vertical Center FUT Divider */}
-          <div
-            aria-hidden="true"
-            className={`pointer-events-none absolute inset-y-2.5 left-1/2 -translate-x-1/2 border-l ${theme.dividerBorder}`}
-          />
-
-          <div className="flex items-center justify-between text-xs sm:text-sm">
-            <span className="text-slate-300 font-bold">ШВД</span>
-            <span className="font-extrabold text-white tabular-nums">
-              {pacStat}
-            </span>
-          </div>
-          <div className="flex items-center justify-between text-xs sm:text-sm">
-            <span className="text-slate-300 font-bold">ДРИ</span>
-            <span className="font-extrabold text-white tabular-nums">
-              {driStat}
-            </span>
-          </div>
-
-          <div className="flex items-center justify-between text-xs sm:text-sm">
-            <span className="text-slate-300 font-bold">УДР</span>
-            <span className={`font-extrabold tabular-nums ${theme.statAccent}`}>
-              {shoStat}
-            </span>
-          </div>
-          <div className="flex items-center justify-between text-xs sm:text-sm">
-            <span className="text-slate-300 font-bold">ЗАХ</span>
-            <span className="font-extrabold text-white tabular-nums">
-              {defStat}
-            </span>
-          </div>
-
-          <div className="flex items-center justify-between text-xs sm:text-sm">
-            <span className="text-slate-300 font-bold">ПАС</span>
-            <span className="font-extrabold text-white tabular-nums">
-              {pasStat}
-            </span>
-          </div>
-          <div className="flex items-center justify-between text-xs sm:text-sm">
-            <span className="text-slate-300 font-bold">ФІЗ</span>
-            <span className="font-extrabold text-white tabular-nums">
-              {phyStat}
-            </span>
-          </div>
-        </div>
-
-        {/* 5. BOTTOM FUT SHIELD FOOTER: WINRATE + GPG + PASSPORT LINK */}
-        <div className="relative z-10 pt-1 flex items-center justify-between gap-2 text-xs font-mono">
-          <div className="flex items-center gap-2">
-            <span className="px-2.5 py-1 rounded-lg bg-[#040814]/80 border border-white/12 text-slate-200 font-bold">
-              WIN <strong className="text-pitch">{winRate}%</strong>
-            </span>
-            <span className="px-2.5 py-1 rounded-lg bg-[#040814]/80 border border-white/12 text-slate-200 font-bold">
-              <strong className="text-gold">{gpg}</strong> Г/М
-            </span>
-          </div>
-
+          <span className="inline-flex items-center gap-1.5 font-bold text-slate-200">
+            <QrCode className={`w-3.5 h-3.5 ${theme.accentText}`} />
+            <span>ПАСПОРТ ГРАВЦЯ • ВІДКРИТИ</span>
+          </span>
           <span
-            className={`inline-flex items-center gap-1 font-sans text-xs font-extrabold ${theme.accentText} group-hover:translate-x-0.5 transition-transform`}
+            className={`inline-flex items-center gap-1 font-extrabold ${theme.accentText}`}
           >
-            <span>Картка FUT</span>
-            <ArrowUpRight className="w-3.5 h-3.5" />
+            <span>UA • 00{rank}</span>
+            <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </span>
         </div>
       </div>

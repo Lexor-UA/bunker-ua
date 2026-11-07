@@ -1017,83 +1017,107 @@ export default function HomePage() {
             step: '01',
             icon: Wallet,
             accent: 'text-gold',
-            line: 'from-transparent via-gold/60 to-transparent',
-            badgeBorder: 'border-gold/35 bg-gold/10 text-gold',
+            line: 'from-transparent via-gold/75 to-transparent',
+            badgeBorder: 'border-gold/40 bg-gold/15 text-amber-200',
             badge: 'БАНКА ЗСУ • ВІД 10 ₴',
             title: 'Реєстрація та донат на ЗСУ',
-            desc: 'Створіть профіль гравця на сайті та закиньте від 10 ₴ (або скільки хочете і можете) на спільну Банку ЗСУ для фонду Project Ukraine.',
+            desc: 'Створіть паспорт гравця на сайті та закиньте від 10 ₴ (або скільки хочете і можете) на Спільну Банку ЗСУ для фонду Project Ukraine.',
+            footerLeft: '100% у фонд Project Ukraine',
+            footerRight: 'Вільний донат',
           },
           {
             step: '02',
             icon: Shuffle,
             accent: 'text-sky-300',
-            line: 'from-transparent via-sky-400/60 to-transparent',
-            badgeBorder: 'border-sky-400/35 bg-sky-400/10 text-sky-300',
-            badge: 'ЛІГА ЧЕМПІОНІВ',
+            line: 'from-transparent via-sky-400/75 to-transparent',
+            badgeBorder: 'border-sky-400/40 bg-sky-400/15 text-sky-200',
+            badge: 'ФОРМАТ ЛІГИ ЧЕМПІОНІВ',
             title: 'Автоматичне жеребкування груп',
-            desc: 'Платформа автоматично проводить посів учасників у групи (по 2 кола) та формує олімпійську сітку Плей-офф.',
+            desc: 'Платформа автоматично проводить посів учасників у групи (матчі у 2 кола) та формує олімпійську сітку Плей-офф.',
+            footerLeft: 'Групи (2 кола) + Плей-офф',
+            footerRight: 'Авто-посів',
           },
           {
             step: '03',
             icon: Swords,
             accent: 'text-gold',
-            line: 'from-transparent via-gold/60 to-transparent',
-            badgeBorder: 'border-gold/35 bg-gold/10 text-gold',
+            line: 'from-transparent via-gold/75 to-transparent',
+            badgeBorder: 'border-gold/40 bg-gold/15 text-amber-200',
             badge: 'ГРУПА ЗА ТИЖДЕНЬ',
             title: 'Вільний графік у Telegram і Приз',
             desc: 'Про час матчів гравці домовляються між собою в Telegram (бажано зіграти групу за тиждень) і змагаються за нагороду від воїнів ЗСУ.',
+            footerLeft: 'Нагорода від воїнів ЗСУ',
+            footerRight: '1v1 у Telegram',
           },
         ].map((item) => {
           const Icon = item.icon;
           return (
             <div
               key={item.step}
-              className="glass-panel rounded-[30px] p-6 sm:p-7 space-y-3.5 relative overflow-hidden border border-sky-400/20 hover:border-sky-400/40 transition-all"
+              className="glass-panel rounded-[30px] p-6 sm:p-7 flex flex-col justify-between gap-4 relative overflow-hidden border border-sky-400/20 hover:border-sky-400/45 transition-all shadow-[0_20px_50px_rgba(0,0,0,0.55)]"
             >
               <div
-                className={`absolute inset-x-10 top-0 h-[1.5px] bg-gradient-to-r ${item.line} pointer-events-none`}
+                className={`absolute inset-x-10 top-0 h-[2px] bg-gradient-to-r ${item.line} pointer-events-none`}
               />
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span
-                    className={`px-3 py-1 rounded-full border text-[0.65rem] font-mono font-extrabold tracking-wider ${item.badgeBorder}`}
-                  >
-                    КРОК {item.step}
-                  </span>
-                  <span className="text-[0.68rem] font-mono font-bold text-slate-300">
-                    {item.badge}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none select-none absolute right-4 top-2 font-display text-6xl font-black text-white/[0.03] leading-none"
+              >
+                {item.step}
+              </div>
+
+              <div className="space-y-3.5 relative z-10">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span
+                      className={`px-3 py-1 rounded-full border text-[0.65rem] font-mono font-extrabold tracking-wider ${item.badgeBorder}`}
+                    >
+                      КРОК {item.step}
+                    </span>
+                    <span className="text-[0.68rem] font-mono font-bold text-slate-300">
+                      {item.badge}
+                    </span>
+                  </div>
+                  <span className="w-10 h-10 rounded-2xl bg-[#040A18]/90 border border-sky-400/25 flex items-center justify-center shadow-[0_8px_18px_rgba(0,0,0,0.45)]">
+                    <Icon className={`w-5 h-5 ${item.accent}`} />
                   </span>
                 </div>
-                <span className="w-10 h-10 rounded-2xl bg-[#040B1C]/85 border border-sky-400/25 flex items-center justify-center shadow-[0_8px_18px_rgba(0,0,0,0.4)]">
-                  <Icon className={`w-5 h-5 ${item.accent}`} />
+                <h3 className="font-display text-lg sm:text-xl font-extrabold text-white tracking-tight">
+                  {item.title}
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                  {item.desc}
+                </p>
+              </div>
+
+              <div className="pt-3 border-t border-white/10 flex items-center justify-between gap-2 text-[0.68rem] font-mono relative z-10">
+                <span className="text-slate-300 font-semibold">
+                  {item.footerLeft}
+                </span>
+                <span className={`font-extrabold ${item.accent}`}>
+                  {item.footerRight}
                 </span>
               </div>
-              <h3 className="font-display text-lg sm:text-xl font-extrabold text-white">
-                {item.title}
-              </h3>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                {item.desc}
-              </p>
             </div>
           );
         })}
       </section>
 
-      {/* 5. EA SPORTS FC ULTIMATE TEAM × UCL SHIELD CARDS (TOP-3 UKRAINE) */}
+      {/* 5. OFFICIAL TOP-3 UKRAINE PODIUM & BUNKER ID PASSPORTS */}
       <section className="space-y-6">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="space-y-1">
             <div className="text-xs font-mono uppercase tracking-wider text-gold font-bold flex items-center gap-1.5">
               <Crown className="w-3.5 h-3.5" />
-              <span>EA SPORTS FC ULTIMATE TEAM • UCL SHIELD CARDS</span>
+              <span>ОФІЦІЙНІ ПАСПОРТИ КІБЕРФУТБОЛІСТІВ • BUNKER ID</span>
             </div>
-            <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-[-0.03em]">
-              Топ-3 гравці України (FUT Рейтинг)
+            <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-white tracking-[-0.03em]">
+              Лідери рейтингу України
             </h2>
           </div>
           <Link
             href="/leaderboard"
-            className="px-5 py-2.5 rounded-full glass-panel hover:bg-gold hover:text-[#040814] text-xs font-extrabold text-white inline-flex items-center gap-1.5 transition-all"
+            className="px-5 py-2.5 rounded-full bg-[#060E24]/90 border border-sky-400/30 hover:border-gold/60 hover:bg-gold hover:text-[#040814] text-xs font-extrabold text-white inline-flex items-center gap-1.5 transition-all shadow-[0_10px_24px_rgba(0,0,0,0.4)]"
           >
             <span>Таблиця ТОП-32</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -1179,19 +1203,19 @@ export default function HomePage() {
                           className={`px-1 py-0.5 rounded text-[0.5rem] font-extrabold uppercase shrink-0 border ${
                             isClub
                               ? 'bg-amber-400/15 text-amber-300 border-amber-400/35'
-                              : 'bg-cyan-400/15 text-cyan-300 border-cyan-400/35'
+                              : 'bg-cyan-400/15 text-cyan-400/35 text-cyan-300'
                           }`}
                         >
                           {isClub ? 'КЛУБ' : 'ФАНАТ'}
                         </span>
                       </div>
                       <div className="text-[0.65rem] text-slate-300 truncate">
-                        {u.city} • {u.platform}
+                        {u.city} • {u.platform} • {u.wins}В
                       </div>
                     </div>
                   </div>
                   <span className="px-2.5 py-0.5 rounded-full bg-gold/15 border border-gold/30 text-[0.7rem] font-mono font-extrabold text-gold shrink-0 tabular-nums">
-                    {u.seasonPoints} pts
+                    {u.seasonPoints} PTS
                   </span>
                 </Link>
               );
