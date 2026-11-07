@@ -85,17 +85,17 @@ export default function HomePage() {
             className="pointer-events-none absolute inset-x-0 top-0 h-[3px] diia-iridescent-bg"
           />
 
-          {/* Subtle Atmospheric 3D Night Stadium Backdrop on Right */}
+          {/* Subtle Atmospheric 3D Night Stadium Backdrop on Right (Royal Blue & Gold Floodlights) */}
           <img
-            src="/images/hero-arena.jpg"
+            src="/images/hero-arena.jpg?v=blue1"
             alt=""
             aria-hidden="true"
-            className="pointer-events-none absolute -right-4 top-0 w-[82%] h-[86%] object-cover opacity-55 mix-blend-screen saturate-125"
+            className="pointer-events-none absolute -right-4 top-0 w-[84%] h-[88%] object-cover opacity-60 mix-blend-screen"
             style={{
               WebkitMaskImage:
-                'radial-gradient(ellipse 75% 75% at 72% 38%, #000 22%, rgba(0,0,0,0.5) 58%, transparent 96%)',
+                'radial-gradient(ellipse 78% 76% at 74% 40%, #000 26%, rgba(0,0,0,0.55) 62%, transparent 96%)',
               maskImage:
-                'radial-gradient(ellipse 75% 75% at 72% 38%, #000 22%, rgba(0,0,0,0.5) 58%, transparent 96%)',
+                'radial-gradient(ellipse 78% 76% at 74% 40%, #000 26%, rgba(0,0,0,0.55) 62%, transparent 96%)',
             }}
           />
 
@@ -121,75 +121,63 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Center Stage: Harmonious Headline + Studio Spotlight Pedestal for 3D BUNKER FC 1v1 Crest */}
-          <div className="relative z-10 grid grid-cols-1 xl:grid-cols-12 items-center gap-6 my-auto py-1">
-            <div className="xl:col-span-8 space-y-5">
-              <div className="space-y-3">
-                <div className="inline-flex items-center gap-2 text-xs font-mono font-extrabold uppercase tracking-[0.16em] text-gold">
-                  <Trophy className="w-3.5 h-3.5 shrink-0" />
-                  <span>ОФІЦІЙНА КІБЕРФУТБОЛЬНА АРЕНА УКРАЇНИ</span>
-                </div>
-
-                <h1 className="font-display text-3xl sm:text-5xl xl:text-[3.05rem] font-extrabold tracking-[-0.035em] text-white leading-[1.06] uppercase">
-                  <span className="block">Українська</span>
-                  <span className="block">Ліга Чемпіонів</span>
-                  <span className="block mt-1.5 diia-gradient-text whitespace-nowrap">
-                    1 на 1 в EA SPORTS FC
-                  </span>
-                </h1>
-
-                <p className="text-sm sm:text-[0.95rem] text-slate-200/95 leading-relaxed max-w-xl pt-0.5">
-                  Груповий етап у 2 кола, олімпійська сітка Плей-офф, офіційні
-                  FUT-картки гравців та головний приз —{' '}
-                  <strong className="text-gold">
-                    пам’ятний трофей від воїнів ЗСУ
-                  </strong>
-                  . Усі 100% донатів передаємо фонду{' '}
-                  <strong className="text-white">Project Ukraine</strong>!
-                </p>
+          {/* Center Stage: Harmonious Headline over Night Champions League Stadium */}
+          <div className="relative z-10 my-auto py-1 space-y-6 max-w-2xl">
+            <div className="space-y-3">
+              <div className="inline-flex items-center gap-2 text-xs font-mono font-extrabold uppercase tracking-[0.16em] text-gold">
+                <Trophy className="w-3.5 h-3.5 shrink-0" />
+                <span>ОФІЦІЙНА КІБЕРФУТБОЛЬНА АРЕНА УКРАЇНИ</span>
               </div>
 
-              <div className="flex flex-wrap items-center gap-3">
-                <Link
-                  href={`/tournaments/${openNovemberCup?.slug ?? 'november-cup-2026'}`}
-                  className="group inline-flex items-center gap-3 pl-5 pr-4 py-3.5 rounded-full bg-gradient-to-r from-[#FDE68A] via-[#F5C451] to-[#D97706] text-[#040814] hover:brightness-110 font-extrabold text-xs sm:text-sm shadow-[0_14px_36px_rgba(245,196,81,0.35)] hover:scale-[1.01] transition-all"
-                >
-                  <span>Подати заявку на Турнір #2</span>
-                  <span className="px-2.5 py-0.5 rounded-full bg-[#040814] text-gold text-xs font-extrabold tabular-nums">
-                    {novCount}/{novMax}
-                  </span>
-                  <ArrowRight className="w-4 h-4 text-[#040814] group-hover:translate-x-0.5 transition-transform" />
-                </Link>
+              <h1 className="font-display text-3xl sm:text-5xl xl:text-[3.35rem] font-extrabold tracking-[-0.035em] text-white leading-[1.06] uppercase">
+                <span className="block">Українська</span>
+                <span className="block">Ліга Чемпіонів</span>
+                <span className="block mt-1.5 diia-gradient-text whitespace-nowrap">
+                  1 на 1 в EA SPORTS FC
+                </span>
+              </h1>
 
-                <Link
-                  href={`/tournaments/${liveOctoberCup?.slug ?? 'october-cup-2026'}`}
-                  className="inline-flex items-center gap-2 px-4 sm:px-5 py-3.5 rounded-full bg-[#0A193D]/90 hover:bg-[#122B66] border border-sky-400/40 text-xs sm:text-sm font-extrabold text-white backdrop-blur-xl transition-all shadow-[0_10px_28px_rgba(37,99,235,0.25)]"
-                >
-                  <Radio className="w-3.5 h-3.5 text-[#FF5C39] animate-pulse shrink-0" />
-                  <span>Матч-центр LIVE</span>
-                </Link>
-
-                <a
-                  href="https://send.monobank.ua/jar/6aFeFX1Lk2"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-3.5 rounded-full bg-[#060E24]/90 hover:bg-amber-400/15 border border-amber-400/35 text-xs sm:text-sm font-extrabold text-gold backdrop-blur-xl transition-all"
-                >
-                  <UaFlag className="w-3.5 h-2.5 shrink-0" />
-                  <span>Банка ЗСУ</span>
-                  <ArrowUpRight className="w-4 h-4" />
-                </a>
-              </div>
+              <p className="text-sm sm:text-base text-slate-200/95 leading-relaxed max-w-xl pt-1">
+                Груповий етап у 2 кола, олімпійська сітка Плей-офф, офіційні
+                FUT-картки гравців та головний приз —{' '}
+                <strong className="text-gold">
+                  пам’ятний трофей від воїнів ЗСУ
+                </strong>
+                . Усі 100% донатів передаємо фонду{' '}
+                <strong className="text-white">Project Ukraine</strong>!
+              </p>
             </div>
 
-            {/* Official 3D BUNKER FC 1v1 Shield Emblem */}
-            <div className="hidden sm:flex xl:col-span-4 items-center justify-center relative py-2">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/bunker-fc-crest.png?v=hd2"
-                alt="BUNKER FC 1v1 • UKRAINE БЛАГОДІЙНА ПЛАТФОРМА"
-                className="relative z-10 w-48 xl:w-56 h-auto object-contain drop-shadow-[0_24px_44px_rgba(0,0,0,0.95)] hover:scale-105 transition-transform duration-500"
-              />
+            <div className="flex flex-wrap items-center gap-3">
+              <Link
+                href={`/tournaments/${openNovemberCup?.slug ?? 'november-cup-2026'}`}
+                className="group inline-flex items-center gap-3 pl-5 pr-4 py-3.5 rounded-full bg-gradient-to-r from-[#FDE68A] via-[#F5C451] to-[#D97706] text-[#040814] hover:brightness-110 font-extrabold text-xs sm:text-sm shadow-[0_14px_36px_rgba(245,196,81,0.35)] hover:scale-[1.01] transition-all"
+              >
+                <span>Подати заявку на Турнір #2</span>
+                <span className="px-2.5 py-0.5 rounded-full bg-[#040814] text-gold text-xs font-extrabold tabular-nums">
+                  {novCount}/{novMax}
+                </span>
+                <ArrowRight className="w-4 h-4 text-[#040814] group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+
+              <Link
+                href={`/tournaments/${liveOctoberCup?.slug ?? 'october-cup-2026'}`}
+                className="inline-flex items-center gap-2 px-4 sm:px-5 py-3.5 rounded-full bg-[#0A193D]/90 hover:bg-[#122B66] border border-sky-400/40 text-xs sm:text-sm font-extrabold text-white backdrop-blur-xl transition-all shadow-[0_10px_28px_rgba(37,99,235,0.25)]"
+              >
+                <Radio className="w-3.5 h-3.5 text-[#FF5C39] animate-pulse shrink-0" />
+                <span>Матч-центр LIVE</span>
+              </Link>
+
+              <a
+                href="https://send.monobank.ua/jar/6aFeFX1Lk2"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-3.5 rounded-full bg-[#060E24]/90 hover:bg-amber-400/15 border border-amber-400/35 text-xs sm:text-sm font-extrabold text-gold backdrop-blur-xl transition-all"
+              >
+                <UaFlag className="w-3.5 h-2.5 shrink-0" />
+                <span>Банка ЗСУ</span>
+                <ArrowUpRight className="w-4 h-4" />
+              </a>
             </div>
           </div>
 
