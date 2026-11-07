@@ -6,10 +6,10 @@ import { useRouter } from 'next/navigation';
 import {
   ArrowRight,
   Crown,
-  Flame,
   LayoutGrid,
   Radio,
   Scale,
+  ShieldCheck,
   Shuffle,
   Swords,
   Trophy,
@@ -23,7 +23,7 @@ import {
   VectorGoldTrophy,
 } from './FintechArt';
 import { PlayoffBracket } from './PlayoffBracket';
-import { MonoCardChip, UaFlag } from './UaFlag';
+import { UaFlag } from './UaFlag';
 
 interface HomeArenaShowcaseProps {
   tournamentSlug: string;
@@ -31,6 +31,17 @@ interface HomeArenaShowcaseProps {
   matches: Match[];
   standings: Record<string, GroupStandingRow[]>;
 }
+
+const QUALIFIED_SEEDS = [
+  { seed: 'A1', nickname: 'BRS_Nederfox', status: 'У Фіналі' },
+  { seed: 'B1', nickname: 'BRS_Vestern', status: '1/4 фіналу' },
+  { seed: 'C1', nickname: 'BRS_Hasfer23', status: 'За 3 місце' },
+  { seed: 'D1', nickname: 'BRS_Lunnek1', status: '1/4 фіналу' },
+  { seed: 'E1', nickname: 'BRS_YoungChamp18', status: '1/2 LIVE' },
+  { seed: 'A2', nickname: 'Grizzy', status: '1/4 фіналу' },
+  { seed: 'C2', nickname: 'Elaizer', status: '1/2 LIVE' },
+  { seed: 'E2', nickname: 'BRS_PELTIK88', status: '1/4 фіналу' },
+];
 
 export function HomeArenaShowcase({
   tournamentSlug,
@@ -57,46 +68,53 @@ export function HomeArenaShowcase({
   ).length;
 
   return (
-    <section className="glass-panel rounded-[34px] p-6 sm:p-9 lg:p-10 space-y-7 overflow-hidden relative">
-      {/* Subtle Top Diia Ambient Glow */}
+    <section className="glass-panel rounded-[36px] p-6 sm:p-9 lg:p-10 space-y-6 overflow-hidden relative border border-sky-400/30 shadow-[0_28px_80px_rgba(2,6,23,0.88)]">
+      {/* Top UEFA Starball Royal Blue & Gold Broadcast Line */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -top-24 left-1/3 w-96 h-48 rounded-full opacity-15 blur-3xl diia-iridescent-bg"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[3px] diia-iridescent-bg"
       />
 
-      {/* Header + Segmented Pill Switcher */}
-      <div className="relative flex flex-col xl:flex-row xl:items-center justify-between gap-5 pb-6 border-b border-white/[0.07]">
+      {/* Subtle Stadium Floodlight Glow */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-24 left-1/3 w-96 h-48 rounded-full opacity-20 blur-3xl bg-gradient-to-r from-[#2563EB] via-[#38BDF8] to-[#F5C451]"
+      />
+
+      {/* Header + UEFA Broadcast Segmented Switcher */}
+      <div className="relative flex flex-col xl:flex-row xl:items-center justify-between gap-5 pb-5 border-b border-sky-400/20">
         <div className="space-y-1.5">
-          <div className="inline-flex flex-wrap items-center gap-2 text-xs font-bold text-slate-300">
+          <div className="inline-flex flex-wrap items-center gap-2 text-xs font-bold text-slate-200">
             {hasMatches ? (
-              <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#FF5C39]/15 border border-[#FF5C39]/40 text-[#FF7A5C] text-[0.65rem] font-extrabold">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FF5C39] text-white text-[0.65rem] font-extrabold uppercase tracking-wider shadow-[0_0_16px_rgba(255,92,57,0.45)]">
                 <Radio className="w-3 h-3 animate-pulse" />
-                LIVE АРЕНА • 1/2 ТА ФІНАЛ
+                <span>LIVE МАТЧ-ЦЕНТР • 1/2 ТА ФІНАЛ</span>
               </span>
             ) : (
               <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-400/15 border border-emerald-400/35 text-pitch text-[0.65rem] font-extrabold">
                 СТАРТ СЕЗОНУ • РЕЄСТРАЦІЯ
               </span>
             )}
-            <span>{tournamentTitle}</span>
-            <span className="hidden sm:inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-400/15 border border-amber-400/30 text-gold text-[0.65rem] font-extrabold">
-              🫙 Зібрано 2 145 ₴ на ЗСУ
+            <span className="font-extrabold text-white">{tournamentTitle}</span>
+            <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-amber-400/15 border border-amber-400/35 text-gold text-[0.65rem] font-extrabold">
+              <ShieldCheck className="w-3.5 h-3.5" />
+              <span>Зібрано 2 145 ₴ у фонд Project Ukraine</span>
             </span>
           </div>
-          <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-white">
+          <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-[-0.03em]">
             Матч-центр Турніру #1: Сітка Плей-офф та Групи A–{lastGroupLetter}
           </h2>
         </div>
 
-        {/* Monobank / iOS Segmented Capsule Switcher */}
-        <div className="inline-flex flex-wrap items-center gap-1 p-1.5 rounded-full bg-[#10121A]/75 border border-white/[0.14] self-start xl:self-auto">
+        {/* UEFA Broadcast Segmented Capsule Switcher */}
+        <div className="inline-flex flex-wrap items-center gap-1.5 p-1.5 rounded-full bg-[#04091A]/90 border border-sky-400/30 self-start xl:self-auto shadow-inner">
           <button
             type="button"
             onClick={() => setTab('playoff')}
             className={`px-4 py-2 rounded-full text-xs font-extrabold transition-all inline-flex items-center gap-2 ${
               tab === 'playoff'
-                ? 'bg-white text-[#09090B] shadow-sm'
-                : 'text-slate-400 hover:text-white'
+                ? 'bg-gradient-to-r from-[#FDE68A] via-[#F5C451] to-[#D97706] text-[#040814] shadow-[0_4px_14px_rgba(245,196,81,0.35)]'
+                : 'text-slate-300 hover:text-white'
             }`}
           >
             <Swords className="w-3.5 h-3.5" />
@@ -108,8 +126,8 @@ export function HomeArenaShowcase({
             onClick={() => setTab('groups')}
             className={`px-4 py-2 rounded-full text-xs font-extrabold transition-all inline-flex items-center gap-2 ${
               tab === 'groups'
-                ? 'bg-white text-[#09090B] shadow-sm'
-                : 'text-slate-400 hover:text-white'
+                ? 'bg-gradient-to-r from-[#FDE68A] via-[#F5C451] to-[#D97706] text-[#040814] shadow-[0_4px_14px_rgba(245,196,81,0.35)]'
+                : 'text-slate-300 hover:text-white'
             }`}
           >
             <LayoutGrid className="w-3.5 h-3.5" />
@@ -123,8 +141,8 @@ export function HomeArenaShowcase({
             onClick={() => setTab('draft')}
             className={`px-4 py-2 rounded-full text-xs font-extrabold transition-all inline-flex items-center gap-2 ${
               tab === 'draft'
-                ? 'bg-white text-[#09090B] shadow-sm'
-                : 'text-slate-400 hover:text-white'
+                ? 'bg-gradient-to-r from-[#FDE68A] via-[#F5C451] to-[#D97706] text-[#040814] shadow-[0_4px_14px_rgba(245,196,81,0.35)]'
+                : 'text-slate-300 hover:text-white'
             }`}
           >
             <Shuffle className="w-3.5 h-3.5" />
@@ -135,62 +153,42 @@ export function HomeArenaShowcase({
 
       {/* TAB 1: LIVE PLAYOFF BRACKET */}
       {tab === 'playoff' && (
-        <div className="space-y-6">
-          {/* WOW Championship Match Spotlight Row */}
+        <div className="space-y-5">
+          {/* Compact 8-Player Knockout Seeding Telemetry Strip (No Redundant Match Banners!) */}
           {hasMatches && (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              {/* Spotlight 1: Grand Finalists */}
-              <Link
-                href={`/tournaments/${tournamentSlug}`}
-                className="mono-iron-surface rounded-[26px] p-5 border border-amber-300/35 hover:border-amber-300/70 transition-all flex items-center justify-between gap-4 group"
-              >
-                <div className="space-y-2 min-w-0">
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-gold text-[#09090B] text-[0.65rem] font-extrabold">
-                    <Crown className="w-3 h-3" />
-                    <span>ГРАНД-ФІНАЛ КУБКА • 1 МІСЦЕ</span>
-                  </div>
-                  <div className="flex flex-wrap items-center gap-2 text-sm sm:text-base font-display font-extrabold text-white">
-                    <span className="text-gold">BRS_Nederfox [A1]</span>
-                    <span className="text-xs font-mono text-slate-400 px-2 py-0.5 rounded-md bg-white/[0.06]">
-                      VS
-                    </span>
-                    <span className="text-slate-300">
-                      Переможець 1/2 (YoungChamp18 / Elaizer)
-                    </span>
-                  </div>
-                  <div className="text-xs text-slate-300">
-                    Півфінал #1 завершено з рахунком{' '}
-                    <strong className="text-white">8 : 5</strong> проти{' '}
-                    <span className="text-slate-200">BRS_Hasfer23</span>
-                  </div>
-                </div>
-                <VectorGoldTrophy className="w-16 h-16 shrink-0 group-hover:scale-105 transition-transform" />
-              </Link>
+            <div className="rounded-[24px] bg-[#040A1E]/90 border border-sky-400/25 px-4 py-3.5 flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+              <div className="flex items-center gap-2.5 shrink-0">
+                <span className="px-2.5 py-1 rounded-lg bg-amber-400/15 border border-amber-400/35 font-mono text-[0.62rem] font-extrabold text-gold uppercase">
+                  ПОСІВ ПЛЕЙ-ОФФ (ТОП-8)
+                </span>
+                <span className="text-xs text-slate-300 font-medium">
+                  5 переможців груп (A1–E1) + 3 найкращі другі місця (A2, C2, E2):
+                </span>
+              </div>
 
-              {/* Spotlight 2: Live Semi-Final #2 */}
-              <Link
-                href={`/tournaments/${tournamentSlug}`}
-                className="diia-card-surface rounded-[26px] p-5 border border-sky-300/30 hover:border-sky-300/65 transition-all flex items-center justify-between gap-4 group"
-              >
-                <div className="space-y-2 min-w-0">
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#FF5C39] text-white text-[0.65rem] font-extrabold">
-                    <Flame className="w-3 h-3 animate-pulse" />
-                    <span>ПІВФІНАЛ #2 LIVE • ЗА ВИХІД У ФІНАЛ</span>
-                  </div>
-                  <div className="flex flex-wrap items-center gap-2 text-sm sm:text-base font-display font-extrabold text-white">
-                    <span className="text-pitch">BRS_YoungChamp18 [E1]</span>
-                    <span className="text-xs font-mono text-slate-300 px-2 py-0.5 rounded-md bg-[#0B0E17]/80 border border-white/15">
-                      LIVE
+              <div className="flex flex-wrap items-center gap-1.5">
+                {QUALIFIED_SEEDS.map((item) => {
+                  const isFinalist = item.status === 'У Фіналі';
+                  const isLive = item.status === '1/2 LIVE';
+                  return (
+                    <span
+                      key={item.seed}
+                      className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[0.65rem] font-bold border ${
+                        isFinalist
+                          ? 'bg-amber-400/15 border-amber-400/45 text-gold'
+                          : isLive
+                            ? 'bg-sky-500/20 border-sky-400/45 text-white'
+                            : 'bg-[#071026] border-white/10 text-slate-300'
+                      }`}
+                    >
+                      <span className="font-mono font-extrabold text-pitch">
+                        {item.seed}
+                      </span>
+                      <span>{item.nickname.replace(/^BRS_/, '')}</span>
                     </span>
-                    <span className="text-white">Elaizer [C2]</span>
-                  </div>
-                  <div className="text-xs text-slate-300">
-                    У матчі за 3-тє місце вже очікує{' '}
-                    <strong className="text-amber-300">BRS_Hasfer23 [C1]</strong>
-                  </div>
-                </div>
-                <VectorEmeraldTrophy className="w-16 h-16 shrink-0 group-hover:scale-105 transition-transform" />
-              </Link>
+                  );
+                })}
+              </div>
             </div>
           )}
 
@@ -199,15 +197,16 @@ export function HomeArenaShowcase({
             onSelectMatch={() => router.push(`/tournaments/${tournamentSlug}`)}
           />
 
-          <div className="pt-2 flex flex-wrap items-center justify-between gap-3">
-            <span className="text-xs text-slate-400">
-              Крос-посів із 5 груп (A–E): переможці груп A–E та 3 найкращі другі місця (A2, C2, E2).
+          <div className="pt-2 border-t border-sky-400/20 flex flex-wrap items-center justify-between gap-3">
+            <span className="text-xs text-slate-300">
+              Натисніть на будь-яку пару в сітці Плей-офф, щоб відкрити кімнату
+              матчу 1v1, рахунок або протокол серії.
             </span>
             <Link
               href={`/tournaments/${tournamentSlug}`}
-              className="px-5 py-2.5 rounded-full bg-white text-[#09090B] hover:bg-neutral-200 text-xs font-extrabold inline-flex items-center gap-2 transition-all"
+              className="px-5 py-2.5 rounded-full bg-gradient-to-r from-[#FDE68A] via-[#F5C451] to-[#D97706] text-[#040814] hover:brightness-110 text-xs font-extrabold inline-flex items-center gap-2 transition-all shadow-[0_8px_20px_rgba(245,196,81,0.3)]"
             >
-              <span>Відкрити Матч-центр кубка</span>
+              <span>Відкрити повний Матч-центр кубка</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
@@ -218,7 +217,7 @@ export function HomeArenaShowcase({
       {tab === 'groups' && (
         <div className="space-y-5">
           {groupNames.length === 0 ? (
-            <div className="p-8 rounded-[26px] bg-[#10121A]/65 border border-white/[0.12] text-center space-y-3">
+            <div className="p-8 rounded-[26px] bg-[#050C22]/85 border border-sky-400/25 text-center space-y-3">
               <div className="font-display text-lg font-extrabold text-white">
                 Груповий етап ще не сформовано (триває реєстрація)
               </div>
@@ -228,7 +227,7 @@ export function HomeArenaShowcase({
               </p>
               <Link
                 href={`/tournaments/${tournamentSlug}`}
-                className="px-5 py-2.5 rounded-full bg-white text-[#09090B] hover:bg-neutral-200 text-xs font-extrabold inline-flex items-center gap-2 transition-all"
+                className="px-5 py-2.5 rounded-full bg-gradient-to-r from-[#FDE68A] via-[#F5C451] to-[#D97706] text-[#040814] text-xs font-extrabold inline-flex items-center gap-2 transition-all"
               >
                 <span>Зареєструватися у кубку</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -241,33 +240,40 @@ export function HomeArenaShowcase({
                 return (
                   <div
                     key={group}
-                    className="rounded-[24px] bg-[#10121A]/65 border border-white/[0.12] overflow-hidden flex flex-col justify-between"
+                    className="rounded-[24px] bg-[#050C22]/95 border border-sky-400/25 overflow-hidden flex flex-col justify-between shadow-[0_14px_34px_rgba(2,6,23,0.75)]"
                   >
                     <div>
-                      <div className="px-4 py-3 border-b border-white/[0.07] flex items-center justify-between bg-white/[0.02]">
-                        <span className="font-display text-sm font-extrabold text-white">
-                          Група {group}
-                        </span>
-                        <span className="text-[0.65rem] font-mono text-pitch font-bold">
-                          2 кола • Плей-офф
+                      <div className="px-4 py-3 border-b border-sky-400/20 flex items-center justify-between bg-gradient-to-r from-[#08163B] to-[#050C22]">
+                        <div className="flex items-center gap-2">
+                          <span className="w-6 h-6 rounded-lg bg-gold text-[#040814] font-mono text-xs font-extrabold flex items-center justify-center">
+                            {group}
+                          </span>
+                          <span className="font-display text-sm font-extrabold text-white uppercase tracking-wide">
+                            Група {group}
+                          </span>
+                        </div>
+                        <span className="text-[0.62rem] font-mono text-sky-300 font-bold uppercase">
+                          2 кола • Завершено
                         </span>
                       </div>
 
-                      <div className="divide-y divide-white/[0.05]">
+                      <div className="divide-y divide-white/[0.06]">
                         {rows.map((r) => {
                           const isClub = isClubMemberByNickname(r.nickname);
                           return (
                             <div
                               key={r.userId}
                               className={`px-4 py-2.5 flex items-center justify-between gap-2.5 text-xs ${
-                                r.qualifies ? 'bg-emerald-400/[0.04]' : ''
+                                r.qualifies
+                                  ? 'bg-gradient-to-r from-emerald-500/[0.08] to-transparent'
+                                  : ''
                               }`}
                             >
                               <div className="flex items-center gap-2 min-w-0">
                                 <span
                                   className={`w-5 h-5 rounded-full text-[0.65rem] font-extrabold flex items-center justify-center shrink-0 tabular-nums ${
                                     r.qualifies
-                                      ? 'bg-pitch/20 text-pitch border border-pitch/40'
+                                      ? 'bg-pitch/20 text-pitch border border-pitch/45'
                                       : 'bg-white/[0.05] text-slate-400'
                                   }`}
                                 >
@@ -282,12 +288,12 @@ export function HomeArenaShowcase({
                                   <div className="flex items-center gap-1.5 min-w-0">
                                     <Link
                                       href={`/players/${encodeURIComponent(r.nickname)}`}
-                                      className="font-bold text-white hover:text-pitch truncate block transition-colors"
+                                      className="font-bold text-white hover:text-gold truncate block transition-colors"
                                     >
                                       {r.nickname}
                                     </Link>
                                     <span
-                                      className={`px-1.5 py-0.5 rounded text-[0.52rem] font-extrabold uppercase shrink-0 border ${
+                                      className={`px-1.5 py-0.5 rounded text-[0.5rem] font-extrabold uppercase shrink-0 border ${
                                         isClub
                                           ? 'bg-amber-400/15 text-amber-300 border-amber-400/35'
                                           : 'bg-cyan-400/15 text-cyan-300 border-cyan-400/35'
@@ -306,10 +312,10 @@ export function HomeArenaShowcase({
                                 <span className="text-slate-400 text-[0.66rem]">
                                   {r.played}М
                                 </span>
-                                <span className="text-slate-400 text-[0.66rem] w-7 text-right">
+                                <span className="text-slate-300 text-[0.66rem] w-7 text-right">
                                   {r.gd > 0 ? `+${r.gd}` : r.gd}
                                 </span>
-                                <span className="px-2.5 py-0.5 rounded-full bg-white/[0.08] text-white font-extrabold">
+                                <span className="px-2.5 py-0.5 rounded-lg bg-sky-500/20 border border-sky-400/30 text-white font-extrabold">
                                   {r.points}
                                 </span>
                               </div>
@@ -322,11 +328,11 @@ export function HomeArenaShowcase({
                 );
               })}
 
-              {/* 6th Symmetrical Summary Card for 5 Groups in a 3x2 / 2x3 Grid */}
-              <div className="rounded-[24px] diia-card-surface border border-sky-300/30 p-5 flex flex-col justify-between gap-4">
+              {/* 6th Symmetrical Summary Card for 5 Groups in a 3x2 Grid */}
+              <div className="rounded-[24px] mono-iron-surface border border-amber-400/40 p-5 flex flex-col justify-between gap-4">
                 <div className="space-y-3">
                   <div className="flex items-center justify-between gap-2">
-                    <span className="px-2.5 py-1 rounded-full diia-iridescent-bg text-[#09090B] text-[0.65rem] font-extrabold">
+                    <span className="px-2.5 py-1 rounded-full bg-gold text-[#040814] text-[0.62rem] font-mono font-extrabold uppercase">
                       СТАТИСТИКА ГРУП A–{lastGroupLetter}
                     </span>
                     <span className="text-xs font-mono font-bold text-pitch">
@@ -337,7 +343,7 @@ export function HomeArenaShowcase({
                   <div>
                     <div className="font-display text-xl font-extrabold text-white">
                       {completedGroupMatchesCount || 33} матчі •{' '}
-                      <span className="text-pitch">{totalGroupGoals} голів</span>
+                      <span className="text-gold">{totalGroupGoals} голів</span>
                     </div>
                     <p className="text-xs text-slate-300 mt-1 leading-relaxed">
                       Усі 5 груп відіграли по 2 кола. До 1/4 фіналу вийшли 5
@@ -347,7 +353,7 @@ export function HomeArenaShowcase({
                   </div>
 
                   <div className="grid grid-cols-2 gap-2 pt-1">
-                    <div className="p-2.5 rounded-xl bg-[#0B0E17]/75 border border-white/10">
+                    <div className="p-2.5 rounded-xl bg-[#040814]/85 border border-amber-400/25">
                       <div className="text-[0.62rem] text-slate-400">
                         Найкраща атака
                       </div>
@@ -355,7 +361,7 @@ export function HomeArenaShowcase({
                         YoungChamp18 (42)
                       </div>
                     </div>
-                    <div className="p-2.5 rounded-xl bg-[#0B0E17]/75 border border-white/10">
+                    <div className="p-2.5 rounded-xl bg-[#040814]/85 border border-sky-400/25">
                       <div className="text-[0.62rem] text-slate-400">
                         Зібрано на ЗСУ
                       </div>
@@ -368,7 +374,7 @@ export function HomeArenaShowcase({
 
                 <Link
                   href={`/tournaments/${tournamentSlug}`}
-                  className="w-full py-2.5 px-4 rounded-full bg-white text-[#09090B] hover:bg-neutral-200 text-xs font-extrabold inline-flex items-center justify-center gap-1.5 transition-all"
+                  className="w-full py-2.5 px-4 rounded-full bg-gradient-to-r from-[#FDE68A] via-[#F5C451] to-[#D97706] text-[#040814] hover:brightness-110 text-xs font-extrabold inline-flex items-center justify-center gap-1.5 transition-all"
                 >
                   <span>Усі 33 матчі груп</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -379,11 +385,12 @@ export function HomeArenaShowcase({
 
           <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
             <span className="text-xs text-slate-400">
-              Критерії при рівності очок: 1) Очні зустрічі • 2) Різниця м’ячів • 3) Забиті голи.
+              Критерії при рівності очок: 1) Очні зустрічі • 2) Різниця м’ячів •
+              3) Забиті голи.
             </span>
             <Link
               href={`/tournaments/${tournamentSlug}`}
-              className="px-5 py-2.5 rounded-full bg-white text-[#09090B] hover:bg-neutral-200 text-xs font-extrabold inline-flex items-center gap-2 transition-all"
+              className="px-5 py-2.5 rounded-full bg-white/10 hover:bg-gold hover:text-[#040814] border border-white/15 text-xs font-extrabold text-white inline-flex items-center gap-2 transition-all"
             >
               <span>Усі матчі груп у Матч-центрі</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -396,7 +403,7 @@ export function HomeArenaShowcase({
       {tab === 'draft' && (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-5 space-y-5">
-            <div className="relative rounded-[28px] overflow-hidden diia-card-surface p-6 flex flex-col justify-between min-h-[13.5rem]">
+            <div className="relative rounded-[28px] overflow-hidden diia-card-surface border border-sky-400/35 p-6 flex flex-col justify-between min-h-[13.5rem]">
               <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0 opacity-45"
@@ -405,14 +412,12 @@ export function HomeArenaShowcase({
               </div>
 
               <div className="relative z-10 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <MonoCardChip tone="silver" />
-                  <span className="px-3 py-1 rounded-full diia-iridescent-bg text-[#09090B] text-[0.65rem] font-extrabold">
-                    FAIR DRAFT • SHA-256
-                  </span>
-                </div>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold text-[#040814] text-[0.65rem] font-mono font-extrabold uppercase">
+                  <Crown className="w-3 h-3" />
+                  <span>FAIR DRAFT • SHA-256</span>
+                </span>
                 <span className="text-xs font-mono font-bold text-pitch">
-                  32 КЛУБИ
+                  32 КЛУБИ УЄФА + УПЛ
                 </span>
               </div>
 
@@ -428,7 +433,7 @@ export function HomeArenaShowcase({
                 <VectorEmeraldTrophy className="w-20 h-20 shrink-0" />
               </div>
 
-              <div className="relative z-10 text-[0.66rem] font-mono text-slate-200 uppercase pt-2 border-t border-white/10">
+              <div className="relative z-10 text-[0.66rem] font-mono text-sky-200 uppercase pt-2 border-t border-white/10">
                 ШАХТАР ДОНЕЦЬК • ДИНАМО КИЇВ • ЄВРОПЕЙСЬКІ КЛУБИ
               </div>
             </div>
@@ -445,22 +450,22 @@ export function HomeArenaShowcase({
             </div>
 
             <div className="flex flex-wrap gap-2 text-xs font-semibold">
-              <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/[0.07] border border-white/[0.12] text-slate-100">
+              <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#060E24] border border-sky-400/25 text-slate-100">
                 <UaFlag className="w-3.5 h-2.5" />
                 <span>Шахтар і Динамо</span>
               </span>
-              <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/[0.07] border border-white/[0.12] text-slate-100">
+              <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#060E24] border border-amber-400/30 text-slate-100">
                 <Scale className="w-3.5 h-3.5 text-gold" />
                 <span>Режим 95 OVR</span>
               </span>
-              <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/[0.07] border border-white/[0.12] text-slate-100">
+              <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#060E24] border border-emerald-400/30 text-slate-100">
                 <Trophy className="w-3.5 h-3.5 text-pitch" />
                 <span>4 кошики посіву</span>
               </span>
             </div>
           </div>
 
-          <div className="lg:col-span-7 p-5 sm:p-6 rounded-[26px] bg-[#10121A]/65 border border-white/[0.12]">
+          <div className="lg:col-span-7 p-5 sm:p-6 rounded-[26px] bg-[#050C22]/90 border border-sky-400/25">
             <ClubDraftRoulettePreview />
           </div>
         </div>
@@ -468,4 +473,3 @@ export function HomeArenaShowcase({
     </section>
   );
 }
-
