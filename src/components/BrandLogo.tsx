@@ -29,9 +29,9 @@ export function BrandLogo({ size = 'md', markOnly = false }: BrandLogoProps) {
         <div className="relative w-full h-full rounded-[12.5px] bg-[#0B0F1A] overflow-hidden flex items-center justify-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/images/bunker-logo-v1.jpg"
+            src="/images/bunker-logo-v3.jpg"
             alt="БУНКЕР UA"
-            className="w-full h-full object-cover scale-[1.16] transition-transform duration-500 group-hover:scale-[1.22]"
+            className="w-full h-full object-cover scale-[1.18] transition-transform duration-500 group-hover:scale-[1.24]"
           />
         </div>
       </div>
