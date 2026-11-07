@@ -25,9 +25,21 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: 'БУНКЕР • Благодійні турніри 1 на 1 в EA SPORTS FC на підтримку ЗСУ',
+  title:
+    'BUNKER FC 1v1 • UKRAINE — Благодійна платформа турнірів в EA SPORTS FC на підтримку ЗСУ',
   description:
-    'Платформа БУНКЕР: благодійні турніри 1v1 в EA FC за системою Ліги Чемпіонів (групи + плей-офф) на підтримку ЗСУ. Приз — пам’ятна нагорода від воїнів ЗСУ.',
+    'Офіційна благодійна платформа BUNKER FC 1v1 Ukraine: турніри 1 на 1 в EA SPORTS FC за системою Ліги Чемпіонів (групи + плей-офф) на підтримку ЗСУ.',
+  icons: {
+    icon: '/images/bunker-fc-emblem.jpg',
+    shortcut: '/images/bunker-fc-emblem.jpg',
+    apple: '/images/bunker-fc-emblem.jpg',
+  },
+  openGraph: {
+    title: 'BUNKER FC 1v1 • UKRAINE — Благодійна платформа',
+    description:
+      'Турніри 1 на 1 в EA SPORTS FC за системою Ліги Чемпіонів на підтримку ЗСУ (Project Ukraine).',
+    images: ['/images/bunker-fc-logo.jpg'],
+  },
 };
 
 export const dynamic = 'force-dynamic';

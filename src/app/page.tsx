@@ -103,12 +103,12 @@ export default function HomePage() {
             className="pointer-events-none absolute -top-24 -left-16 w-96 h-60 rounded-full opacity-30 blur-3xl bg-gradient-to-r from-[#2563EB] via-[#38BDF8] to-[#F5C451]"
           />
 
-          {/* Top Bar: Official UCL Broadcast Badge + Cross-Play */}
+          {/* Top Bar: Official BUNKER FC 1v1 Broadcast Badge + Cross-Play */}
           <div className="relative z-10 flex flex-wrap items-center justify-between gap-3">
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#07112E]/90 border border-sky-400/35 text-xs font-extrabold text-white backdrop-blur-md shadow-[0_0_25px_rgba(37,99,235,0.3)]">
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#07112E]/90 border border-amber-400/35 text-xs font-extrabold text-white backdrop-blur-md shadow-[0_0_25px_rgba(245,196,81,0.22)]">
               <UaFlag className="w-4 h-3" />
               <span className="tracking-wide uppercase">
-                ★ БУНКЕР UA • УКРАЇНСЬКА ЛІГА ЧЕМПІОНІВ 1V1
+                ★ BUNKER FC 1v1 • UKRAINE БЛАГОДІЙНА ПЛАТФОРМА
               </span>
               <ShieldCheck className="w-3.5 h-3.5 text-gold" />
             </div>
@@ -119,61 +119,77 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Center Stage: Bold Champions League Headline, Subtitle & Primary Actions */}
-          <div className="relative z-10 space-y-6 max-w-2xl my-auto py-2">
-            <div className="space-y-3.5">
-              <div className="inline-flex items-center gap-2 text-xs font-mono font-extrabold uppercase tracking-[0.18em] text-gold">
-                <Trophy className="w-3.5 h-3.5" />
-                <span>ОФІЦІЙНА КІБЕРФУТБОЛЬНА АРЕНА НА ПІДТРИМКУ ЗСУ</span>
+          {/* Center Stage: Bold Champions League Headline + Official 3D BUNKER FC 1v1 Crest */}
+          <div className="relative z-10 flex flex-col xl:flex-row xl:items-center justify-between gap-6 my-auto py-2">
+            <div className="space-y-6 max-w-xl">
+              <div className="space-y-3.5">
+                <div className="inline-flex items-center gap-2 text-xs font-mono font-extrabold uppercase tracking-[0.18em] text-gold">
+                  <Trophy className="w-3.5 h-3.5" />
+                  <span>ОФІЦІЙНА КІБЕРФУТБОЛЬНА АРЕНА НА ПІДТРИМКУ ЗСУ</span>
+                </div>
+
+                <h1 className="font-display text-4xl sm:text-5xl xl:text-[3.35rem] font-extrabold tracking-[-0.04em] text-white leading-[1.04] uppercase">
+                  Українська Ліга Чемпіонів{' '}
+                  <span className="block mt-1.5 diia-gradient-text">
+                    1 на 1 в EA SPORTS FC
+                  </span>
+                </h1>
+
+                <p className="text-sm sm:text-base text-slate-200 leading-relaxed">
+                  Груповий етап у 2 кола, олімпійська сітка Плей-офф, офіційні
+                  FUT-картки гравців та головний приз —{' '}
+                  <strong className="text-gold">
+                    пам’ятний трофей від воїнів ЗСУ
+                  </strong>
+                  . Усі 100% донатів передаємо фонду{' '}
+                  <strong className="text-white">Project Ukraine</strong>!
+                </p>
               </div>
 
-              <h1 className="font-display text-4xl sm:text-5xl xl:text-[3.5rem] font-extrabold tracking-[-0.04em] text-white leading-[1.04] uppercase">
-                Українська Ліга Чемпіонів{' '}
-                <span className="block mt-1.5 diia-gradient-text">
-                  1 на 1 в EA SPORTS FC
-                </span>
-              </h1>
+              <div className="flex flex-wrap items-center gap-3.5">
+                <Link
+                  href={`/tournaments/${openNovemberCup?.slug ?? 'november-cup-2026'}`}
+                  className="group inline-flex items-center gap-3 pl-6 pr-4 py-3.5 rounded-full bg-gradient-to-r from-[#FDE68A] via-[#F5C451] to-[#D97706] text-[#040814] hover:brightness-110 font-extrabold text-sm shadow-[0_14px_36px_rgba(245,196,81,0.35)] hover:scale-[1.01] transition-all"
+                >
+                  <span>Подати заявку на Турнір #2</span>
+                  <span className="px-2.5 py-0.5 rounded-full bg-[#040814] text-gold text-xs font-extrabold tabular-nums">
+                    {novCount}/{novMax}
+                  </span>
+                  <ArrowRight className="w-4 h-4 text-[#040814] group-hover:translate-x-0.5 transition-transform" />
+                </Link>
 
-              <p className="text-sm sm:text-base text-slate-200 leading-relaxed max-w-xl">
-                Груповий етап у 2 кола, олімпійська сітка Плей-офф, офіційні
-                FUT-картки гравців та головний приз —{' '}
-                <strong className="text-gold">
-                  пам’ятний трофей від воїнів ЗСУ
-                </strong>
-                . Усі 100% донатів передаємо фонду{' '}
-                <strong className="text-white">Project Ukraine</strong>!
-              </p>
+                <Link
+                  href={`/tournaments/${liveOctoberCup?.slug ?? 'october-cup-2026'}`}
+                  className="inline-flex items-center gap-2.5 px-5 py-3.5 rounded-full bg-[#0A193D]/90 hover:bg-[#122B66] border border-sky-400/40 text-sm font-extrabold text-white backdrop-blur-xl transition-all shadow-[0_10px_28px_rgba(37,99,235,0.25)]"
+                >
+                  <Radio className="w-4 h-4 text-[#FF5C39] animate-pulse" />
+                  <span>Матч-центр Турніру #1 LIVE</span>
+                </Link>
+
+                <a
+                  href="https://send.monobank.ua/jar/6aFeFX1Lk2"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-3.5 rounded-full bg-[#060E24]/90 hover:bg-amber-400/15 border border-amber-400/35 text-xs sm:text-sm font-extrabold text-gold backdrop-blur-xl transition-all"
+                >
+                  <span>🫙 Банка ЗСУ</span>
+                  <ArrowUpRight className="w-4 h-4" />
+                </a>
+              </div>
             </div>
 
-            <div className="flex flex-wrap items-center gap-3.5">
-              <Link
-                href={`/tournaments/${openNovemberCup?.slug ?? 'november-cup-2026'}`}
-                className="group inline-flex items-center gap-3 pl-6 pr-4 py-3.5 rounded-full bg-gradient-to-r from-[#FDE68A] via-[#F5C451] to-[#D97706] text-[#040814] hover:brightness-110 font-extrabold text-sm shadow-[0_14px_36px_rgba(245,196,81,0.35)] hover:scale-[1.01] transition-all"
-              >
-                <span>Подати заявку на Турнір #2</span>
-                <span className="px-2.5 py-0.5 rounded-full bg-[#040814] text-gold text-xs font-extrabold tabular-nums">
-                  {novCount}/{novMax}
-                </span>
-                <ArrowRight className="w-4 h-4 text-[#040814] group-hover:translate-x-0.5 transition-transform" />
-              </Link>
-
-              <Link
-                href={`/tournaments/${liveOctoberCup?.slug ?? 'october-cup-2026'}`}
-                className="inline-flex items-center gap-2.5 px-5 py-3.5 rounded-full bg-[#0A193D]/90 hover:bg-[#122B66] border border-sky-400/40 text-sm font-extrabold text-white backdrop-blur-xl transition-all shadow-[0_10px_28px_rgba(37,99,235,0.25)]"
-              >
-                <Radio className="w-4 h-4 text-[#FF5C39] animate-pulse" />
-                <span>Матч-центр Турніру #1 LIVE</span>
-              </Link>
-
-              <a
-                href="https://send.monobank.ua/jar/6aFeFX1Lk2"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-3.5 rounded-full bg-[#060E24]/90 hover:bg-amber-400/15 border border-amber-400/35 text-xs sm:text-sm font-extrabold text-gold backdrop-blur-xl transition-all"
-              >
-                <span>🫙 Банка ЗСУ</span>
-                <ArrowUpRight className="w-4 h-4" />
-              </a>
+            {/* Official 3D BUNKER FC 1v1 Shield Emblem Showcase */}
+            <div className="hidden sm:flex items-center justify-center shrink-0 self-center">
+              <div className="relative w-44 h-44 xl:w-52 xl:h-52 rounded-[30px] p-[2px] bg-gradient-to-br from-amber-300 via-gold to-sky-500 shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_40px_rgba(245,196,81,0.28)]">
+                <div className="w-full h-full rounded-[28px] bg-[#070B14] overflow-hidden flex items-center justify-center">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/images/bunker-fc-emblem.jpg"
+                    alt="BUNKER FC 1v1 • UKRAINE БЛАГОДІЙНА ПЛАТФОРМА"
+                    className="w-full h-full object-cover scale-[1.03]"
+                  />
+                </div>
+              </div>
             </div>
           </div>
 
