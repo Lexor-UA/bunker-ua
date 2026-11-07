@@ -245,7 +245,6 @@ export default function HomePage() {
               <div className="relative z-10 flex items-center justify-between gap-2">
                 <div className="flex items-center gap-2.5">
                   <MonoCardChip tone="gold" />
-                  <NfcIcon className="w-4 h-4 text-amber-200/80" />
                   <span className="px-3 py-1 rounded-full bg-gold text-[#09090B] text-xs font-extrabold">
                     🎖️ ПРИЗ ВІД ВОЇНІВ ЗСУ
                   </span>
@@ -300,7 +299,6 @@ export default function HomePage() {
               <div className="relative z-10 flex items-center justify-between gap-2">
                 <div className="flex items-center gap-2.5">
                   <MonoCardChip tone="silver" />
-                  <NfcIcon className="w-4 h-4 text-sky-200/80" />
                   <span className="px-3 py-1 rounded-full diia-iridescent-bg text-[#09090B] text-xs font-extrabold">
                     🇺🇦 НА ПІДТРИМКУ ЗСУ
                   </span>

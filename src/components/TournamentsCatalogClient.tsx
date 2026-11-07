@@ -287,7 +287,6 @@ export function TournamentsCatalogClient({
                           <div className="flex flex-wrap items-center justify-between gap-3">
                             <div className="flex flex-wrap items-center gap-2.5 text-xs">
                               <MonoCardChip tone="gold" />
-                              <NfcIcon className="w-4 h-4 text-amber-200/80" />
                               <span className="px-3 py-1 rounded-full bg-[#10121A]/75 border border-white/15 text-slate-200 font-semibold inline-flex items-center gap-1.5">
                                 <Calendar className="w-3.5 h-3.5 text-gold" />
                                 {formatDateUa(t.startDate)}

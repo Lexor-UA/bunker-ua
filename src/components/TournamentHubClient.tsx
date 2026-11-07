@@ -290,7 +290,6 @@ export function TournamentHubClient({
               <div className="relative z-10 flex items-center justify-between gap-2">
                 <div className="flex items-center gap-2.5">
                   <MonoCardChip tone={isAnnual ? 'gold' : 'silver'} />
-                  <NfcIcon className="w-4 h-4 text-slate-200/80" />
                   <span className="px-2.5 py-0.5 rounded-full bg-black/45 border border-white/15 text-[0.65rem] font-extrabold text-white uppercase tracking-wider">
                     {tournament.entryFeeUah === 0
                       ? 'Вхід за рейтингом'

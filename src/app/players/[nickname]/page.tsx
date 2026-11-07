@@ -147,7 +147,6 @@ export default async function PlayerProfilePage({
             <div className="relative z-10 flex items-center justify-between gap-2">
               <div className="flex items-center gap-2">
                 <MonoCardChip tone={nationalRank === 1 ? 'gold' : 'silver'} />
-                <NfcIcon className="w-4 h-4 text-slate-300/80" />
                 <span
                   className={`px-3 py-1 rounded-full text-[0.68rem] font-extrabold tracking-tight shadow-sm ${
                     nationalRank === 1
