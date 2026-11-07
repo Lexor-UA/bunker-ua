@@ -90,15 +90,15 @@ export function MonoPrizeJarSvg({ className = 'w-24 h-28' }: { className?: strin
     >
       <defs>
         <linearGradient id="jarLiquid" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#74C7FF" />
-          <stop offset="36%" stopColor="#C79DFF" />
-          <stop offset="72%" stopColor="#FFC08E" />
-          <stop offset="100%" stopColor="#6DF2BC" />
+          <stop offset="0%" stopColor="#2563EB" />
+          <stop offset="42%" stopColor="#38BDF8" />
+          <stop offset="78%" stopColor="#F5C451" />
+          <stop offset="100%" stopColor="#FDE68A" />
         </linearGradient>
         <linearGradient id="jarGlass" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="rgba(255,255,255,0.22)" />
-          <stop offset="50%" stopColor="rgba(255,255,255,0.05)" />
-          <stop offset="100%" stopColor="rgba(255,255,255,0.14)" />
+          <stop offset="0%" stopColor="rgba(56,189,248,0.45)" />
+          <stop offset="50%" stopColor="rgba(255,255,255,0.1)" />
+          <stop offset="100%" stopColor="rgba(245,196,81,0.45)" />
         </linearGradient>
         <clipPath id="jarInterior">
           <rect x="22" y="34" width="76" height="96" rx="20" />

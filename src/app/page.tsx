@@ -1015,6 +1015,8 @@ export default function HomePage() {
             step: '01',
             icon: Wallet,
             accent: 'text-gold',
+            line: 'from-transparent via-gold/60 to-transparent',
+            badgeBorder: 'border-gold/35 bg-gold/10 text-gold',
             badge: 'БАНКА ЗСУ • ВІД 10 ₴',
             title: 'Реєстрація та донат на ЗСУ',
             desc: 'Створіть профіль гравця на сайті та закиньте від 10 ₴ (або скільки хочете і можете) на спільну Банку ЗСУ для фонду Project Ukraine.',
@@ -1023,6 +1025,8 @@ export default function HomePage() {
             step: '02',
             icon: Shuffle,
             accent: 'text-sky-300',
+            line: 'from-transparent via-sky-400/60 to-transparent',
+            badgeBorder: 'border-sky-400/35 bg-sky-400/10 text-sky-300',
             badge: 'ЛІГА ЧЕМПІОНІВ',
             title: 'Автоматичне жеребкування груп',
             desc: 'Платформа автоматично проводить посів учасників у групи (по 2 кола) та формує олімпійську сітку Плей-офф.',
@@ -1030,7 +1034,9 @@ export default function HomePage() {
           {
             step: '03',
             icon: Swords,
-            accent: 'text-pitch',
+            accent: 'text-gold',
+            line: 'from-transparent via-gold/60 to-transparent',
+            badgeBorder: 'border-gold/35 bg-gold/10 text-gold',
             badge: 'ГРУПА ЗА ТИЖДЕНЬ',
             title: 'Вільний графік у Telegram і Приз',
             desc: 'Про час матчів гравці домовляються між собою в Telegram (бажано зіграти групу за тиждень) і змагаються за нагороду від воїнів ЗСУ.',
@@ -1040,18 +1046,23 @@ export default function HomePage() {
           return (
             <div
               key={item.step}
-              className="glass-panel rounded-[30px] p-6 sm:p-7 space-y-3.5 relative overflow-hidden"
+              className="glass-panel rounded-[30px] p-6 sm:p-7 space-y-3.5 relative overflow-hidden border border-sky-400/20 hover:border-sky-400/40 transition-all"
             >
+              <div
+                className={`absolute inset-x-10 top-0 h-[1.5px] bg-gradient-to-r ${item.line} pointer-events-none`}
+              />
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <span className="px-3 py-1 rounded-full diia-iridescent-bg text-[#09090B] text-[0.65rem] font-mono font-extrabold">
+                  <span
+                    className={`px-3 py-1 rounded-full border text-[0.65rem] font-mono font-extrabold tracking-wider ${item.badgeBorder}`}
+                  >
                     КРОК {item.step}
                   </span>
                   <span className="text-[0.68rem] font-mono font-bold text-slate-300">
                     {item.badge}
                   </span>
                 </div>
-                <span className="w-10 h-10 rounded-2xl bg-[#10121A]/80 border border-white/15 flex items-center justify-center">
+                <span className="w-10 h-10 rounded-2xl bg-[#040B1C]/85 border border-sky-400/25 flex items-center justify-center shadow-[0_8px_18px_rgba(0,0,0,0.4)]">
                   <Icon className={`w-5 h-5 ${item.accent}`} />
                 </span>
               </div>
@@ -1145,11 +1156,11 @@ export default function HomePage() {
                 <Link
                   key={u.id}
                   href={`/players/${encodeURIComponent(u.nickname)}`}
-                  className="p-3.5 rounded-[22px] glass-panel flex items-center justify-between gap-2 hover:border-white/30 transition-colors group"
+                  className="p-3.5 rounded-[22px] bg-[#060E24]/85 border border-sky-400/20 hover:border-gold/45 flex items-center justify-between gap-2 transition-all group shadow-[0_10px_24px_rgba(0,0,0,0.4)]"
                 >
                   <div className="flex items-center gap-2.5 min-w-0">
-                    <span className="w-7 h-7 rounded-full bg-[#10121A]/80 border border-white/15 text-xs font-bold text-slate-200 flex items-center justify-center shrink-0 tabular-nums">
-                      {idx + 4}
+                    <span className="w-7 h-7 rounded-full bg-[#040814] border border-sky-400/30 text-xs font-mono font-extrabold text-sky-200 flex items-center justify-center shrink-0 tabular-nums">
+                      #{idx + 4}
                     </span>
                     <span
                       className="w-7 h-7 rounded-xl flex items-center justify-center font-mono text-[0.62rem] font-extrabold text-[#09090B] shrink-0 shadow"
@@ -1159,7 +1170,7 @@ export default function HomePage() {
                     </span>
                     <div className="min-w-0">
                       <div className="flex items-center gap-1.5 min-w-0">
-                        <span className="text-xs font-extrabold text-white group-hover:text-pitch truncate transition-colors">
+                        <span className="text-xs font-extrabold text-white group-hover:text-gold truncate transition-colors">
                           {u.nickname}
                         </span>
                         <span
@@ -1177,8 +1188,8 @@ export default function HomePage() {
                       </div>
                     </div>
                   </div>
-                  <span className="px-2.5 py-0.5 rounded-full bg-white/10 text-xs font-extrabold text-white shrink-0 tabular-nums">
-                    {u.seasonPoints}
+                  <span className="px-2.5 py-0.5 rounded-full bg-gold/15 border border-gold/30 text-[0.7rem] font-mono font-extrabold text-gold shrink-0 tabular-nums">
+                    {u.seasonPoints} pts
                   </span>
                 </Link>
               );
@@ -1192,62 +1203,85 @@ export default function HomePage() {
         {/* Charity Jar for AFU Card */}
         <HoloCard
           variant="diia"
-          className="lg:col-span-5 diia-card-surface rounded-[32px] p-7 sm:p-8 flex flex-col justify-between gap-6"
+          className="lg:col-span-5 diia-card-surface rounded-[34px] p-7 sm:p-8 flex flex-col justify-between gap-6 border border-gold/30 shadow-[0_24px_60px_rgba(0,0,0,0.65)] relative overflow-hidden"
         >
+          {/* Top Gold & Royal Blue Broadcast Line */}
+          <div className="absolute inset-x-10 top-0 h-[2px] bg-gradient-to-r from-transparent via-gold/80 to-transparent pointer-events-none" />
+
           <div className="space-y-5 relative z-10">
             <div className="flex items-start justify-between gap-4">
               <div className="space-y-3">
-                <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#10121A]/75 border border-white/15 text-xs font-bold text-white">
-                  <ShieldCheck className="w-3.5 h-3.5 text-pitch" />
-                  <span>Спільна Банка для ЗСУ</span>
-                  <UaFlag className="w-3.5 h-2.5" />
+                <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#040A18]/90 border border-gold/35 text-[0.7rem] font-mono font-extrabold uppercase tracking-wider text-amber-200 shadow-[0_6px_16px_rgba(0,0,0,0.4)]">
+                  <UaFlag className="w-4 h-3" />
+                  <span>БЛАГОДІЙНИЙ ФОНД PROJECT UKRAINE</span>
+                  <ShieldCheck className="w-3.5 h-3.5 text-gold" />
                 </span>
 
                 <div>
-                  <div className="text-xs text-slate-200 font-medium">
-                    Усі 100% внесків передаємо фонду Project Ukraine
+                  <div className="text-xs text-sky-200/90 font-semibold">
+                    Усі 100% внесків передаємо напряму на підтримку ЗСУ
                   </div>
-                  <div className="font-display text-3xl sm:text-4xl font-extrabold text-white tracking-[-0.03em] leading-tight mt-2">
-                    Внесок від 10 <span className="diia-gradient-text">₴</span>
+                  <div className="font-display text-3xl sm:text-4xl font-extrabold text-white tracking-[-0.03em] leading-tight mt-1.5">
+                    Внесок від{' '}
+                    <span className="bg-gradient-to-r from-amber-200 via-gold to-amber-400 bg-clip-text text-transparent">
+                      10 ₴
+                    </span>
                   </div>
                 </div>
               </div>
 
-              <MonoPrizeJarSvg className="w-20 h-24 sm:w-24 sm:h-28" />
+              <div className="relative shrink-0">
+                <div className="absolute -inset-2 rounded-full bg-gold/15 blur-xl pointer-events-none" />
+                <MonoPrizeJarSvg className="w-20 h-24 sm:w-24 sm:h-28 relative z-10 drop-shadow-[0_12px_24px_rgba(0,0,0,0.65)]" />
+              </div>
             </div>
 
-            <div className="p-4 rounded-[22px] bg-[#10121A]/75 border border-white/15 space-y-2">
+            <div className="p-4 sm:p-5 rounded-[24px] bg-[#040A18]/85 border border-sky-400/25 space-y-2.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
               <div className="flex items-center justify-between text-xs">
-                <span className="text-slate-300">Картка Банки ЗСУ:</span>
-                <span className="font-mono font-extrabold text-gold">
+                <span className="text-slate-300 font-medium">
+                  Картка Спільної Банки ЗСУ:
+                </span>
+                <span className="px-2.5 py-0.5 rounded-md bg-gold/15 border border-gold/30 font-mono font-extrabold text-gold tracking-wider">
                   4874 1000 3491 9384
                 </span>
               </div>
-              <div className="flex items-center justify-between text-xs pt-1 border-t border-white/[0.08]">
-                <span className="text-slate-300">Зібрано в Турнірі #1:</span>
-                <span className="font-mono font-extrabold text-pitch">
-                  2 145 ₴ • 18 учасників
+              <div className="flex items-center justify-between text-xs pt-2 border-t border-white/[0.08]">
+                <span className="text-slate-300 font-medium">
+                  Зібрано в Турнірі #1:
+                </span>
+                <span className="font-mono font-extrabold text-sky-300">
+                  2 145 ₴ • 18 учасників • 100% на ЗСУ
                 </span>
               </div>
               <p className="text-xs text-slate-300 leading-relaxed pt-1">
-                Тотального контролю по внесках немає — кожен кидає на банку ЗСУ
-                скільки хоче і може. Квитанція та звіт публікуються у нашій
-                Telegram-групі.
+                Фіксованого ліміту немає — кожен донатить на Спільну Банку ЗСУ
+                від 10 ₴ або скільки хоче і може. Офіційна квитанція та звіт
+                публікуються у нашій Telegram-спільноті.
               </p>
             </div>
 
             <div className="grid grid-cols-2 gap-3 text-xs">
-              <div className="p-3.5 rounded-2xl bg-[#10121A]/65 border border-white/10">
-                <div className="text-slate-300">Формат змагання</div>
-                <div className="text-sm sm:text-base font-extrabold text-white mt-0.5">
-                  Ліга Чемпіонів
+              <div className="p-3.5 rounded-2xl bg-[#040A18]/75 border border-sky-400/20 flex items-center justify-between gap-2">
+                <div>
+                  <div className="text-[0.65rem] font-mono uppercase tracking-wider text-sky-300/90 font-bold">
+                    ФОРМАТ ЗМАГАННЯ
+                  </div>
+                  <div className="text-sm sm:text-base font-extrabold text-white mt-0.5">
+                    Ліга Чемпіонів
+                  </div>
                 </div>
+                <Shield className="w-5 h-5 text-sky-300 shrink-0" />
               </div>
-              <div className="p-3.5 rounded-2xl bg-[#10121A]/65 border border-white/10">
-                <div className="text-slate-300">Головний приз</div>
-                <div className="text-sm sm:text-base font-extrabold text-gold mt-0.5">
-                  Нагорода від ЗСУ
+              <div className="p-3.5 rounded-2xl bg-[#040A18]/75 border border-gold/25 flex items-center justify-between gap-2">
+                <div>
+                  <div className="text-[0.65rem] font-mono uppercase tracking-wider text-gold font-bold">
+                    ГОЛОВНИЙ ПРИЗ
+                  </div>
+                  <div className="text-sm sm:text-base font-extrabold text-gold mt-0.5">
+                    Трофей від ЗСУ
+                  </div>
                 </div>
+                <Trophy className="w-5 h-5 text-gold shrink-0" />
               </div>
             </div>
           </div>
@@ -1256,21 +1290,31 @@ export default function HomePage() {
             href="https://send.monobank.ua/jar/6aFeFX1Lk2"
             target="_blank"
             rel="noopener noreferrer"
-            className="relative z-10 w-full py-3.5 px-5 rounded-full bg-white text-[#09090B] hover:bg-neutral-100 text-xs font-extrabold text-center transition-all shadow-[0_12px_28px_rgba(255,255,255,0.18)] inline-flex items-center justify-center gap-2"
+            className="relative z-10 w-full py-3.5 px-5 rounded-full bg-gradient-to-r from-[#FDE68A] via-[#F5C451] to-[#D97706] hover:brightness-110 text-[#040814] text-xs sm:text-sm font-extrabold text-center transition-all shadow-[0_12px_30px_rgba(245,196,81,0.35)] inline-flex items-center justify-center gap-2.5"
           >
-            <span>🫙 Відкрити Банку ЗСУ (send.monobank.ua)</span>
-            <ArrowUpRight className="w-4 h-4" />
+            <UaFlag className="w-4 h-3 shrink-0" />
+            <span>Відкрити Спільну Банку ЗСУ • send.monobank.ua</span>
+            <ArrowUpRight className="w-4 h-4 shrink-0" />
           </a>
         </HoloCard>
 
         {/* Clean Tactile FAQ */}
-        <div className="lg:col-span-7 glass-panel rounded-[32px] p-7 sm:p-8 flex flex-col justify-between gap-5">
+        <div className="lg:col-span-7 glass-panel rounded-[34px] p-7 sm:p-8 flex flex-col justify-between gap-5 border border-sky-400/25 shadow-[0_24px_60px_rgba(0,0,0,0.65)] relative overflow-hidden">
+          {/* Top Broadcast Accent Line */}
+          <div className="absolute inset-x-10 top-0 h-[2px] bg-gradient-to-r from-transparent via-sky-400/70 to-transparent pointer-events-none" />
+
           <div className="space-y-5">
-            <div className="flex items-center justify-between gap-3">
-              <h2 className="font-display text-2xl font-extrabold text-white">
-                Як проходить благодійний турнір
-              </h2>
-              <span className="px-3 py-1 rounded-full bg-white/[0.08] border border-white/15 text-xs font-semibold text-slate-200">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="space-y-1">
+                <div className="text-[0.68rem] font-mono font-extrabold uppercase tracking-wider text-sky-300 flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-gold" />
+                  <span>ОФІЦІЙНИЙ ДОВІДНИК УЧАСНИКА • BUNKER FC 1V1</span>
+                </div>
+                <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-white tracking-[-0.02em]">
+                  Як проходить благодійний турнір
+                </h2>
+              </div>
+              <span className="px-3.5 py-1.5 rounded-full bg-[#040A18]/90 border border-sky-400/30 text-xs font-mono font-bold text-sky-200">
                 Вільний графік • 1v1
               </span>
             </div>
@@ -1279,33 +1323,40 @@ export default function HomePage() {
               {[
                 {
                   q: 'Як взяти участь у благодійному турнірі?',
-                  a: '1) Зареєструйте профіль на сайті та натисніть «Узяти участь» на сторінці турніру. 2) Закиньте від 10 грн (або скільки хочете і можете) на спільну Банку ЗСУ (картка: 4874 1000 3491 9384). Усі 100% передаємо фонду Project Ukraine.',
+                  a: '1) Зареєструйте офіційний паспорт гравця на сайті та натисніть «Подати заявку» на сторінці турніру. 2) Закиньте від 10 ₴ (або скільки хочете і можете) на Спільну Банку ЗСУ (картка: 4874 1000 3491 9384). Усі 100% донатів передаємо фонду Project Ukraine.',
                 },
                 {
                   q: 'Який графік матчів і як зв’язатися з суперником?',
-                  a: 'Графік вільний: про час та дату матчів гравці домовляються між собою напряму в Telegram (бажано зіграти групу протягом тижня). Пряме посилання на Telegram та EA ID суперника відкривається у Кімнаті матчу.',
+                  a: 'Графік вільний: про час та дату матчів гравці домовляються між собою напряму в Telegram (бажано зіграти груповий етап протягом тижня). Пряме посилання на Telegram та EA ID / PSN ID суперника відкривається у Кімнаті матчу 1v1.',
                 },
                 {
-                  q: 'Як працює жеребкування груп і плей-офф?',
-                  a: 'Формат Ліги Чемпіонів: платформа автоматично ділить учасників на групи по 4 гравці та формує турнірну сітку Плей-офф.',
+                  q: 'Як працює жеребкування груп і сітка Плей-офф?',
+                  a: 'Формат Української Ліги Чемпіонів: платформа автоматично ділить учасників на групи (матчі у 2 кола — вдома та на виїзді), після чого найкращі гравці виходять у сітку Плей-офф (1/4 фіналу, Півфінали та Гранд-Фінал).',
                 },
                 {
                   q: 'Який приз отримує переможець турніру?',
-                  a: 'Головний приз — ексклюзивна пам’ятна нагорода від воїнів ЗСУ, а також кубковий титул та очки у загальному рейтингу платформи.',
+                  a: 'Головна нагорода кожного кубка — ексклюзивний пам’ятний трофей від воїнів ЗСУ, золотий чемпіонський бейдж у паспорті гравця та рейтингові очки для виходу у Підсумковий Кубок Сезону.',
                 },
               ].map((item, idx) => (
                 <details
                   key={idx}
                   open={idx === 0}
-                  className="group rounded-[22px] bg-[#10121A]/65 hover:bg-[#151824]/80 border border-white/10 open:border-white/25 transition-colors"
+                  className="group rounded-[22px] bg-[#040A18]/80 hover:bg-[#07122B]/90 border border-sky-400/15 open:border-gold/40 open:bg-[#071126]/95 transition-all"
                 >
                   <summary className="cursor-pointer px-5 py-4 flex items-center justify-between gap-4 text-sm font-bold text-white select-none">
-                    <span>{item.q}</span>
-                    <span className="w-7 h-7 rounded-full bg-white/10 group-open:bg-white group-open:text-[#09090B] text-slate-200 flex items-center justify-center shrink-0 transition-colors">
+                    <span className="flex items-center gap-3 min-w-0">
+                      <span className="w-6 h-6 rounded-lg bg-sky-400/15 border border-sky-400/30 group-open:bg-gold/20 group-open:border-gold/50 group-open:text-gold text-sky-300 font-mono text-[0.7rem] font-extrabold flex items-center justify-center shrink-0 transition-colors">
+                        0{idx + 1}
+                      </span>
+                      <span className="group-open:text-amber-100 transition-colors">
+                        {item.q}
+                      </span>
+                    </span>
+                    <span className="w-7 h-7 rounded-full bg-white/10 group-open:bg-gold group-open:text-[#040814] text-slate-200 flex items-center justify-center shrink-0 transition-colors">
                       <ChevronDown className="w-4 h-4 group-open:rotate-180 transition-transform" />
                     </span>
                   </summary>
-                  <div className="px-5 pb-4 text-xs sm:text-sm text-slate-200 leading-relaxed">
+                  <div className="px-5 pb-4 pl-14 text-xs sm:text-sm text-slate-200/95 leading-relaxed">
                     {item.a}
                   </div>
                 </details>
@@ -1313,15 +1364,26 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="pt-3 border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-300">
-            <span>Хочете протестувати кабінет гравця або арбітражу?</span>
-            <Link
-              href="/admin"
-              className="font-bold text-white hover:text-pitch transition-colors inline-flex items-center gap-1"
-            >
-              <span>Відкрити Студію Адміна</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
+          <div className="pt-3.5 border-t border-sky-400/15 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-300">
+            <span className="font-medium text-slate-300">
+              Офіційні документи та таблиця сезону BUNKER FC 1v1:
+            </span>
+            <div className="flex flex-wrap items-center gap-4">
+              <Link
+                href="/rules"
+                className="font-extrabold text-sky-300 hover:text-white transition-colors inline-flex items-center gap-1"
+              >
+                <span>Повний регламент правил</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+              <Link
+                href="/leaderboard"
+                className="font-extrabold text-gold hover:text-amber-200 transition-colors inline-flex items-center gap-1"
+              >
+                <span>Таблиця рейтингу України</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
