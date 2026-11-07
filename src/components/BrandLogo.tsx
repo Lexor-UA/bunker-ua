@@ -26,15 +26,11 @@ export function BrandLogo({ size = 'md', markOnly = false }: BrandLogoProps) {
 
   return (
     <div className="inline-flex items-center gap-3.5 shrink-0 select-none group">
-      {/* Transparent Die-Cut 3D BUNKER FC 1v1 Shield Crest with Subtle Gold Halo */}
+      {/* Transparent Die-Cut 3D BUNKER FC 1v1 Shield Crest */}
       <div className="relative flex items-center justify-center shrink-0">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-1 rounded-full bg-amber-400/20 blur-md group-hover:bg-amber-400/35 transition-colors"
-        />
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/images/bunker-fc-crest.png"
+          src="/images/bunker-fc-crest.png?v=hd2"
           alt="BUNKER FC 1v1 • UKRAINE БЛАГОДІЙНА ПЛАТФОРМА"
           className={`relative z-10 ${crestDims} object-contain drop-shadow-[0_6px_16px_rgba(0,0,0,0.85)] transition-transform duration-300 group-hover:scale-105 shrink-0`}
         />

@@ -85,24 +85,24 @@ export default function HomePage() {
             className="pointer-events-none absolute inset-x-0 top-0 h-[3px] diia-iridescent-bg"
           />
 
-          {/* Subtle Atmospheric 3D Night Stadium Backdrop (Color-Matched to Midnight Royal Blue) */}
+          {/* Subtle Atmospheric 3D Night Stadium Backdrop on Right */}
           <img
             src="/images/hero-arena.jpg"
             alt=""
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-luminosity"
+            className="pointer-events-none absolute -right-4 top-0 w-[82%] h-[86%] object-cover opacity-55 mix-blend-screen saturate-125"
             style={{
               WebkitMaskImage:
-                'linear-gradient(115deg, transparent 15%, rgba(0,0,0,0.65) 60%, rgba(0,0,0,0.85) 100%)',
+                'radial-gradient(ellipse 75% 75% at 72% 38%, #000 22%, rgba(0,0,0,0.5) 58%, transparent 96%)',
               maskImage:
-                'linear-gradient(115deg, transparent 15%, rgba(0,0,0,0.65) 60%, rgba(0,0,0,0.85) 100%)',
+                'radial-gradient(ellipse 75% 75% at 72% 38%, #000 22%, rgba(0,0,0,0.5) 58%, transparent 96%)',
             }}
           />
 
-          {/* Harmonious Royal Blue Ambient Lighting (No Green/Turquoise Cast) */}
+          {/* Stadium Floodlight Beam */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#04091A]/90 via-[#07122E]/75 to-[#040816]/95"
+            className="pointer-events-none absolute -top-24 -left-16 w-96 h-60 rounded-full opacity-30 blur-3xl bg-gradient-to-r from-[#2563EB] via-[#38BDF8] to-[#F5C451]"
           />
 
           {/* Top Bar: Official Season Broadcast Badge + Cross-Play */}
@@ -186,7 +186,7 @@ export default function HomePage() {
             <div className="hidden sm:flex xl:col-span-4 items-center justify-center relative py-2">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/images/bunker-fc-crest.png"
+                src="/images/bunker-fc-crest.png?v=hd2"
                 alt="BUNKER FC 1v1 • UKRAINE БЛАГОДІЙНА ПЛАТФОРМА"
                 className="relative z-10 w-48 xl:w-56 h-auto object-contain drop-shadow-[0_24px_44px_rgba(0,0,0,0.95)] hover:scale-105 transition-transform duration-500"
               />
