@@ -1,11 +1,31 @@
 import React from 'react';
 import type { Club } from '@/lib/types';
 
+const CLUB_NICKNAMES = new Set(['Grizzy', 'Elaizer', 'Tripik']);
+
+export function isClubMemberByNickname(nickname?: string | null): boolean {
+  if (!nickname) return false;
+  return nickname.startsWith('BRS_') || CLUB_NICKNAMES.has(nickname);
+}
+
+export function getSmartInitials(nickname?: string | null): string {
+  if (!nickname) return 'UA';
+  const clean = nickname.replace(/^BRS_/i, '').trim();
+  if (!clean) return 'UA';
+  const uppers = clean.match(/[A-ZА-ЯІЇЄҐ]/g);
+  if (uppers && uppers.length >= 2) {
+    return (uppers[0] + uppers[1]).toUpperCase();
+  }
+  return clean.slice(0, 2).toUpperCase();
+}
+
 interface ClubCrestProps {
   club: Club | null | undefined;
   size?: 'sm' | 'md' | 'lg' | 'xl';
   showName?: boolean;
   showStars?: boolean;
+  nickname?: string | null;
+  seedBadge?: string | null;
 }
 
 export function ClubCrest({
@@ -13,6 +33,8 @@ export function ClubCrest({
   size = 'md',
   showName = false,
   showStars = false,
+  nickname = null,
+  seedBadge = null,
 }: ClubCrestProps) {
   const dims =
     size === 'sm'
@@ -24,13 +46,23 @@ export function ClubCrest({
           : 'w-9 h-9 text-[0.65rem]';
 
   if (!club) {
+    const label = seedBadge || (nickname ? getSmartInitials(nickname) : '1v1');
+    const isClub = isClubMemberByNickname(nickname);
+    const badgeTone = seedBadge
+      ? 'border-emerald-400/40 bg-gradient-to-br from-emerald-500/25 via-[#101522] to-[#0B0E17] text-emerald-300 shadow-[0_0_12px_rgba(52,211,153,0.15)]'
+      : isClub
+        ? 'border-amber-400/40 bg-gradient-to-br from-amber-500/25 via-[#141218] to-[#0B0E17] text-amber-200 shadow-[0_0_12px_rgba(251,191,36,0.14)]'
+        : nickname
+          ? 'border-sky-400/35 bg-gradient-to-br from-sky-500/20 via-[#101522] to-[#0B0E17] text-sky-200'
+          : 'border-white/15 bg-[#10121A]/85 text-slate-300';
+
     return (
       <span className="inline-flex items-center gap-2">
         <span
-          className={`${dims} inline-flex items-center justify-center rounded-xl border border-white/15 bg-[#10121A]/85 font-mono font-extrabold text-slate-300 shrink-0 shadow-inner`}
-          title="Ultimate Team / Власний склад"
+          className={`${dims} inline-flex items-center justify-center rounded-xl border font-mono font-extrabold shrink-0 shadow-inner ${badgeTone}`}
+          title={nickname ? `${nickname} • Ultimate Team 1v1` : 'Ultimate Team / Власний склад'}
         >
-          FUT
+          {label}
         </span>
         {showName && (
           <span className="text-xs text-slate-400">Власний склад</span>

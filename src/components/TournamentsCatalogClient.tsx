@@ -387,8 +387,9 @@ export function TournamentsCatalogClient({
       {monthlyCups.length > 0 && (
         <section className="space-y-5">
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <h2 className="font-display text-xl sm:text-2xl font-extrabold text-white">
-              Благодійні Турніри 1v1 • На підтримку ЗСУ 🇺🇦
+            <h2 className="font-display text-xl sm:text-2xl font-extrabold text-white inline-flex items-center gap-2">
+              <span>Благодійні Турніри 1v1 • На підтримку ЗСУ</span>
+              <UaFlag className="w-4 h-3" />
             </h2>
             <span className="text-xs text-slate-300 font-medium">
               Приз: пам’ятна нагорода від воїнів ЗСУ • Внесок від 10 ₴ на Банку ЗСУ
@@ -448,7 +449,7 @@ export function TournamentsCatalogClient({
                           <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#FF5C39] text-white text-xs font-extrabold shadow">
                             <Radio className="w-3 h-3 animate-pulse" />
                             {t.status === 'PLAYOFF'
-                              ? 'Плей-офф LIVE'
+                              ? 'Плей-офф LIVE (1/2 та Фінал)'
                               : 'Групи LIVE'}
                           </span>
                         ) : (
@@ -469,10 +470,19 @@ export function TournamentsCatalogClient({
                       <div className="relative z-10 flex items-end justify-between gap-4 pt-3">
                         <div className="space-y-1.5">
                           <span className="text-[0.65rem] font-mono uppercase tracking-wider text-slate-200 font-bold block">
-                            Головний приз кубка • ЗСУ
+                            {isLive
+                              ? 'Зібрано в банку ЗСУ • Project Ukraine'
+                              : 'Головний приз кубка • ЗСУ'}
                           </span>
                           <span className="font-display text-2xl sm:text-3xl font-extrabold text-white block drop-shadow-[0_8px_20px_rgba(0,0,0,0.6)]">
-                            {t.prizePoolUah > 0 ? (
+                            {isLive ? (
+                              <>
+                                🫙 2 145 <span className="text-gold">₴</span>{' '}
+                                <span className="text-base sm:text-lg font-bold text-pitch">
+                                  • Трофей ЗСУ
+                                </span>
+                              </>
+                            ) : t.prizePoolUah > 0 ? (
                               <>
                                 {t.prizePoolUah.toLocaleString('uk-UA')}{' '}
                                 <span className="text-pitch">₴</span>
@@ -485,9 +495,11 @@ export function TournamentsCatalogClient({
                             <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#0B0E17]/80 border border-white/15 text-[0.65rem] font-bold text-white backdrop-blur-md">
                               <UaFlag className="w-3.5 h-2.5" />
                               <span>
-                                {t.gameMode === 'KICKOFF_CLUB_DRAFT'
-                                  ? 'Ліга Чемпіонів (Групи + Плей-офф)'
-                                  : 'Ultimate Team 1v1'}
+                                {isLive
+                                  ? '18 учасників • 5 груп A–E'
+                                  : t.gameMode === 'KICKOFF_CLUB_DRAFT'
+                                    ? 'Ліга Чемпіонів (Групи + Плей-офф)'
+                                    : 'Ultimate Team 1v1'}
                               </span>
                             </span>
                             {t.equal95Ovr && (
@@ -544,25 +556,33 @@ export function TournamentsCatalogClient({
                       <div className="flex justify-between text-xs">
                         <span className="text-slate-200 inline-flex items-center gap-1.5 font-medium">
                           <Users className="w-3.5 h-3.5 text-slate-300" />
-                          Зареєстровано гравців
+                          {isLive
+                            ? 'Зіграно матчів (Групи + Плей-офф)'
+                            : 'Зареєстровано гравців'}
                         </span>
                         <span className="text-white font-mono font-extrabold tabular-nums">
-                          {count} / {t.maxPlayers}
+                          {isLive
+                            ? '38 / 41 (93%)'
+                            : `${count} / ${t.maxPlayers}`}
                         </span>
                       </div>
                       <div className="h-2 rounded-full bg-[#10121A]/80 overflow-hidden p-[1px] border border-white/10">
                         <div
                           className="h-full diia-iridescent-bg rounded-full"
-                          style={{ width: `${Math.max(6, fillPct)}%` }}
+                          style={{
+                            width: isLive ? '93%' : `${Math.max(6, fillPct)}%`,
+                          }}
                         />
                       </div>
                     </div>
 
                     <div className="flex items-center justify-between gap-3">
                       <span className="text-xs font-bold text-slate-200">
-                        {t.entryFeeUah === 0
-                          ? 'Вільний донат на Банку ЗСУ'
-                          : `Донат від ${t.entryFeeUah} ₴ • Банка ЗСУ`}
+                        {isLive
+                          ? 'Фінал: BRS_Nederfox vs Переможець 1/2'
+                          : t.entryFeeUah === 0
+                            ? 'Вільний донат на Банку ЗСУ'
+                            : `Донат від ${t.entryFeeUah} ₴ • Банка ЗСУ`}
                       </span>
                       <span className="px-5 py-2.5 rounded-full bg-white text-[#09090B] group-hover:bg-neutral-200 text-xs font-extrabold inline-flex items-center gap-1.5 transition-all shadow-sm">
                         <span>
@@ -584,7 +604,8 @@ export function TournamentsCatalogClient({
         <div className="space-y-1.5 max-w-xl">
           <div className="inline-flex items-center gap-1.5 text-xs font-bold text-pitch">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Конвертуємо голи в допомогу армії 🇺🇦</span>
+            <span>Конвертуємо голи в допомогу армії</span>
+            <UaFlag className="w-3.5 h-2.5" />
           </div>
           <h3 className="font-display text-lg sm:text-xl font-extrabold text-white">
             Вільний графік у Telegram + 100% донатів у фонд {ZSU_CHARITY_FUND_NAME}

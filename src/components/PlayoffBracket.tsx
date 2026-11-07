@@ -3,7 +3,7 @@
 import React from 'react';
 import { AlertTriangle, CheckCircle2, Crown, ShieldAlert, Swords, Trophy } from 'lucide-react';
 import type { Match, PlayoffRound } from '@/lib/types';
-import { ClubCrest } from './ClubCrest';
+import { ClubCrest, isClubMemberByNickname } from './ClubCrest';
 
 interface PlayoffBracketProps {
   matches: Match[];
@@ -19,10 +19,16 @@ const ROUND_TITLES: Record<PlayoffRound, string> = {
   THIRD: 'Матч за 3-тє місце',
 };
 
-const CLUB_NICKNAMES = new Set(['Grizzy', 'Elaizer', 'Tripik']);
-function isClubMember(nickname: string): boolean {
-  return nickname.startsWith('BRS_') || CLUB_NICKNAMES.has(nickname);
-}
+const PLAYER_GROUP_SEEDS: Record<string, string> = {
+  BRS_Nederfox: 'A1',
+  BRS_Vestern: 'B1',
+  BRS_Hasfer23: 'C1',
+  BRS_Lunnek1: 'D1',
+  BRS_YoungChamp18: 'E1',
+  Grizzy: 'A2',
+  Elaizer: 'C2',
+  BRS_PELTIK88: 'E2',
+};
 
 function BracketMatchCard({
   match,
@@ -37,13 +43,19 @@ function BracketMatchCard({
 }) {
   const p1Won = Boolean(match.winnerId && match.winnerId === match.player1Id);
   const p2Won = Boolean(match.winnerId && match.winnerId === match.player2Id);
+  const p1Seed = match.player1
+    ? PLAYER_GROUP_SEEDS[match.player1.nickname] ?? null
+    : null;
+  const p2Seed = match.player2
+    ? PLAYER_GROUP_SEEDS[match.player2.nickname] ?? null
+    : null;
 
   return (
     <button
       type="button"
       onClick={() => onSelect(match)}
       className={`w-full text-left rounded-[22px] transition-all group overflow-hidden ${isFinal
-          ? 'mono-iron-surface hover:border-amber-300/70'
+          ? 'mono-iron-surface hover:border-amber-300/70 shadow-[0_14px_34px_rgba(251,191,36,0.12)]'
           : isThird
             ? 'glass-panel hover:border-amber-400/40'
             : match.status === 'DISPUTED'
@@ -81,8 +93,8 @@ function BracketMatchCard({
           </span>
         )}
         {match.status === 'SCHEDULED' && (
-          <span className="text-slate-400 group-hover:text-white transition-colors font-sans font-bold">
-            Відкрити →
+          <span className="text-pitch group-hover:text-white transition-colors font-sans font-bold">
+            LIVE • Відкрити →
           </span>
         )}
       </div>
@@ -93,7 +105,12 @@ function BracketMatchCard({
           }`}
       >
         <div className="flex items-center gap-2.5 min-w-0">
-          <ClubCrest club={match.player1?.club} size="sm" />
+          <ClubCrest
+            club={match.player1?.club}
+            nickname={match.player1?.nickname}
+            seedBadge={p1Seed}
+            size="sm"
+          />
           <div className="min-w-0">
             <div className="flex items-center gap-1.5 min-w-0">
               <span
@@ -108,18 +125,21 @@ function BracketMatchCard({
               </span>
               {match.player1 && (
                 <span
-                  className={`px-1.5 py-0.5 rounded-md text-[0.55rem] font-extrabold uppercase tracking-wider shrink-0 border ${isClubMember(match.player1.nickname)
+                  className={`px-1.5 py-0.5 rounded-md text-[0.55rem] font-extrabold uppercase tracking-wider shrink-0 border ${isClubMemberByNickname(match.player1.nickname)
                       ? 'bg-amber-400/15 text-amber-300 border-amber-400/35'
                       : 'bg-cyan-400/15 text-cyan-300 border-cyan-400/35'
                     }`}
                 >
-                  {isClubMember(match.player1.nickname) ? 'КЛУБ' : 'ФАНАТ'}
+                  {isClubMemberByNickname(match.player1.nickname) ? 'КЛУБ' : 'ФАНАТ'}
                 </span>
               )}
             </div>
             {match.player1 && (
               <div className="text-[0.65rem] text-slate-400 truncate">
-                {match.player1.club?.name ?? match.player1.city}
+                {match.player1.club?.name ??
+                  (p1Seed
+                    ? `Посів ${p1Seed} • ${match.player1.city}`
+                    : match.player1.city)}
               </div>
             )}
           </div>
@@ -147,7 +167,12 @@ function BracketMatchCard({
           }`}
       >
         <div className="flex items-center gap-2.5 min-w-0">
-          <ClubCrest club={match.player2?.club} size="sm" />
+          <ClubCrest
+            club={match.player2?.club}
+            nickname={match.player2?.nickname}
+            seedBadge={p2Seed}
+            size="sm"
+          />
           <div className="min-w-0">
             <div className="flex items-center gap-1.5 min-w-0">
               <span
@@ -162,18 +187,21 @@ function BracketMatchCard({
               </span>
               {match.player2 && (
                 <span
-                  className={`px-1.5 py-0.5 rounded-md text-[0.55rem] font-extrabold uppercase tracking-wider shrink-0 border ${isClubMember(match.player2.nickname)
+                  className={`px-1.5 py-0.5 rounded-md text-[0.55rem] font-extrabold uppercase tracking-wider shrink-0 border ${isClubMemberByNickname(match.player2.nickname)
                       ? 'bg-amber-400/15 text-amber-300 border-amber-400/35'
                       : 'bg-cyan-400/15 text-cyan-300 border-cyan-400/35'
                     }`}
                 >
-                  {isClubMember(match.player2.nickname) ? 'КЛУБ' : 'ФАНАТ'}
+                  {isClubMemberByNickname(match.player2.nickname) ? 'КЛУБ' : 'ФАНАТ'}
                 </span>
               )}
             </div>
             {match.player2 && (
               <div className="text-[0.65rem] text-slate-400 truncate">
-                {match.player2.club?.name ?? match.player2.city}
+                {match.player2.club?.name ??
+                  (p2Seed
+                    ? `Посів ${p2Seed} • ${match.player2.city}`
+                    : match.player2.city)}
               </div>
             )}
           </div>

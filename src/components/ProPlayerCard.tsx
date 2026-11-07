@@ -1,7 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
-import { ArrowUpRight, CheckCircle2, QrCode, Trophy } from 'lucide-react';
+import { ArrowUpRight, CheckCircle2, Crown, QrCode, Trophy } from 'lucide-react';
 import type { User } from '@/lib/types';
+import { getSmartInitials, isClubMemberByNickname } from './ClubCrest';
 import { HoloCard } from './HoloCard';
 import { UaFlag } from './UaFlag';
 
@@ -24,6 +25,8 @@ export function ProPlayerCard({ player, rank }: ProPlayerCardProps) {
     96,
     Math.max(85, 85 + Math.round(player.seasonPoints / 52))
   );
+  const isClub = isClubMemberByNickname(player.nickname);
+  const smartInitials = getSmartInitials(player.nickname);
 
   const customAvatarUrl =
     player.avatarUrl &&
@@ -61,12 +64,19 @@ export function ProPlayerCard({ player, rank }: ProPlayerCardProps) {
       <div className="flex items-center justify-between gap-2 relative z-10">
         <div className="flex items-center gap-2">
           <span
-            className={`px-3 py-1 rounded-full text-[0.68rem] font-extrabold tracking-tight shadow-sm ${rankBadgeClass}`}
+            className={`px-3 py-1 rounded-full text-[0.68rem] font-extrabold tracking-tight shadow-sm inline-flex items-center gap-1 ${rankBadgeClass}`}
           >
-            #{rank} в Україні
+            {rank === 1 && <Crown className="w-3 h-3" />}
+            <span>#{rank} в Україні</span>
           </span>
-          <span className="text-xs font-semibold text-slate-300">
-            PRO Картка
+          <span
+            className={`px-2 py-0.5 rounded-full text-[0.62rem] font-extrabold uppercase tracking-wider border ${
+              isClub
+                ? 'bg-amber-400/15 text-amber-300 border-amber-400/35'
+                : 'bg-cyan-400/15 text-cyan-300 border-cyan-400/35'
+            }`}
+          >
+            {isClub ? 'КЛУБ' : 'ФАНАТ'}
           </span>
         </div>
 
@@ -107,14 +117,14 @@ export function ProPlayerCard({ player, rank }: ProPlayerCardProps) {
           <div
             className="relative w-24 h-28 sm:w-28 sm:h-32 rounded-[22px] overflow-hidden border border-white/25 shrink-0 shadow-2xl flex flex-col items-center justify-center"
             style={{
-              background: `radial-gradient(circle at 30% 25%, ${player.avatarColor}44, #0B0E17 80%)`,
+              background: `radial-gradient(circle at 30% 25%, ${player.avatarColor}55, #0B0E17 82%)`,
             }}
           >
             <div
-              className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center font-display font-extrabold text-lg sm:text-xl text-[#09090B] shadow-lg"
+              className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center font-display font-extrabold text-lg sm:text-xl text-[#09090B] shadow-lg ring-2 ring-white/25"
               style={{ backgroundColor: player.avatarColor }}
             >
-              {player.nickname.slice(0, 2).toUpperCase()}
+              {smartInitials}
             </div>
             <span className="mt-2 px-2.5 py-0.5 rounded-full bg-black/65 border border-white/15 text-slate-200 text-[0.6rem] font-extrabold tabular-nums">
               {actualPlayed > 0 ? `${proOvr} OVR` : player.platform}

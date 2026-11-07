@@ -6,6 +6,7 @@ import {
   EA_OFFICIAL_DISCLAIMER_UA,
 } from '@/lib/constants';
 import { BrandLogo } from './BrandLogo';
+import { UaFlag } from './UaFlag';
 
 export function Footer() {
   return (
@@ -19,7 +20,8 @@ export function Footer() {
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
               Всеукраїнська платформа благодійних турнірів 1v1 з EA SPORTS FC на
               підтримку ЗСУ (фонд Project Ukraine). Конвертуємо голи в допомогу
-              армії! 🇺🇦
+              армії!{' '}
+              <UaFlag className="w-3.5 h-2.5 inline-block align-middle ml-1" />
             </p>
           </div>
 
