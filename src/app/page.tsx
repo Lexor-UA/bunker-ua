@@ -175,53 +175,24 @@ export default function HomePage() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-4 py-3.5 rounded-full bg-[#060E24]/90 hover:bg-amber-400/15 border border-amber-400/35 text-xs sm:text-sm font-extrabold text-gold backdrop-blur-xl transition-all"
                 >
-                  <span>🫙 Банка ЗСУ</span>
+                  <UaFlag className="w-3.5 h-2.5 shrink-0" />
+                  <span>Банка ЗСУ</span>
                   <ArrowUpRight className="w-4 h-4" />
                 </a>
               </div>
             </div>
 
-            {/* Official 3D BUNKER FC 1v1 Shield Emblem on Champions Halo Pedestal */}
+            {/* Official 3D BUNKER FC 1v1 Shield Emblem */}
             <div className="hidden sm:flex xl:col-span-4 items-center justify-center relative py-2">
-              {/* Soft Dark-Navy + Gold Radial Aura so stadium background never clashes with the crest */}
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute w-56 h-56 rounded-full"
-                style={{
-                  background:
-                    'radial-gradient(circle, rgba(4,9,26,0.82) 0%, rgba(245,196,81,0.18) 52%, rgba(37,99,235,0.12) 72%, transparent 100%)',
-                }}
+                className="pointer-events-none absolute w-48 h-48 rounded-full bg-amber-400/10 blur-3xl"
               />
-              {/* Subtle Concentric Champions Ring */}
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 240 240"
-                className="pointer-events-none absolute w-56 h-56 xl:w-60 xl:h-60 opacity-45"
-              >
-                <circle
-                  cx="120"
-                  cy="120"
-                  r="106"
-                  fill="none"
-                  stroke="#F5C451"
-                  strokeWidth="1"
-                  strokeDasharray="6 6"
-                />
-                <circle
-                  cx="120"
-                  cy="120"
-                  r="92"
-                  fill="none"
-                  stroke="#38BDF8"
-                  strokeWidth="0.75"
-                  strokeOpacity="0.6"
-                />
-              </svg>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/bunker-fc-crest.png"
                 alt="BUNKER FC 1v1 • UKRAINE БЛАГОДІЙНА ПЛАТФОРМА"
-                className="relative z-10 w-48 xl:w-56 h-auto object-contain drop-shadow-[0_22px_40px_rgba(0,0,0,0.95)] hover:scale-105 transition-transform duration-500"
+                className="relative z-10 w-48 xl:w-56 h-auto object-contain drop-shadow-[0_24px_44px_rgba(0,0,0,0.95)] hover:scale-105 transition-transform duration-500"
               />
             </div>
           </div>
