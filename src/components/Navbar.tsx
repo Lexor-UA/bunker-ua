@@ -19,6 +19,7 @@ import {
 } from '@/lib/constants';
 import { BrandLogo } from './BrandLogo';
 import { ModalDialog } from './ModalDialog';
+import { UaFlag } from './UaFlag';
 
 interface NavbarProps {
   currentUser: User | null;
@@ -207,9 +208,10 @@ export function Navbar({
               href={ZSU_MONOBANK_JAR_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-3.5 py-1.5 rounded-full bg-emerald-400/10 hover:bg-emerald-400/20 border border-emerald-400/30 text-xs font-extrabold text-pitch inline-flex items-center gap-1.5 whitespace-nowrap transition-all"
+              className="px-3.5 py-1.5 rounded-full bg-amber-400/10 hover:bg-amber-400/20 border border-amber-400/30 text-xs font-extrabold text-gold inline-flex items-center gap-1.5 whitespace-nowrap transition-all"
             >
-              <span>🫙 Банка ЗСУ</span>
+              <UaFlag className="w-3.5 h-2.5 shrink-0" />
+              <span>Банка ЗСУ</span>
               <ExternalLink className="w-3 h-3" />
             </a>
 
@@ -326,7 +328,7 @@ export function Navbar({
                   onClick={() => setMobileOpen(false)}
                   className="w-full px-4 py-2.5 rounded-full text-xs font-extrabold bg-emerald-400/20 text-pitch border border-emerald-400/35 text-center"
                 >
-                  ⚔️ Мій матч vs {myOpponent.nickname} →
+                  Мій матч vs {myOpponent.nickname} →
                 </Link>
               )}
               {!currentUser ? (

@@ -10,30 +10,14 @@ import {
   Swords,
   Trophy,
 } from 'lucide-react';
-import type { Match, PlayoffRound } from '@/lib/types';
-import { ClubCrest, isClubMemberByNickname } from './ClubCrest';
+import type { Match } from '@/lib/types';
+import { ClubCrest } from './ClubCrest';
 
 interface PlayoffBracketProps {
   matches: Match[];
   onSelectMatch: (match: Match) => void;
   prizeCurrencyLabel?: string;
 }
-
-const ROUND_TITLES: Record<PlayoffRound, string> = {
-  R16: '1/8 фіналу',
-  QF: '1/4 фіналу',
-  SF: '1/2 фіналу • Півфінали',
-  FINAL: 'Гранд-Фінал',
-  THIRD: 'Матч за 3-тє місце',
-};
-
-const ROUND_SUBTITLES: Record<PlayoffRound, string> = {
-  R16: '16 КРАЩИХ',
-  QF: '8 КРАЩИХ ІЗ ГРУП A–E',
-  SF: '4 ПІВФІНАЛІСТИ',
-  FINAL: 'ЗА ГОЛОВНИЙ ТРОФЕЙ',
-  THIRD: 'БРОНЗОВИЙ ФІНАЛ',
-};
 
 const PLAYER_GROUP_SEEDS: Record<string, string> = {
   BRS_Nederfox: 'A1',
@@ -70,95 +54,77 @@ function BracketMatchCard({
   const isLivePlayable = match.status === 'SCHEDULED' && isBothAssigned;
 
   const tbaTitle = isFinal
-    ? 'Переможець Півфіналу #2'
+    ? 'Переможець 1/2'
     : isThird
-      ? 'Суперник із Півфіналу #2'
-      : 'Очікується суперник';
-  const tbaSubtitle =
-    isFinal || isThird
-      ? 'BRS_YoungChamp18 [E1] / Elaizer [C2]'
-      : 'За результатами попереднього раунду';
+      ? 'Суперник із 1/2'
+      : 'Очікується';
 
   return (
     <button
       type="button"
       onClick={() => onSelect(match)}
-      className={`w-full text-left rounded-[22px] transition-all duration-200 group overflow-hidden relative ${
+      className={`w-full text-left rounded-[20px] transition-all duration-200 group overflow-hidden relative cursor-pointer ${
         isFinal
-          ? 'mono-iron-surface border border-amber-400/50 hover:border-amber-300/90 shadow-[0_16px_40px_rgba(245,196,81,0.16)]'
-          : isThird
-            ? 'bg-[#050C22]/95 border border-amber-400/30 hover:border-amber-300/65 shadow-[0_12px_30px_rgba(2,6,23,0.75)]'
-            : match.status === 'DISPUTED'
-              ? 'glass-panel border-rose-500/50 hover:border-rose-400 shadow-[0_0_24px_rgba(244,63,94,0.18)]'
-              : isLivePlayable
-                ? 'bg-[#071436]/95 border border-sky-400/55 hover:border-gold/75 shadow-[0_14px_34px_rgba(37,99,235,0.28)]'
-                : 'bg-[#050C20]/95 border border-sky-400/20 hover:border-sky-400/50 shadow-[0_12px_28px_rgba(2,6,23,0.7)]'
+          ? 'bg-gradient-to-br from-[#141D3B] via-[#0B1228] to-[#1F170D] border border-amber-400/45 hover:border-amber-300 shadow-[0_14px_34px_rgba(0,0,0,0.55)]'
+          : isLivePlayable
+            ? 'bg-[#071330] border border-sky-400/45 hover:border-sky-300 shadow-[0_12px_28px_rgba(37,99,235,0.2)]'
+            : 'bg-[#050B1C]/90 border border-white/[0.09] hover:border-white/25'
       }`}
     >
-      {/* Top Broadcast Meta Bar */}
+      {/* Compact Match Header */}
       <div
-        className={`flex items-center justify-between px-3.5 py-2 border-b text-[0.65rem] font-mono ${
+        className={`flex items-center justify-between px-3.5 py-2 border-b text-[0.65rem] ${
           isFinal
-            ? 'bg-gradient-to-r from-amber-500/20 via-[#080E22]/90 to-[#080E22]/90 border-amber-400/30'
+            ? 'bg-amber-400/10 border-amber-400/25'
             : isLivePlayable
-              ? 'bg-gradient-to-r from-sky-500/25 via-[#07122E] to-[#07122E] border-sky-400/30'
-              : 'bg-[#040918]/80 border-white/[0.08]'
+              ? 'bg-sky-400/10 border-sky-400/25'
+              : 'bg-white/[0.02] border-white/[0.06]'
         }`}
       >
-        <span className="flex items-center gap-1.5 font-bold">
+        <span className="font-bold text-slate-300 flex items-center gap-1.5">
           {isFinal ? (
-            <span className="text-gold flex items-center gap-1.5 font-extrabold tracking-wider uppercase">
+            <span className="text-gold font-extrabold inline-flex items-center gap-1">
               <Crown className="w-3.5 h-3.5" />
-              <span>ГРАНД-ФІНАЛ • ЗА ТРОФЕЙ ЗСУ</span>
+              <span>Гранд-Фінал</span>
             </span>
           ) : isThird ? (
-            <span className="text-amber-200 font-extrabold tracking-wider uppercase">
-              🥉 МАТЧ ЗА 3 МІСЦЕ • +135 PTS
-            </span>
+            <span className="text-amber-200 font-bold">Матч за 3 місце</span>
           ) : (
-            <span className="text-sky-200/90 font-extrabold">
-              {match.playoffRound === 'QF'
-                ? `1/4 ФІНАЛУ • МАТЧ #${match.matchOrder}`
-                : `ПІВФІНАЛ #${match.matchOrder}`}
-            </span>
+            <span>Матч #{match.matchOrder}</span>
           )}
         </span>
 
         {match.status === 'COMPLETED' && (
-          <span className="px-2 py-0.5 rounded-full bg-emerald-400/15 border border-emerald-400/35 text-pitch inline-flex items-center gap-1 font-extrabold text-[0.6rem]">
+          <span className="text-emerald-400 inline-flex items-center gap-1 font-mono font-bold text-[0.62rem]">
             <CheckCircle2 className="w-3 h-3" />
             <span>FT</span>
           </span>
         )}
         {match.status === 'DISPUTED' && (
-          <span className="px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/40 inline-flex items-center gap-1 animate-pulse">
-            <ShieldAlert className="w-3 h-3" /> СПІР
+          <span className="text-rose-300 inline-flex items-center gap-1 font-bold text-[0.62rem]">
+            <ShieldAlert className="w-3 h-3" /> Спір
           </span>
         )}
         {match.status === 'PENDING_CONFIRM' && (
-          <span className="px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 inline-flex items-center gap-1">
-            <AlertTriangle className="w-3 h-3" /> ПЕРЕВІРКА
+          <span className="text-amber-300 inline-flex items-center gap-1 font-bold text-[0.62rem]">
+            <AlertTriangle className="w-3 h-3" /> Перевірка
           </span>
         )}
         {match.status === 'SCHEDULED' &&
           (isLivePlayable ? (
-            <span className="px-2.5 py-0.5 rounded-full bg-[#FF5C39] text-white inline-flex items-center gap-1 font-sans font-extrabold text-[0.6rem] uppercase tracking-wider shadow-[0_0_12px_rgba(255,92,57,0.5)]">
+            <span className="px-2 py-0.5 rounded-full bg-[#FF5C39] text-white inline-flex items-center gap-1 font-extrabold text-[0.58rem] uppercase">
               <Radio className="w-2.5 h-2.5 animate-pulse" />
-              <span>LIVE • ВІДКРИТИ</span>
+              <span>LIVE</span>
             </span>
           ) : (
-            <span className="text-gold/90 group-hover:text-gold transition-colors font-sans font-extrabold text-[0.64rem]">
-              Очікує 1/2 →
-            </span>
+            <span className="text-slate-400 text-[0.62rem]">Очікується</span>
           ))}
       </div>
 
       {/* Player 1 Row */}
       <div
-        className={`flex items-center justify-between gap-2 px-3.5 py-2.5 border-b border-white/[0.06] ${
-          p1Won
-            ? 'bg-gradient-to-r from-emerald-500/[0.12] via-sky-500/[0.06] to-transparent'
-            : ''
+        className={`flex items-center justify-between gap-2 px-3.5 py-2.5 border-b border-white/[0.05] ${
+          p1Won ? 'bg-white/[0.04]' : ''
         }`}
       >
         <div className="flex items-center gap-2.5 min-w-0">
@@ -168,43 +134,19 @@ function BracketMatchCard({
             seedBadge={p1Seed}
             size="sm"
           />
-          <div className="min-w-0">
-            <div className="flex items-center gap-1.5 min-w-0">
-              <span
-                className={`text-xs font-extrabold truncate ${
-                  p1Won
-                    ? 'text-white'
-                    : match.player1
-                      ? 'text-slate-200'
-                      : 'text-slate-400'
-                }`}
-              >
-                {match.player1 ? match.player1.nickname : tbaTitle}
-              </span>
-              {match.player1 && (
-                <span
-                  className={`px-1.5 py-0.5 rounded text-[0.52rem] font-extrabold uppercase tracking-wider shrink-0 border ${
-                    isClubMemberByNickname(match.player1.nickname)
-                      ? 'bg-amber-400/15 text-amber-300 border-amber-400/35'
-                      : 'bg-cyan-400/15 text-cyan-300 border-cyan-400/35'
-                  }`}
-                >
-                  {isClubMemberByNickname(match.player1.nickname)
-                    ? 'КЛУБ'
-                    : 'ФАНАТ'}
-                </span>
-              )}
-            </div>
-            <div className="text-[0.64rem] text-slate-400 truncate">
-              {match.player1
-                ? (match.player1.club?.name ??
-                  (p1Seed
-                    ? `Посів ${p1Seed} • ${match.player1.city}`
-                    : match.player1.city))
-                : tbaSubtitle}
-            </div>
-          </div>
+          <span
+            className={`text-xs font-bold truncate ${
+              p1Won
+                ? 'text-white'
+                : match.player1
+                  ? 'text-slate-200'
+                  : 'text-slate-500'
+            }`}
+          >
+            {match.player1 ? match.player1.nickname : tbaTitle}
+          </span>
         </div>
+
         <div className="flex items-center gap-1.5 shrink-0 font-mono tabular-nums">
           {match.penalties1 !== null && (
             <span className="text-[0.65rem] text-gold font-bold">
@@ -212,10 +154,10 @@ function BracketMatchCard({
             </span>
           )}
           <span
-            className={`w-7 h-7 rounded-xl flex items-center justify-center text-xs font-extrabold ${
+            className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs font-extrabold ${
               p1Won
-                ? 'bg-gradient-to-b from-[#FDE68A] to-[#F5C451] text-[#040814] shadow-[0_2px_10px_rgba(245,196,81,0.35)]'
-                : 'bg-[#040814]/85 text-slate-200 border border-sky-400/20'
+                ? 'bg-gold text-[#040814]'
+                : 'bg-[#040814]/80 text-slate-300 border border-white/10'
             }`}
           >
             {match.score1 !== null ? match.score1 : '—'}
@@ -226,9 +168,7 @@ function BracketMatchCard({
       {/* Player 2 Row */}
       <div
         className={`flex items-center justify-between gap-2 px-3.5 py-2.5 ${
-          p2Won
-            ? 'bg-gradient-to-r from-emerald-500/[0.12] via-sky-500/[0.06] to-transparent'
-            : ''
+          p2Won ? 'bg-white/[0.04]' : ''
         }`}
       >
         <div className="flex items-center gap-2.5 min-w-0">
@@ -238,43 +178,19 @@ function BracketMatchCard({
             seedBadge={p2Seed}
             size="sm"
           />
-          <div className="min-w-0">
-            <div className="flex items-center gap-1.5 min-w-0">
-              <span
-                className={`text-xs font-extrabold truncate ${
-                  p2Won
-                    ? 'text-white'
-                    : match.player2
-                      ? 'text-slate-200'
-                      : 'text-sky-200/90'
-                }`}
-              >
-                {match.player2 ? match.player2.nickname : tbaTitle}
-              </span>
-              {match.player2 && (
-                <span
-                  className={`px-1.5 py-0.5 rounded text-[0.52rem] font-extrabold uppercase tracking-wider shrink-0 border ${
-                    isClubMemberByNickname(match.player2.nickname)
-                      ? 'bg-amber-400/15 text-amber-300 border-amber-400/35'
-                      : 'bg-cyan-400/15 text-cyan-300 border-cyan-400/35'
-                  }`}
-                >
-                  {isClubMemberByNickname(match.player2.nickname)
-                    ? 'КЛУБ'
-                    : 'ФАНАТ'}
-                </span>
-              )}
-            </div>
-            <div className="text-[0.64rem] text-slate-400 truncate">
-              {match.player2
-                ? (match.player2.club?.name ??
-                  (p2Seed
-                    ? `Посів ${p2Seed} • ${match.player2.city}`
-                    : match.player2.city))
-                : tbaSubtitle}
-            </div>
-          </div>
+          <span
+            className={`text-xs font-bold truncate ${
+              p2Won
+                ? 'text-white'
+                : match.player2
+                  ? 'text-slate-200'
+                  : 'text-slate-500'
+            }`}
+          >
+            {match.player2 ? match.player2.nickname : tbaTitle}
+          </span>
         </div>
+
         <div className="flex items-center gap-1.5 shrink-0 font-mono tabular-nums">
           {match.penalties2 !== null && (
             <span className="text-[0.65rem] text-gold font-bold">
@@ -282,10 +198,10 @@ function BracketMatchCard({
             </span>
           )}
           <span
-            className={`w-7 h-7 rounded-xl flex items-center justify-center text-xs font-extrabold ${
+            className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs font-extrabold ${
               p2Won
-                ? 'bg-gradient-to-b from-[#FDE68A] to-[#F5C451] text-[#040814] shadow-[0_2px_10px_rgba(245,196,81,0.35)]'
-                : 'bg-[#040814]/85 text-slate-200 border border-sky-400/20'
+                ? 'bg-gold text-[#040814]'
+                : 'bg-[#040814]/80 text-slate-300 border border-white/10'
             }`}
           >
             {match.score2 !== null ? match.score2 : '—'}
@@ -304,107 +220,82 @@ export function PlayoffBracket({
 
   if (playoffMatches.length === 0) {
     return (
-      <div className="glass-panel rounded-[30px] p-10 text-center space-y-3">
-        <div className="w-14 h-14 rounded-2xl bg-[#060E24] border border-sky-400/30 flex items-center justify-center mx-auto">
-          <Swords className="w-7 h-7 text-gold" />
+      <div className="glass-panel rounded-[28px] p-10 text-center space-y-3">
+        <div className="w-12 h-12 rounded-2xl bg-[#060E24] border border-white/15 flex items-center justify-center mx-auto">
+          <Swords className="w-6 h-6 text-gold" />
         </div>
         <h3 className="font-display text-lg font-bold text-white">
-          Сітка Плей-офф формується після завершення Групового етапу
+          Сітка Плей-офф формується після групового етапу
         </h3>
-        <p className="text-sm text-slate-300 max-w-lg mx-auto">
-          Переможці груп та найкращі другі місця виходять у сітку Single
-          Elimination з крос-посівом за системою Ліги Чемпіонів.
-        </p>
       </div>
     );
   }
 
-  const r16 = playoffMatches.filter((m) => m.playoffRound === 'R16');
-  const qf = playoffMatches.filter((m) => m.playoffRound === 'QF');
-  const sf = playoffMatches.filter((m) => m.playoffRound === 'SF');
+  const qf = playoffMatches
+    .filter((m) => m.playoffRound === 'QF')
+    .sort((a, b) => a.matchOrder - b.matchOrder);
+  const sf = playoffMatches
+    .filter((m) => m.playoffRound === 'SF')
+    .sort((a, b) => a.matchOrder - b.matchOrder);
   const finalMatch = playoffMatches.find((m) => m.playoffRound === 'FINAL');
   const thirdMatch = playoffMatches.find((m) => m.playoffRound === 'THIRD');
 
-  const activeColumns: Array<{
-    round: PlayoffRound;
-    items: Match[];
-  }> = [];
-  if (r16.length > 0) activeColumns.push({ round: 'R16', items: r16 });
-  if (qf.length > 0) activeColumns.push({ round: 'QF', items: qf });
-  if (sf.length > 0) activeColumns.push({ round: 'SF', items: sf });
-
   return (
-    <div className="space-y-4">
-      <div className="overflow-x-auto pb-3">
-        <div className="min-w-[58rem] grid grid-flow-col auto-cols-fr gap-8 items-stretch">
-          {activeColumns.map((col) => (
-            <div key={col.round} className="flex flex-col">
-              {/* Broadcast Stage Column Header */}
-              <div className="mb-4 px-4 py-2.5 rounded-2xl bg-gradient-to-r from-[#071436] via-[#0A1D4D] to-[#071436] border border-sky-400/35 flex items-center justify-between gap-2 shadow-[0_8px_20px_rgba(2,6,23,0.6)]">
-                <span className="font-display text-xs font-extrabold uppercase tracking-wider text-white">
-                  {ROUND_TITLES[col.round]}
-                </span>
-                <span className="px-2 py-0.5 rounded-md bg-sky-400/15 border border-sky-400/30 font-mono text-[0.6rem] font-extrabold text-sky-200">
-                  {ROUND_SUBTITLES[col.round]}
-                </span>
-              </div>
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+      {/* Column 1: Quarterfinals */}
+      <div className="flex flex-col justify-between gap-4">
+        <div className="px-4 py-2.5 rounded-xl bg-white/[0.03] border border-white/[0.08] text-center">
+          <span className="font-display text-xs font-extrabold uppercase tracking-wider text-slate-200">
+            1/4 Фіналу
+          </span>
+        </div>
 
-              <div className="flex-1 flex flex-col justify-around gap-5">
-                {col.items.map((m, idx) => (
-                  <div key={m.id} className="relative">
-                    <BracketMatchCard match={m} onSelect={onSelectMatch} />
-                    {/* Crisp Royal Blue & Gold Broadcast Connector Line */}
-                    <span
-                      aria-hidden="true"
-                      className="hidden sm:block pointer-events-none absolute top-1/2 -right-8 w-8 h-[2px] bg-gradient-to-r from-[#38BDF8]/75 via-[#F5C451]/75 to-[#38BDF8]/40"
-                    />
-                    {/* Vertical Bracket Arm Connector for Paired Matches */}
-                    {col.items.length >= 2 && idx % 2 === 0 && (
-                      <span
-                        aria-hidden="true"
-                        className="hidden sm:block pointer-events-none absolute top-1/2 -right-4 w-[2px] h-[calc(100%+1.25rem)] bg-gradient-to-b from-[#38BDF8]/65 via-[#F5C451]/80 to-[#38BDF8]/65"
-                      />
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
+        <div className="flex-1 flex flex-col justify-around gap-3.5">
+          {qf.map((m) => (
+            <BracketMatchCard key={m.id} match={m} onSelect={onSelectMatch} />
           ))}
+        </div>
+      </div>
 
-          {/* Фінальна колонка (Гранд-Фінал + Матч за 3 місце) */}
-          <div className="flex flex-col">
-            <div className="mb-4 px-4 py-2.5 rounded-2xl bg-gradient-to-r from-amber-500/25 via-amber-400/15 to-amber-500/25 border border-amber-400/50 flex items-center justify-between gap-2 shadow-[0_8px_24px_rgba(245,196,81,0.15)]">
-              <span className="font-display text-xs font-extrabold uppercase tracking-wider text-gold flex items-center gap-1.5">
-                <Trophy className="w-3.5 h-3.5" />
-                <span>Вирішальні матчі</span>
-              </span>
-              <span className="px-2 py-0.5 rounded-md bg-amber-400/20 border border-amber-400/40 font-mono text-[0.6rem] font-extrabold text-amber-100">
-                ФІНАЛ ТА 3 МІСЦЕ
-              </span>
-            </div>
+      {/* Column 2: Semifinals */}
+      <div className="flex flex-col justify-between gap-4">
+        <div className="px-4 py-2.5 rounded-xl bg-white/[0.03] border border-white/[0.08] text-center">
+          <span className="font-display text-xs font-extrabold uppercase tracking-wider text-sky-200">
+            1/2 Фіналу • Півфінали
+          </span>
+        </div>
 
-            <div className="flex-1 flex flex-col justify-around gap-5">
-              {finalMatch && (
-                <div>
-                  <BracketMatchCard
-                    match={finalMatch}
-                    onSelect={onSelectMatch}
-                    isFinal
-                  />
-                </div>
-              )}
+        <div className="flex-1 flex flex-col justify-around gap-6 py-2">
+          {sf.map((m) => (
+            <BracketMatchCard key={m.id} match={m} onSelect={onSelectMatch} />
+          ))}
+        </div>
+      </div>
 
-              {thirdMatch && (
-                <div>
-                  <BracketMatchCard
-                    match={thirdMatch}
-                    onSelect={onSelectMatch}
-                    isThird
-                  />
-                </div>
-              )}
-            </div>
-          </div>
+      {/* Column 3: Grand Final & 3rd Place Match */}
+      <div className="flex flex-col justify-between gap-4">
+        <div className="px-4 py-2.5 rounded-xl bg-amber-400/10 border border-amber-400/30 text-center">
+          <span className="font-display text-xs font-extrabold uppercase tracking-wider text-gold inline-flex items-center justify-center gap-1.5">
+            <Trophy className="w-3.5 h-3.5" />
+            <span>Фінальні матчі</span>
+          </span>
+        </div>
+
+        <div className="flex-1 flex flex-col justify-center gap-6 py-2">
+          {finalMatch && (
+            <BracketMatchCard
+              match={finalMatch}
+              onSelect={onSelectMatch}
+              isFinal
+            />
+          )}
+          {thirdMatch && (
+            <BracketMatchCard
+              match={thirdMatch}
+              onSelect={onSelectMatch}
+              isThird
+            />
+          )}
         </div>
       </div>
     </div>
