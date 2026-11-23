@@ -4,6 +4,7 @@ import {
   ArrowRight,
   ArrowUpRight,
   ChevronDown,
+  Cpu,
   Crown,
   QrCode,
   Radio,
@@ -26,6 +27,7 @@ import {
   listTournaments,
 } from '@/lib/tournament-engine';
 import { getClubById } from '@/lib/clubs';
+import { BunkerAiMatchPredictor } from '@/components/BunkerAiMatchPredictor';
 import {
   ClubCrest,
   getSmartInitials,
@@ -44,7 +46,8 @@ export const dynamic = 'force-dynamic';
 
 export default function HomePage() {
   const tournaments = listTournaments();
-  const top8Players = getLeaderboard().slice(0, 8);
+  const allLeaderboardPlayers = getLeaderboard();
+  const top8Players = allLeaderboardPlayers.slice(0, 8);
   const top3Players = top8Players.slice(0, 3);
   const recentMatches = getRecentTickerMatches(6);
 
@@ -169,6 +172,14 @@ export default function HomePage() {
               </Link>
 
               <a
+                href="#bunker-ai-arena"
+                className="inline-flex items-center gap-2 px-4 py-3.5 rounded-full bg-[#06122E]/90 hover:bg-sky-400/15 border border-sky-400/40 text-xs sm:text-sm font-extrabold text-sky-200 backdrop-blur-xl transition-all"
+              >
+                <Cpu className="w-4 h-4 text-gold shrink-0" />
+                <span>AI-Симулятор 1v1</span>
+              </a>
+
+              <a
                 href="https://send.monobank.ua/jar/6aFeFX1Lk2"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -179,6 +190,43 @@ export default function HomePage() {
                 <ArrowUpRight className="w-4 h-4" />
               </a>
             </div>
+
+            {/* Live AI Matchday Prediction HUD Bar */}
+            <a
+              href="#bunker-ai-arena"
+              className="block p-3.5 rounded-2xl bg-[#040A1E]/90 border border-sky-400/25 hover:border-gold/50 backdrop-blur-xl transition-all group max-w-xl"
+            >
+              <div className="flex items-center justify-between gap-2 text-[0.66rem] font-mono mb-1.5">
+                <span className="inline-flex items-center gap-1.5 font-extrabold text-gold uppercase">
+                  <Cpu className="w-3.5 h-3.5 text-sky-300 animate-pulse" />
+                  <span>BUNKER AI • ПРОГНОЗ ФІНАЛУ BO3</span>
+                </span>
+                <span className="text-sky-300 group-hover:text-gold transition-colors font-bold">
+                  Відкрити AI-Симулятор →
+                </span>
+              </div>
+              <div className="flex items-center justify-between text-xs font-extrabold text-white mb-1.5">
+                <span>
+                  BRS_Nederfox <strong className="text-gold">56%</strong>
+                </span>
+                <span className="text-[0.65rem] font-mono text-slate-400">
+                  xG 4.8 : 3.9
+                </span>
+                <span>
+                  <strong className="text-sky-300">44%</strong> Переможець 1/2
+                </span>
+              </div>
+              <div className="h-1.5 rounded-full bg-[#020611] overflow-hidden flex">
+                <div
+                  className="h-full bg-gradient-to-r from-amber-500 via-gold to-amber-200"
+                  style={{ width: '56%' }}
+                />
+                <div
+                  className="h-full bg-gradient-to-r from-sky-300 to-blue-500"
+                  style={{ width: '44%' }}
+                />
+              </div>
+            </a>
           </div>
 
           {/* Bottom 3 Broadcast Telemetry Pods */}
@@ -965,6 +1013,9 @@ export default function HomePage() {
           standings={arenaStandings}
         />
       )}
+
+      {/* 3.5. BUNKER AI 1V1 MATCH PREDICTOR & BO3 SIMULATOR */}
+      <BunkerAiMatchPredictor players={allLeaderboardPlayers} />
 
       {/* 4. 3-STEP CHARITY TOURNAMENT JOURNEY */}
       <section className="grid grid-cols-1 md:grid-cols-3 gap-5">

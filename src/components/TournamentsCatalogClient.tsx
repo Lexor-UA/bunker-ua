@@ -105,43 +105,47 @@ export function TournamentsCatalogClient({
 
         <div className="relative flex flex-col xl:flex-row xl:items-end justify-between gap-8">
           <div className="space-y-4 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full diia-iridescent-subtle border border-white/15 text-xs font-bold text-white">
-              <UaFlag className="w-3.5 h-2.5" />
-              <span>БУНКЕР • Благодійна серія турнірів на підтримку ЗСУ</span>
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#07112E]/90 border border-amber-400/35 text-xs font-extrabold text-white">
+              <UaFlag className="w-4 h-3" />
+              <span className="uppercase tracking-wider">
+                BUNKER FC 1V1 • UKRAINE • СЕРІЯ БЛАГОДІЙНИХ ТУРНІРІВ ЗСУ
+              </span>
             </div>
 
-            <h1 className="font-display text-3xl sm:text-5xl font-extrabold text-white tracking-[-0.04em]">
+            <h1 className="font-display text-3xl sm:text-5xl font-extrabold text-white tracking-[-0.04em] uppercase">
               Благодійні Турніри{' '}
-              <span className="diia-gradient-text">1 на 1 в EA FC</span>
+              <span className="diia-gradient-text">1 на 1 в EA SPORTS FC</span>
             </h1>
 
-            <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
-              Система Ліги Чемпіонів (групи + плей-офф), вільний графік матчів за
-              домовленістю в Telegram та особливий трофей переможцю —{' '}
-              <strong className="text-white">
-                пам’ятна нагорода від воїнів ЗСУ 🎖️
+            <p className="text-sm sm:text-base text-slate-200/95 leading-relaxed">
+              Система Ліги Чемпіонів (групи у 2 кола + сітка Плей-офф), вільний
+              графік матчів за домовленістю в Telegram, інтелектуальна
+              AI-телеметрія та головний приз переможцю —{' '}
+              <strong className="text-gold">
+                пам’ятний трофей від воїнів ЗСУ
               </strong>
               . Усі 100% внесків передаємо фонду{' '}
-              <strong className="text-pitch">{ZSU_CHARITY_FUND_NAME}</strong>.
+              <strong className="text-white">{ZSU_CHARITY_FUND_NAME}</strong>.
             </p>
           </div>
 
           {/* Right Quick KPI Capsules + Jar Link */}
           <div className="flex flex-wrap items-center gap-3">
-            <div className="px-4 py-2.5 rounded-2xl bg-[#10121A]/75 border border-white/15 backdrop-blur-md">
+            <div className="px-4 py-2.5 rounded-2xl bg-[#040A1C]/90 border border-gold/30 backdrop-blur-md">
               <div className="text-[0.65rem] text-slate-300 font-medium">
                 Головний приз кубка
               </div>
-              <div className="font-display text-base sm:text-lg font-extrabold text-gold">
-                🎖️ Нагорода від ЗСУ
+              <div className="font-display text-base sm:text-lg font-extrabold text-gold inline-flex items-center gap-1.5">
+                <Trophy className="w-4 h-4" />
+                <span>Трофей від ЗСУ</span>
               </div>
             </div>
 
-            <div className="px-4 py-2.5 rounded-2xl bg-[#10121A]/75 border border-white/15 backdrop-blur-md">
+            <div className="px-4 py-2.5 rounded-2xl bg-[#040A1C]/90 border border-sky-400/25 backdrop-blur-md">
               <div className="text-[0.65rem] text-slate-300 font-medium">
                 Внесок на Банку ЗСУ
               </div>
-              <div className="font-display text-base sm:text-lg font-extrabold text-pitch">
+              <div className="font-display text-base sm:text-lg font-extrabold text-sky-300">
                 від 10 ₴ • {ZSU_CHARITY_FUND_NAME}
               </div>
             </div>
@@ -150,9 +154,10 @@ export function TournamentsCatalogClient({
               href={ZSU_MONOBANK_JAR_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-3.5 rounded-full text-xs font-extrabold bg-white text-[#09090B] hover:bg-neutral-100 transition-all shadow-[0_14px_34px_rgba(255,255,255,0.18)] inline-flex items-center gap-2"
+              className="px-6 py-3.5 rounded-full text-xs font-extrabold bg-gradient-to-r from-[#FDE68A] via-[#F5C451] to-[#D97706] text-[#040814] hover:brightness-110 transition-all shadow-[0_14px_34px_rgba(245,196,81,0.3)] inline-flex items-center gap-2"
             >
-              <span>🫙 Відкрити Банку ЗСУ</span>
+              <UaFlag className="w-3.5 h-2.5 shrink-0" />
+              <span>Відкрити Банку ЗСУ</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
           </div>
@@ -330,7 +335,7 @@ export function TournamentsCatalogClient({
                                   {tier.amountUah > 0
                                     ? `${tier.amountUah.toLocaleString('uk-UA')} ₴`
                                     : idx === 0
-                                      ? '🎖️ Трофей ЗСУ'
+                                      ? 'Трофей від ЗСУ'
                                       : `+${tier.points} pts`}
                                 </div>
                               </div>
@@ -348,7 +353,7 @@ export function TournamentsCatalogClient({
                               <div className="font-display text-xl sm:text-2xl font-extrabold text-gold">
                                 {t.prizePoolUah > 0
                                   ? `${t.prizePoolUah.toLocaleString('uk-UA')} ₴`
-                                  : '🎖️ Ексклюзивний сувенір від ЗСУ'}
+                                  : 'Ексклюзивний трофей від воїнів ЗСУ'}
                               </div>
                             </div>
 
@@ -477,18 +482,20 @@ export function TournamentsCatalogClient({
                           <span className="font-display text-2xl sm:text-3xl font-extrabold text-white block drop-shadow-[0_8px_20px_rgba(0,0,0,0.6)]">
                             {isLive ? (
                               <>
-                                🫙 2 145 <span className="text-gold">₴</span>{' '}
-                                <span className="text-base sm:text-lg font-bold text-pitch">
-                                  • Трофей ЗСУ
+                                2 145 <span className="text-gold">₴</span>{' '}
+                                <span className="text-base sm:text-lg font-bold text-sky-300">
+                                  • Трофей від ЗСУ
                                 </span>
                               </>
                             ) : t.prizePoolUah > 0 ? (
                               <>
                                 {t.prizePoolUah.toLocaleString('uk-UA')}{' '}
-                                <span className="text-pitch">₴</span>
+                                <span className="text-gold">₴</span>
                               </>
                             ) : (
-                              <span>🎖️ Нагорода від воїнів ЗСУ</span>
+                              <span className="text-gold">
+                                Трофей від воїнів ЗСУ
+                              </span>
                             )}
                           </span>
                           <div className="pt-1 flex flex-wrap items-center gap-1.5">
@@ -536,13 +543,13 @@ export function TournamentsCatalogClient({
                           </div>
                           <div
                             className={`text-xs sm:text-sm font-extrabold tabular-nums mt-0.5 ${
-                              pIdx === 0 ? 'text-pitch' : 'text-white'
+                              pIdx === 0 ? 'text-gold' : 'text-white'
                             }`}
                           >
                             {p.amountUah > 0
                               ? `${p.amountUah.toLocaleString('uk-UA')} ₴`
                               : pIdx === 0
-                                ? '🎖️ Трофей ЗСУ'
+                                ? 'Трофей від ЗСУ'
                                 : `+${p.points} pts`}
                           </div>
                         </div>
@@ -623,17 +630,18 @@ export function TournamentsCatalogClient({
             Система Ліги Чемпіонів
           </span>
           <ArrowRight className="w-4 h-4 text-slate-400 hidden sm:block" />
-          <span className="px-4 py-2.5 rounded-2xl bg-[#10121A]/80 border border-amber-400/35 text-gold inline-flex items-center gap-2">
+          <span className="px-4 py-2.5 rounded-2xl bg-[#040A1C]/90 border border-amber-400/35 text-gold inline-flex items-center gap-2">
             <CheckCircle2 className="w-4 h-4" />
-            🎖️ Нагорода від воїнів ЗСУ
+            <span>Трофей від воїнів ЗСУ</span>
           </span>
           <a
             href={ZSU_MONOBANK_JAR_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-5 py-2.5 rounded-full bg-white text-[#09090B] hover:bg-neutral-200 font-extrabold transition-colors inline-flex items-center gap-1.5"
+            className="px-5 py-2.5 rounded-full bg-gradient-to-r from-[#FDE68A] via-[#F5C451] to-[#D97706] text-[#040814] hover:brightness-110 font-extrabold transition-all inline-flex items-center gap-1.5"
           >
-            <span>🫙 Банка ЗСУ</span>
+            <UaFlag className="w-3.5 h-2.5 shrink-0" />
+            <span>Банка ЗСУ</span>
             <ExternalLink className="w-3.5 h-3.5" />
           </a>
         </div>
